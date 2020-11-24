@@ -23,9 +23,14 @@ struct GraveView: View {
                 Text(grave.deceased ?? "Ej namngiven")
                     .font(.system(size: 18))
                     .foregroundColor(Color.blue)
+                if let cemetery = grave.cemetery {
+                Text(cemetery)
+                    .font(.system(size: 14))
+                    .bold()
+                }
                 Text("Begravdes: \(grave.dateBuried ?? "Okänd")")
                     .font(.system(size: 14))
-            }
+            }.padding()
         }
     }
 }
