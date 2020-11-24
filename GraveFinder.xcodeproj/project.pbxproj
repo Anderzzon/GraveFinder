@@ -52,6 +52,9 @@
 		031BF237256BC94E0047A5F4 /* GraveFinder */ = {
 			isa = PBXGroup;
 			children = (
+				7845964B256CFF6000A97B7F /* Models */,
+				7845964A256CFF5700A97B7F /* ViewModels */,
+				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
@@ -67,6 +70,27 @@
 				031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		78459649256CFF4A00A97B7F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7845964A256CFF5700A97B7F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7845964B256CFF6000A97B7F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
