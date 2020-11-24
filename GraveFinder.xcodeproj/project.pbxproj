@@ -11,6 +11,8 @@
 		031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF23A256BC94E0047A5F4 /* ContentView.swift */; };
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
+		032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC4256D38DA00A28FAD /* MapView.swift */; };
+		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		031BF23C256BC9500047A5F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		031BF241256BC9500047A5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		032EDEC4256D38DA00A28FAD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
+				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
 				031BF241256BC9500047A5F4 /* Info.plist */,
 				031BF23E256BC9500047A5F4 /* Preview Content */,
@@ -75,6 +80,7 @@
 		78459649256CFF4A00A97B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				032EDEC4256D38DA00A28FAD /* MapView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -163,6 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
+				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
+				032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
