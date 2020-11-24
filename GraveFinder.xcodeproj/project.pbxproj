@@ -56,7 +56,6 @@
 				7845964A256CFF5700A97B7F /* ViewModels */,
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
-				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
 				031BF241256BC9500047A5F4 /* Info.plist */,
 				031BF23E256BC9500047A5F4 /* Preview Content */,
@@ -75,6 +74,7 @@
 		78459649256CFF4A00A97B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
