@@ -76,21 +76,21 @@
 			isa = PBXGroup;
 			children = (
 			);
-			path = Views;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		7845964A256CFF5700A97B7F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ViewModels;
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		7845964B256CFF6000A97B7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Models;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
