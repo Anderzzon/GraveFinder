@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            MapView()
-            GravesView()
-        }
-        
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+           
+                MapView()
+                BottomSheetView()
+            
+        })
         
     }
 }
