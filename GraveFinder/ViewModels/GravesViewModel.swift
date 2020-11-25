@@ -30,8 +30,6 @@ class GravesViewModel: ObservableObject {
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
             .assign(to: \GravesViewModel.graves, on: self)
-        
-        
     }
     func validate(_ grave:Grave) -> Bool {
         return grave.location.lat != nil && grave.location.lon != nil && grave.deceased != nil
