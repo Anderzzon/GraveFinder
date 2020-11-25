@@ -17,6 +17,8 @@
 		78459653256D01F800A97B7F /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459652256D01F800A97B7F /* GravesView.swift */; };
 		78459655256D027D00A97B7F /* GraveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459654256D027D00A97B7F /* GraveView.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
+		032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC4256D38DA00A28FAD /* MapView.swift */; };
+		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		78459652256D01F800A97B7F /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78459654256D027D00A97B7F /* GraveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveView.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		032EDEC4256D38DA00A28FAD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
+				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
 				031BF241256BC9500047A5F4 /* Info.plist */,
 				031BF23E256BC9500047A5F4 /* Preview Content */,
@@ -89,16 +94,16 @@
 			children = (
 				78459652256D01F800A97B7F /* GravesView.swift */,
 				78459654256D027D00A97B7F /* GraveView.swift */,
+				032EDEC4256D38DA00A28FAD /* MapView.swift */,
 			);
-			path = Views;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		7845964A256CFF5700A97B7F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				78459650256D01E700A97B7F /* GravesViewModel.swift */,
 			);
-			path = ViewModels;
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		7845964B256CFF6000A97B7F /* Models */ = {
@@ -108,7 +113,7 @@
 				7845964E256D00B100A97B7F /* Location.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
 			);
-			path = Models;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +186,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
+				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
+				032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78459653256D01F800A97B7F /* GravesView.swift in Sources */,
