@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03102EE5256E539C004FBE3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EE4256E539C004FBE3F /* MapView.swift */; };
 		031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */; };
 		031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF23A256BC94E0047A5F4 /* ContentView.swift */; };
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
+		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 		7845964D256D004200A97B7F /* Grave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7845964C256D004200A97B7F /* Grave.swift */; };
 		7845964F256D00B100A97B7F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7845964E256D00B100A97B7F /* Location.swift */; };
 		78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459650256D01E700A97B7F /* GravesViewModel.swift */; };
 		78459653256D01F800A97B7F /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459652256D01F800A97B7F /* GravesView.swift */; };
 		78459655256D027D00A97B7F /* GraveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459654256D027D00A97B7F /* GraveView.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
-		032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC4256D38DA00A28FAD /* MapView.swift */; };
-		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03102EE4256E539C004FBE3F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		031BF235256BC94E0047A5F4 /* GraveFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraveFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveFinderApp.swift; sourceTree = "<group>"; };
 		031BF23A256BC94E0047A5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		031BF23C256BC9500047A5F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		031BF241256BC9500047A5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		7845964C256D004200A97B7F /* Grave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grave.swift; sourceTree = "<group>"; };
 		7845964E256D00B100A97B7F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		78459650256D01E700A97B7F /* GravesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesViewModel.swift; sourceTree = "<group>"; };
 		78459652256D01F800A97B7F /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78459654256D027D00A97B7F /* GraveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveView.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
-		032EDEC4256D38DA00A28FAD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,11 +49,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03102EE2256E5310004FBE3F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		031BF22C256BC94E0047A5F4 = {
 			isa = PBXGroup;
 			children = (
 				031BF237256BC94E0047A5F4 /* GraveFinder */,
 				031BF236256BC94E0047A5F4 /* Products */,
+				03102EE2256E5310004FBE3F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,16 +102,17 @@
 			children = (
 				78459652256D01F800A97B7F /* GravesView.swift */,
 				78459654256D027D00A97B7F /* GraveView.swift */,
-				032EDEC4256D38DA00A28FAD /* MapView.swift */,
+				03102EE4256E539C004FBE3F /* MapView.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7845964A256CFF5700A97B7F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				78459650256D01E700A97B7F /* GravesViewModel.swift */,
 			);
-			name = ViewModels;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		7845964B256CFF6000A97B7F /* Models */ = {
@@ -113,7 +122,7 @@
 				7845964E256D00B100A97B7F /* Location.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +196,7 @@
 			files = (
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
-				032EDEC5256D38DA00A28FAD /* MapView.swift in Sources */,
+				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78459653256D01F800A97B7F /* GravesView.swift in Sources */,
