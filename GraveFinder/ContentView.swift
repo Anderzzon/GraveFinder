@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = GravesViewModel()
+
     var body: some View {
         VStack {
-            MapView()
-            GravesView()
+            MapView(viewModel: viewModel)
+            GravesView(viewModel: viewModel)
         }
-        
-        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(viewModel: GravesViewModel())
     }
 }

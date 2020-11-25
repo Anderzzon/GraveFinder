@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GravesView: View {
-    @ObservedObject var viewModel = GravesViewModel()
+    @ObservedObject var viewModel:GravesViewModel
     
     var body: some View {
         NavigationView {
