@@ -19,6 +19,7 @@
 		78459653256D01F800A97B7F /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459652256D01F800A97B7F /* GravesView.swift */; };
 		78459655256D027D00A97B7F /* GraveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459654256D027D00A97B7F /* GraveView.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
+		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		78459652256D01F800A97B7F /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78459654256D027D00A97B7F /* GraveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveView.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				78459652256D01F800A97B7F /* GravesView.swift */,
 				78459654256D027D00A97B7F /* GraveView.swift */,
 				03102EE4256E539C004FBE3F /* MapView.swift */,
+				E2C787CF256E575D008ACA90 /* BottomSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				78459653256D01F800A97B7F /* GravesView.swift in Sources */,
 				78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */,
 				78459655256D027D00A97B7F /* GraveView.swift in Sources */,
+				E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */,
 				7845964F256D00B100A97B7F /* Location.swift in Sources */,
 				7845964D256D004200A97B7F /* Grave.swift in Sources */,
 			);
