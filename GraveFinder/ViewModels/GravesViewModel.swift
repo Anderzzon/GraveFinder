@@ -8,7 +8,6 @@ import Combine
 import SwiftUI
 
 class GravesViewModel: ObservableObject {
-    private let url = URL(string: "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=13888")
     
     @Published var graves:[Grave] = [] {
         didSet {
@@ -17,7 +16,8 @@ class GravesViewModel: ObservableObject {
     }
     var task : AnyCancellable?
     
-    func fetchGraves() {
+    func fetchGraves(for query:String) {
+        let url = URL(string: "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=\(query)")
         task = URLSession.shared.dataTaskPublisher(for: url!)
             .map { $0.data }
             .decode(type: SearchResults.self, decoder: JSONDecoder())
