@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import MapKit
+
 struct Location : Codable, Hashable {
-    let lat:Double?
-    let lon:Double?
-    let x:Double?
-    let y:Double?
+    let latitude:Double?
+    let longitude:Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case latitude = "lat"
+        case longitude = "lon"
+    }
 }

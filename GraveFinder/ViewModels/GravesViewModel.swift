@@ -9,14 +9,23 @@ import SwiftUI
 
 class GravesViewModel: ObservableObject {
     
-    @Published var searchResults = SearchResults(graves: [Grave](), pages: 0)
+    @Published var totalList = [Grave]()
+    
+    var searchResults = SearchResults(graves: [Grave](), pages: 0) {
+        didSet {
+            totalList.append(contentsOf: searchResults.graves)
+        }
+    }
+    
     
     var task : AnyCancellable?
     
     func fetchGraves(for query:String, atPage page: Int) {
         guard page > 0 else { return }
-        let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + query.replacingOccurrences(of: " ", with: "+") + "&page=" + "\(page)"
+        let parsedQuery = query.replacingOccurrences(of: " ", with: "+")
+        let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + parsedQuery + "&page=" + "\(page)"
         guard let url = URL(string: endpoint) else { return }
+        
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: SearchResults.self, decoder: JSONDecoder())
@@ -34,9 +43,10 @@ class GravesViewModel: ObservableObject {
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
             .assign(to: \GravesViewModel.searchResults, on: self)
+            
     }
     func validate(_ grave:Grave) -> Bool {
-        return grave.location.lat != nil && grave.location.lon != nil && grave.deceased != nil
+        return grave.location.latitude != nil && grave.location.longitude != nil && grave.deceased != nil
     }
     
 }

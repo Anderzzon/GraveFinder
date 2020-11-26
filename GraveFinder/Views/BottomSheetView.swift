@@ -91,7 +91,7 @@ struct BottomSheetView : View {
 
 struct BottomSheet : View {
     @ObservedObject var viewModel : GravesViewModel
-//    @Binding var searchTxt:String
+    //    @Binding var searchTxt:String
     
     @State  var txt = ""
     @State var searchTxt = ""
@@ -101,6 +101,8 @@ struct BottomSheet : View {
     @State var output: String = ""
     @State var input: String = ""
     @State var typing = false
+    @State private var isSearching = false
+    @State private var currentPage = 1
     
     var body: some View{
         
@@ -121,16 +123,18 @@ struct BottomSheet : View {
                 TextField("Search...", text: $txt, onEditingChanged: {_ in
                     
                 }, onCommit: {
+                    viewModel.totalList.removeAll()
                     self.searchTxt = self.txt
-                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: 1)
+                    self.isSearching = true
+                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: currentPage)
                 })
-//                { (status) in
-//                    
-//                    withAnimation{
-//                        
-//                        offset = value
-//                    }
-//                    
+                //                { (status) in
+                //
+                //                    withAnimation{
+                //
+                //                        offset = value
+                //                    }
+                //
             }
             .padding(.vertical,10)
             .padding(.horizontal)
@@ -143,17 +147,20 @@ struct BottomSheet : View {
             
             ScrollView(.vertical, showsIndicators: false, content: {
                 
-                LazyVStack(alignment: .leading, spacing: 15, content: {
-                    if (viewModel.searchResults.graves.count > 0) {
-                    ForEach(viewModel.searchResults.graves,id:\.self){ grave in
-                        GraveView(grave: grave)
-                    }
+                if isSearching {
+                    LazyVStack(alignment: .leading, spacing: 15, content: {
+                    if (viewModel.totalList.count > 0) {
+                        ForEach(viewModel.totalList,id:\.self){ grave in
+                            GraveView(grave: grave)
+                        }
                     } else {
                         Text("No results").font(.system(.headline))
                     }
                 })
                 .padding()
                 .padding(.top)
+                }
+                
             })
             
         }
