@@ -6,13 +6,16 @@
 //
 
 import Foundation
-struct Grave:Codable, Hashable {
+import MapKit
+
+struct Grave:Codable, Hashable, Identifiable {
     let deceased:String?
     let dateBuried:String?
     let dateOfBirth:String?
     let dateOfDeath:String?
     let cemetery:String?
     let location:Location
+    let id = UUID()
     
     enum CodingKeys: String, CodingKey {
         case deceased = "label"

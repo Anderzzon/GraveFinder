@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate, MKMapViewDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedWhenInUse {
             print("Location authorized")
@@ -22,4 +22,5 @@ class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Location updated!")
     }
+    
 }
