@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		03102EE5256E539C004FBE3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EE4256E539C004FBE3F /* MapView.swift */; };
+		03102EF8256ED6F5004FBE3F /* MapViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EF7256ED6F5004FBE3F /* MapViewUI.swift */; };
+		03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EFB256EDF6F004FBE3F /* GraveLocation.swift */; };
 		031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */; };
 		031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF23A256BC94E0047A5F4 /* ContentView.swift */; };
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		03102EE4256E539C004FBE3F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		03102EF7256ED6F5004FBE3F /* MapViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUI.swift; sourceTree = "<group>"; };
+		03102EFB256EDF6F004FBE3F /* GraveLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveLocation.swift; sourceTree = "<group>"; };
 		031BF235256BC94E0047A5F4 /* GraveFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraveFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveFinderApp.swift; sourceTree = "<group>"; };
 		031BF23A256BC94E0047A5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,8 +108,9 @@
 			children = (
 				78459652256D01F800A97B7F /* GravesView.swift */,
 				78459654256D027D00A97B7F /* GraveView.swift */,
-				03102EE4256E539C004FBE3F /* MapView.swift */,
 				E2C787CF256E575D008ACA90 /* BottomSheetView.swift */,
+				03102EE4256E539C004FBE3F /* MapView.swift */,
+				03102EF7256ED6F5004FBE3F /* MapViewUI.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 				7845964C256D004200A97B7F /* Grave.swift */,
 				7845964E256D00B100A97B7F /* Location.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
+				03102EFB256EDF6F004FBE3F /* GraveLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,12 +206,14 @@
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
+				03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78459653256D01F800A97B7F /* GravesView.swift in Sources */,
 				78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */,
 				78459655256D027D00A97B7F /* GraveView.swift in Sources */,
 				E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */,
+				03102EF8256ED6F5004FBE3F /* MapViewUI.swift in Sources */,
 				7845964F256D00B100A97B7F /* Location.swift in Sources */,
 				7845964D256D004200A97B7F /* Grave.swift in Sources */,
 			);
