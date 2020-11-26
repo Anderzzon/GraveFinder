@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BottomSheetView : View {
     
+    @ObservedObject var viewModel : GravesViewModel
     
     @State var offset : CGFloat = 0
     
@@ -20,7 +21,7 @@ struct BottomSheetView : View {
             
             VStack{
                 
-                BottomSheet(offset: $offset, value: (-reader.frame(in: .global).height + 150))
+                BottomSheet(viewModel:viewModel,offset: $offset, value: (-reader.frame(in: .global).height + 150))
                     .offset(y: reader.frame(in: .global).height - 140)
                     // adding gesture....
                     .offset(y: offset)
@@ -89,8 +90,7 @@ struct BottomSheetView : View {
 }
 
 struct BottomSheet : View {
-    
-    @ObservedObject var viewModel = GravesViewModel()
+    @ObservedObject var viewModel : GravesViewModel
 //    @Binding var searchTxt:String
     
     @State  var txt = ""
@@ -144,7 +144,7 @@ struct BottomSheet : View {
             ScrollView(.vertical, showsIndicators: false, content: {
                 
                 LazyVStack(alignment: .leading, spacing: 15, content: {
-                    ForEach(self.viewModel.graves,id:\.self){grave in
+                    ForEach(viewModel.graves,id:\.self){grave in
                         GraveView(grave: grave)
                     }
                 })
