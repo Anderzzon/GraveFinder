@@ -90,7 +90,7 @@ struct BottomSheetView : View {
 
 struct BottomSheet : View {
     @ObservedObject var viewModel : GravesViewModel
-//    @Binding var searchTxt:String
+    //    @Binding var searchTxt:String
     
     @State  var txt = ""
     @State var searchTxt = ""
@@ -100,6 +100,8 @@ struct BottomSheet : View {
     @State var output: String = ""
     @State var input: String = ""
     @State var typing = false
+    @State private var isSearching = false
+    @State private var currentPage = 1
     
     var body: some View{
         
@@ -120,16 +122,18 @@ struct BottomSheet : View {
                 TextField("Search...", text: $txt, onEditingChanged: {_ in
                     
                 }, onCommit: {
+                    viewModel.totalList.removeAll()
                     self.searchTxt = self.txt
-                    self.viewModel.fetchGraves(for: self.searchTxt)
+                    self.isSearching = true
+                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: currentPage)
                 })
-//                { (status) in
-//                    
-//                    withAnimation{
-//                        
-//                        offset = value
-//                    }
-//                    
+                //                { (status) in
+                //
+                //                    withAnimation{
+                //
+                //                        offset = value
+                //                    }
+                //
             }
             .padding(.vertical,10)
             .padding(.horizontal)
@@ -142,9 +146,11 @@ struct BottomSheet : View {
             
             ScrollView(.vertical, showsIndicators: false, content: {
                 
-                LazyVStack(alignment: .leading, spacing: 15, content: {
-                    ForEach(viewModel.graves,id:\.self){grave in
-                        GraveView(grave: grave).onTapGesture {
+                if isSearching {
+                    LazyVStack(alignment: .leading, spacing: 15, content: {
+                    if (viewModel.totalList.count > 0) {
+                        ForEach(viewModel.totalList,id:\.self){ grave in
+                            GraveView(grave: grave).onTapGesture {
                             offset = 0
                             viewModel.selectedGraves.removeAll()
                             let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.lat!, longitude: grave.location.lon!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
@@ -153,10 +159,15 @@ struct BottomSheet : View {
                                 print("Dead person: \(graveLocation) added")
                             }
                         }
+                    } else {
+                        Text("No results").font(.system(.headline))
+                    }
                     }
                 })
                 .padding()
                 .padding(.top)
+                }
+                
             })
             
         }
