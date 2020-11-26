@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct GravesView: View {
-    
-    @State var viewModel = GravesViewModel()
-    //@Binding var searchTxt:String
+    @ObservedObject var viewModel:GravesViewModel
     
     var body: some View {
         NavigationView {
             List(viewModel.graves, id: \.self) { grave in
                 GraveView(grave: grave)
-            }
-            .navigationBarTitle("Graves")
+            }.navigationBarTitle("Graves")
 
+        }.onAppear {
+            self.viewModel.fetchGraves(for: "13888")
         }
     }
 }

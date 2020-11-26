@@ -24,11 +24,17 @@ class GravesViewModel: ObservableObject {
             .map { $0.data }
             .decode(type: SearchResults.self, decoder: JSONDecoder())
             .map { $0.graves }
+            .map { $0.filter { grave in
+                return self.validate(grave)
+                }
+            }
             .replaceError(with: [Grave]())
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
             .assign(to: \GravesViewModel.graves, on: self)
-        
+    }
+    func validate(_ grave:Grave) -> Bool {
+        return grave.location.lat != nil && grave.location.lon != nil && grave.deceased != nil
     }
     
 }
