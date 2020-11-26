@@ -12,12 +12,10 @@ struct GravesView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.graves, id: \.self) { grave in
+            List(viewModel.searchResults.graves, id: \.self) { grave in
                 GraveView(grave: grave)
             }.navigationBarTitle("Graves")
 
-        }.onAppear {
-            self.viewModel.fetchGraves(for: "13888")
         }
     }
 }

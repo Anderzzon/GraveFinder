@@ -122,7 +122,7 @@ struct BottomSheet : View {
                     
                 }, onCommit: {
                     self.searchTxt = self.txt
-                    self.viewModel.fetchGraves(for: self.searchTxt)
+                    self.viewModel.fetchGraves(for: self.searchTxt, onPage: 1, of: viewModel.searchResults.pages)
                 })
 //                { (status) in
 //                    
@@ -144,7 +144,7 @@ struct BottomSheet : View {
             ScrollView(.vertical, showsIndicators: false, content: {
                 
                 LazyVStack(alignment: .leading, spacing: 15, content: {
-                    ForEach(viewModel.graves,id:\.self){grave in
+                    ForEach(viewModel.searchResults.graves,id:\.self){ grave in
                         GraveView(grave: grave)
                     }
                 })
