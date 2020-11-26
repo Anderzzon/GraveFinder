@@ -9,6 +9,7 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
+    @ObservedObject var viewModel:GravesViewModel
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     @State private var mapType: MKMapType = .standard
     
@@ -20,6 +21,7 @@ struct MapView: View {
         graves.append(grave)
         self.annotations = graves
     }
+    
     
     var body: some View {
         

@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = GravesViewModel()
+
     var body: some View {
-        VStack {
-            MapView()
-            //GravesView()
-        }
-        
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+           
+                MapView(viewModel: viewModel)
+                BottomSheetView(viewModel: viewModel)
+            
+        })
         
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView()
+        MapView(viewModel: GravesViewModel())
     }
 }
