@@ -148,24 +148,25 @@ struct BottomSheet : View {
                 
                 if isSearching {
                     LazyVStack(alignment: .leading, spacing: 15, content: {
-                    if (viewModel.totalList.count > 0) {
-                        ForEach(viewModel.totalList,id:\.self){ grave in
-                            GraveView(grave: grave).onTapGesture {
-                            offset = 0
-                            viewModel.selectedGraves.removeAll()
-                            let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.lat!, longitude: grave.location.lon!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                viewModel.selectedGraves.append(graveLocation)
-                                print("Dead person: \(graveLocation) added")
+                        if (viewModel.totalList.count > 0) {
+                            ForEach(viewModel.totalList,id:\.self){ grave in
+                                GraveView(grave: grave).onTapGesture {
+                                    offset = 0
+                                    viewModel.selectedGraves.removeAll()
+                                    let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.latitude!, longitude: grave.location.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                        viewModel.selectedGraves.append(graveLocation)
+                                        print("Dead person: \(graveLocation) added")
+                                    }
+                                }
                             }
-                        }
-                    } else {
-                        Text("No results").font(.system(.headline))
-                    }
-                    }
-                })
-                .padding()
-                .padding(.top)
+                            } else {
+                                Text("No results").font(.system(.headline))
+                            }
+                        
+                    })
+                    .padding()
+                    .padding(.top)
                 }
                 
             })
