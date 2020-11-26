@@ -9,22 +9,14 @@ import SwiftUI
 
 class GravesViewModel: ObservableObject {
     
-   @Published var searchResults = SearchResults(graves: [Grave](), pages: 0) {
-        didSet {
-            print(searchResults.graves.count)
-        }
-    }
+    @Published var searchResults = SearchResults(graves: [Grave](), pages: 0)
     
     var task : AnyCancellable?
     
-    func fetchGraves(for query:String, onPage page: Int, of totalPages:Int) {
-        guard page > 0  else {
-            return }
+    func fetchGraves(for query:String, atPage page: Int) {
+        guard page > 0 else { return }
         let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + "\(query)" + "&page=" + "\(page)"
-        guard let url = URL(string: endpoint) else {
-            print("error")
-            return
-        }
+        guard let url = URL(string: endpoint) else { return }
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: SearchResults.self, decoder: JSONDecoder())
@@ -43,8 +35,8 @@ class GravesViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \GravesViewModel.searchResults, on: self)
     }
-    func validate(_ grave:Grave?) -> Bool {
-        return grave != nil && grave?.location.lat != nil && grave?.location.lon != nil && grave?.deceased != nil
+    func validate(_ grave:Grave) -> Bool {
+        return grave.location.lat != nil && grave.location.lon != nil && grave.deceased != nil
     }
     
 }

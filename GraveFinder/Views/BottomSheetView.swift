@@ -122,7 +122,7 @@ struct BottomSheet : View {
                     
                 }, onCommit: {
                     self.searchTxt = self.txt
-                    self.viewModel.fetchGraves(for: self.searchTxt, onPage: 1, of: viewModel.searchResults.pages)
+                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: 1)
                 })
 //                { (status) in
 //                    
