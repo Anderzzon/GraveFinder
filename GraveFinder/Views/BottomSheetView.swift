@@ -78,7 +78,6 @@ struct BottomSheetView : View {
                                     return
                                 }
                                 
-                                offset = 0
                             }
                         }
                     }))
@@ -145,7 +144,15 @@ struct BottomSheet : View {
                 
                 LazyVStack(alignment: .leading, spacing: 15, content: {
                     ForEach(viewModel.graves,id:\.self){grave in
-                        GraveView(grave: grave)
+                        GraveView(grave: grave).onTapGesture {
+                            offset = 0
+                            viewModel.selectedGraves.removeAll()
+                            let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.lat!, longitude: grave.location.lon!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                viewModel.selectedGraves.append(graveLocation)
+                                print("Dead person: \(graveLocation) added")
+                            }
+                        }
                     }
                 })
                 .padding()

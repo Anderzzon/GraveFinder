@@ -9,9 +9,10 @@ import SwiftUI
 import MapKit
 
 struct MapViewUI: UIViewRepresentable {
+    var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var graves: [GraveLocation]
     let mapViewType: MKMapType
-    let region: MKCoordinateRegion
+    //@ObservedObject var viewModel: GravesViewModel
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -28,9 +29,14 @@ struct MapViewUI: UIViewRepresentable {
         if graves.count != mapView.annotations.count {
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(graves)
+            
+        }
+        if graves.count == 1 {
+            mapView.setRegion(graves[0].region!, animated: true)
         }
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
+        print("Region \(region)")
         mapView.mapType = mapViewType
     }
     

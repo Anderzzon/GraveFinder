@@ -10,6 +10,7 @@ import MapKit
 
 final class GraveLocation: NSObject, Identifiable {
     let name: String
+    let life: String
     let latitude: Double
     let longitude: Double
     let location: CLLocation
@@ -17,10 +18,12 @@ final class GraveLocation: NSObject, Identifiable {
     let region: MKCoordinateRegion?
     let id = UUID()
     
-    init(name: String, latitude: Double, longitude: Double) {
+    init(name: String, latitude: Double, longitude: Double, birth: String, death: String) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
+        
+        life = birth + " - " + death
         
         location = CLLocation(latitude: latitude, longitude: longitude)
         region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
@@ -30,6 +33,7 @@ final class GraveLocation: NSObject, Identifiable {
     }
 }
 extension GraveLocation: MKAnnotation {
-  var coordinate: CLLocationCoordinate2D { location.coordinate }
-  var title: String? { name }
+    var coordinate: CLLocationCoordinate2D { location.coordinate }
+    var title: String? { name }
+    var subtitle: String? { life }
 }

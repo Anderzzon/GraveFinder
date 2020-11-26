@@ -10,24 +10,18 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var viewModel: GravesViewModel
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @State private var region: MKCoordinateRegion?
     @State private var mapType: MKMapType = .standard
     
-    var graves: [GraveLocation] = []
     @State private var annotations = [GraveLocation]()
     
     init(viewModel: GravesViewModel) {
         self.viewModel = viewModel
-        let grave = GraveLocation(name: "Hans", latitude: 59.27212, longitude: 18.10164)
-        graves.append(grave)
-        self.annotations = graves
     }
     
-    
     var body: some View {
-        
         ZStack {
-            MapViewUI(graves: annotations, mapViewType: mapType, region: region).edgesIgnoringSafeArea(.all)
+            MapViewUI(graves: viewModel.selectedGraves, mapViewType: mapType).edgesIgnoringSafeArea(.all)
             VStack {
                 Picker("", selection: $mapType) {
                     Text("Standard").tag(MKMapType.standard).padding()
@@ -38,31 +32,6 @@ struct MapView: View {
                 .background(Color.gray.opacity(0.7))
                 .offset(y: 18)
                 Spacer()
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            annotations.removeAll()
-                            let grave = GraveLocation(name: UUID().uuidString, latitude: 59.27212, longitude: 18.10164)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                annotations.append(grave)
-                            }
-                            
-                            print("Annotations count: \(annotations.count)")
-                            
-                        }) {
-                            Image(systemName: "plus")
-                        }
-                        .padding()
-                        .background(Color.black.opacity(0.75))
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .clipShape(Circle())
-                        .padding(.trailing)
-                    }
-                    Spacer()
-                }
             }
         }
     }

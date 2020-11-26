@@ -14,6 +14,7 @@ class GravesViewModel: ObservableObject {
             print(graves)
         }
     }
+    @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
     var task : AnyCancellable?
     
     func fetchGraves(for query:String) {
