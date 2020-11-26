@@ -15,7 +15,7 @@ class GravesViewModel: ObservableObject {
     
     func fetchGraves(for query:String, atPage page: Int) {
         guard page > 0 else { return }
-        let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + "\(query)" + "&page=" + "\(page)"
+        let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + query.replacingOccurrences(of: " ", with: "+") + "&page=" + "\(page)"
         guard let url = URL(string: endpoint) else { return }
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }

@@ -144,8 +144,12 @@ struct BottomSheet : View {
             ScrollView(.vertical, showsIndicators: false, content: {
                 
                 LazyVStack(alignment: .leading, spacing: 15, content: {
+                    if (viewModel.searchResults.graves.count > 0) {
                     ForEach(viewModel.searchResults.graves,id:\.self){ grave in
                         GraveView(grave: grave)
+                    }
+                    } else {
+                        Text("No results").font(.system(.headline))
                     }
                 })
                 .padding()
