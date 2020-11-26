@@ -9,29 +9,31 @@ import SwiftUI
 
 class GravesViewModel: ObservableObject {
     
-    @Published var graves:[Grave] = [] {
-        didSet {
-            print(graves)
-        }
-    }
+    @Published var searchResults = SearchResults(graves: [Grave](), pages: 0)
+    
     var task : AnyCancellable?
     
-    func fetchGraves(for query:String) {
-     
-        let url = URL(string: "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=\(query)")
-        
-        task = URLSession.shared.dataTaskPublisher(for: url!)
+    func fetchGraves(for query:String, atPage page: Int) {
+        guard page > 0 else { return }
+        let endpoint = "https://etjanst.stockholm.se/Hittagraven/ajax/search?SearchText=" + "\(query)" + "&page=" + "\(page)"
+        guard let url = URL(string: endpoint) else { return }
+        task = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
             .decode(type: SearchResults.self, decoder: JSONDecoder())
-            .map { $0.graves }
-            .map { $0.filter { grave in
-                return self.validate(grave)
+            .map { searchResults in
+                var filteredGraves = searchResults.graves.filter{ grave in
+                    return self.validate(grave)
+                    }
+                let pages = searchResults.pages
+                if filteredGraves.count < 1 {
+                    filteredGraves = [Grave]()
                 }
+                return SearchResults(graves: filteredGraves, pages: pages)
             }
-            .replaceError(with: [Grave]())
+            .replaceError(with: SearchResults(graves: [Grave](), pages: 0))
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
-            .assign(to: \GravesViewModel.graves, on: self)
+            .assign(to: \GravesViewModel.searchResults, on: self)
     }
     func validate(_ grave:Grave) -> Bool {
         return grave.location.lat != nil && grave.location.lon != nil && grave.deceased != nil
