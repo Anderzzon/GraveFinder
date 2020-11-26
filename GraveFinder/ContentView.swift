@@ -11,10 +11,13 @@ struct ContentView: View {
     @ObservedObject var viewModel = GravesViewModel()
 
     var body: some View {
-        VStack {
-            MapView(viewModel: viewModel)
-            GravesView(viewModel: viewModel)
-        }
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+           
+                MapView(viewModel: viewModel)
+                BottomSheetView(viewModel: viewModel)
+            
+        })
+        
     }
 }
 
