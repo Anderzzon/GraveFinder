@@ -123,7 +123,7 @@ struct BottomSheet : View {
                     viewModel.totalList.removeAll()
                     self.searchTxt = self.txt
                     self.isSearching = true
-					self.currentPage += 1
+					self.currentPage = 1
 					self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
                 })
             }
@@ -136,51 +136,50 @@ struct BottomSheet : View {
             .padding()
             
 			ZStack{
-            ScrollView(.vertical, showsIndicators: false, content: {
-                
-                if isSearching {
-                    LazyVStack(alignment: .leading, spacing: 15, content: {
-                        if (viewModel.totalList.count > 0) {
-                            ForEach(viewModel.totalList,id:\.self){ grave in
-                                GraveView(grave: grave).onTapGesture {
-                                    offset = 0
-                                    viewModel.selectedGraves.removeAll()
-                                    let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.latitude!, longitude: grave.location.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                        viewModel.selectedGraves.append(graveLocation)
-                                        print("Dead person: \(graveLocation) added")
-                                    }
-                                }
-                            }
-                            } else {
-                                Text("No results").font(.system(.headline))
-                            }
-                        
-                    })
-                    .padding()
-                    .padding(.top)
-                }
-                
-            })
-			VStack{
-				Spacer()
-				HStack {
-					Spacer()
-					Button(action: {
-						print("GET MORE")
-						self.currentPage += 1
-						self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
-					}){
-						Image(systemName: "ellipsis.circle.fill").imageScale(.large)
-							.font(.system(.largeTitle))
-							.frame(width: 77, height: 70)
-							.foregroundColor(Color.blue)
-							.padding(.bottom, 7)
+				ScrollView(.vertical, showsIndicators: false, content: {
+
+					if isSearching {
+						LazyVStack(alignment: .leading, spacing: 15, content: {
+							if (viewModel.totalList.count > 0) {
+								ForEach(viewModel.totalList,id:\.self){ grave in
+									GraveView(grave: grave).onTapGesture {
+										offset = 0
+										viewModel.selectedGraves.removeAll()
+										let graveLocation = GraveLocation(name: grave.deceased!, latitude: grave.location.latitude!, longitude: grave.location.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+										DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+											viewModel.selectedGraves.append(graveLocation)
+											print("Dead person: \(graveLocation) added")
+										}
+									}
+								}
+							} else {
+								Text("No results").font(.system(.headline))
+							}
+
+						})
+						.padding()
+						.padding(.top)
 					}
 
-					
+				})
+				VStack{
+					Spacer()
+					HStack {
+						Spacer()
+						Button(action: {
+							self.currentPage += 1
+							self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
+						}){
+							Image(systemName: "ellipsis.circle.fill").imageScale(.large)
+								.font(.system(.largeTitle))
+								.frame(width: 77, height: 70)
+								.foregroundColor(Color.blue)
+								.padding(.bottom, 7)
+						}
+
+
+					}
 				}
-			}
 			}
         }
         .background(BlurView(style: .systemMaterial))
