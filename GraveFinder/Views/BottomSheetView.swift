@@ -92,16 +92,22 @@ struct BottomSheet : View {
     @ObservedObject var viewModel : GravesViewModel
     //    @Binding var searchTxt:String
     
-    @State  var txt = ""
-    @State var searchTxt = ""
+    @State  var query = ""
+    @State private var isSearching = false
+    @State private var isAutoCompleting = false
+    
     @Binding var offset : CGFloat
     var value : CGFloat
     
     @State var output: String = ""
     @State var input: String = ""
     @State var typing = false
-    @State private var isSearching = false
     @State private var currentPage = 1
+    
+    enum ShowContent {
+        case searchResults, autoCompleteResults, noResults, nothing
+    }
+    @State private var showContent = ShowContent.nothing
     
     var body: some View{
         
@@ -119,14 +125,26 @@ struct BottomSheet : View {
                     .font(.system(size: 22))
                     .foregroundColor(.gray)
                 
-                TextField("Search...", text: $txt, onEditingChanged: {_ in
-                    
-                }, onCommit: {
+                TextField("Search...", text: $query, onCommit: {
                     viewModel.totalList.removeAll()
-                    self.searchTxt = self.txt
-                    self.isSearching = true
-                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: currentPage)
+                    viewModel.autoComplete.graves.removeAll()
+                    self.viewModel.fetchGraves(for: self.query, atPage: currentPage, withEndpoint: Constants.gravesSearch)
+                    self.showContent = .searchResults
+                    
+                }).onChange(of: self.query, perform: { _ in
+                    if(self.query.count > 0){
+                        viewModel.totalList.removeAll()
+                        viewModel.fetchGraves(for: self.query, atPage: 1, withEndpoint: Constants.autoCompleteSearch)
+                        self.showContent = .autoCompleteResults
+                    } else {
+                        viewModel.autoComplete.graves.removeAll()
+                        self.showContent = .noResults
+                    }
                 })
+                
+                
+                
+                
                 //                { (status) in
                 //
                 //                    withAnimation{
@@ -143,10 +161,25 @@ struct BottomSheet : View {
             .cornerRadius(15)
             .padding()
             
-            
             ScrollView(.vertical, showsIndicators: false, content: {
-                
-                if isSearching {
+                switch showContent {
+                case .noResults:
+                    Text("No results")
+                        .font(.system(.headline))
+                case .autoCompleteResults:
+                    VStack(alignment: .leading, spacing: 5, content:{
+                        ForEach(viewModel.autoComplete.graves){
+                            grave in
+                            AutoCompleteText(for: grave)
+                                .foregroundColor(.black)
+                                .onTapGesture {
+                                    viewModel.autoComplete.graves.removeAll()
+                                    viewModel.totalList.removeAll()
+                                    self.query = grave.deceased!
+                                }
+                        }
+                    })
+                case .searchResults:
                     LazyVStack(alignment: .leading, spacing: 15, content: {
                         if (viewModel.totalList.count > 0) {
                             ForEach(viewModel.totalList,id:\.self){ grave in
@@ -160,13 +193,12 @@ struct BottomSheet : View {
                                     }
                                 }
                             }
-                            } else {
-                                Text("No results").font(.system(.headline))
-                            }
-                        
+                        }
                     })
                     .padding()
                     .padding(.top)
+                default:
+                    EmptyView()
                 }
                 
             })
@@ -178,18 +210,13 @@ struct BottomSheet : View {
 }
 
 struct BlurView : UIViewRepresentable {
-    
     var style : UIBlurEffect.Style
     
     func makeUIView(context: Context) -> UIVisualEffectView{
-        
         let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
-        
         return view
     }
     
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
-        
-        
     }
 }
