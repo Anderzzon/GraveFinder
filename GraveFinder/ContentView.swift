@@ -14,7 +14,7 @@ struct ContentView: View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
            
                 MapView(viewModel: viewModel)
-                BottomSheetView(viewModel: viewModel)
+                BottomSheet(viewModel: viewModel)
             
         })
         
