@@ -90,8 +90,7 @@ struct BottomSheetView : View {
 
 struct BottomSheet : View {
     @ObservedObject var viewModel : GravesViewModel
-    //    @Binding var searchTxt:String
-    
+
     @State  var txt = ""
     @State var searchTxt = ""
     @Binding var offset : CGFloat
@@ -101,8 +100,7 @@ struct BottomSheet : View {
     @State var input: String = ""
     @State var typing = false
     @State private var isSearching = false
-    @State private var currentPage = 1
-    
+    @State private var currentPage = 0
     var body: some View{
         
         VStack{
@@ -125,15 +123,9 @@ struct BottomSheet : View {
                     viewModel.totalList.removeAll()
                     self.searchTxt = self.txt
                     self.isSearching = true
-                    self.viewModel.fetchGraves(for: self.searchTxt, atPage: currentPage)
+					self.currentPage += 1
+					self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
                 })
-                //                { (status) in
-                //
-                //                    withAnimation{
-                //
-                //                        offset = value
-                //                    }
-                //
             }
             .padding(.vertical,10)
             .padding(.horizontal)
@@ -143,7 +135,7 @@ struct BottomSheet : View {
             .cornerRadius(15)
             .padding()
             
-            
+			ZStack{
             ScrollView(.vertical, showsIndicators: false, content: {
                 
                 if isSearching {
@@ -170,7 +162,26 @@ struct BottomSheet : View {
                 }
                 
             })
-            
+			VStack{
+				Spacer()
+				HStack {
+					Spacer()
+					Button(action: {
+						print("GET MORE")
+						self.currentPage += 1
+						self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
+					}){
+						Image(systemName: "ellipsis.circle.fill").imageScale(.large)
+							.font(.system(.largeTitle))
+							.frame(width: 77, height: 70)
+							.foregroundColor(Color.blue)
+							.padding(.bottom, 7)
+					}
+
+					
+				}
+			}
+			}
         }
         .background(BlurView(style: .systemMaterial))
         .cornerRadius(15)
