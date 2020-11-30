@@ -30,7 +30,7 @@ struct BottomSheet : View {
     @State private var currentPage = 0
     
     enum ShowContent {
-        case searchResults, noResults, nothing
+        case searchResults, nothing
     }
     @State private var showContent = ShowContent.nothing
     
@@ -61,16 +61,14 @@ struct BottomSheet : View {
                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                         
                     }).onChange(of: query, perform: { _ in
-                        print(query)
-                        viewModel.currentPage = 1
                         viewModel.selectedGraves.removeAll()
                         if(query.count > 0){
                             viewModel.totalGravesList.removeAll()
                             viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                             showContent = .searchResults
                         } else {
-                            showContent = .noResults
-                        }
+                            showContent = .nothing
+                            showContent = .nothing
                     })
                 }
                 .padding(.vertical,10)
@@ -80,20 +78,31 @@ struct BottomSheet : View {
                 .background(BlurView(style: .systemMaterial))
                 .cornerRadius(15)
                 .padding()
-                ZStack{
-                    ScrollView(.vertical, showsIndicators: true, content: {
-                        switch showContent {
-                        case .noResults:
-                            Text("No results")
-                                .font(.system(.headline))
-                        case .searchResults:
-                            LazyVStack(alignment: .leading, spacing: 5, content:{
-                                ForEach(viewModel.totalGravesList){
-                                    grave in
-                                    let isSelectedGrave = grave == selectedGrave
-                                    
-                                    if let latitude = grave.location.latitude,
-                                       let longitude = grave.location.longitude {
+                ScrollView(.vertical, showsIndicators: true, content: {
+                ScrollView(.vertical, showsIndicators: true, content: {
+                    switch showContent {
+                    case .searchResults:
+                        LazyVStack(alignment: .leading, spacing: 5, content:{
+                            ForEach(viewModel.totalGravesList){
+                                grave in
+                                let isSelectedGrave = grave == selectedGrave
+                                
+                                if let latitude = grave.location.latitude,
+                                   let longitude = grave.location.longitude {
+                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                        .foregroundColor(.black)
+                                        .onTapGesture {
+                                            viewModel.selectedGraves.removeAll()
+                                            selectedGrave = grave
+                                            offset = 0
+                                            let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: latitude, longitude: longitude, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                viewModel.selectedGraves.append(graveLocation)
+                                                print("Dead person: \(graveLocation) added")
+                                    } else if let cemetery = grave.cemetery {
+                                } else if let cemetery = grave.cemetery {
+                                    if grave.graveType != nil && grave.graveType == "memorial" {
                                         
                                         AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                             .foregroundColor(.black)
@@ -101,85 +110,63 @@ struct BottomSheet : View {
                                                 viewModel.selectedGraves.removeAll()
                                                 selectedGrave = grave
                                                 offset = 0
-                                                let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: latitude, longitude: longitude, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                    viewModel.selectedGraves.append(graveLocation)
-                                                    print("Dead person: \(graveLocation) added")
+                                                
+                                                if let memorialLocation = viewModel.staticMemorials[cemetery] {
+                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: memorialLocation.latitude!, longitude: memorialLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                        viewModel.selectedGraves.append(graveLocation)
+                                                        print("Dead person: \(graveLocation) added")
+                                                    }
+                                                    
                                                 }
                                             }
-                                    } else if let cemetery = grave.cemetery {
-                                        if grave.graveType != nil && grave.graveType == "memorial" {
-                                            
-                                            AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                                .foregroundColor(.black)
-                                                .onTapGesture {
-                                                    viewModel.selectedGraves.removeAll()
-                                                    selectedGrave = grave
-                                                    offset = 0
-                                                    
-                                                    if let memorialLocation = viewModel.staticMemorials[cemetery] {
-                                                        let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: memorialLocation.latitude!, longitude: memorialLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                            viewModel.selectedGraves.append(graveLocation)
-                                                            print("Dead person: \(graveLocation) added")
-                                                        }
-                                                        
-                                                    }
-                                                }
-                                        } else {
-                                            AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                                .foregroundColor(.black)
-                                                .onTapGesture {
-                                                    viewModel.selectedGraves.removeAll()
-                                                    selectedGrave = grave
-                                                    offset = 0
-                                                    
-                                                    if let cemeteryLocation = viewModel.staticCemeteries[cemetery] {
-                                                        let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: cemeteryLocation.latitude!, longitude: cemeteryLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                            viewModel.selectedGraves.append(graveLocation)
-                                                            print("Dead person: \(graveLocation) added")
-                                                        }
-                                                        
-                                                    }
-                                                }
-                                        }
                                     } else {
-                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: true)
-                                    }
+                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                            .foregroundColor(.black)
+                                            .onTapGesture {
+                                                viewModel.selectedGraves.removeAll()
+                                                selectedGrave = grave
+                                                offset = 0
+                                                
+                                                if let cemeteryLocation = viewModel.staticCemeteries[cemetery] {
+                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: cemeteryLocation.latitude!, longitude: cemeteryLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                        viewModel.selectedGraves.append(graveLocation)
+                                                        print("Dead person: \(graveLocation) added")
+                                                    }
+                                                    
+                                                }
+                                            }
+                                } else {
+                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: true)
                                 }
-                                LazyHStack(alignment: .center) {
-                                    Spacer()
-                                    Text("Loading more...").padding().onAppear {
-                                        viewModel.currentPage += 1
-                                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                                    }
-                                    Spacer()
-                                }
-                            })
-                        default:
-                            EmptyView()
-                        }
-                        
-                    })
-                    VStack{
-                        Spacer()
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                self.currentPage += 1
-                                viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                            }){
-                                Image(systemName: "ellipsis.circle.fill").imageScale(.large)
-                                    .font(.system(.largeTitle))
-                                    .frame(width: 77, height: 70)
-                                    .foregroundColor(Color.blue)
-                                    .padding(.bottom, 7)
                             }
-                        }
-                    }
-                }
-            }
+                            }
+                            if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
+                                HStack(alignment: .center) {
+                                    Button(action: {
+                                    Button(action: {
+                                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                                    }, label: {
+                                    }, label: {
+                                        Text("Visa fler...")
+                                    }).padding(.bottom, 20)
+                                    Spacer()
+                                }
+                            } else {
+                                HStack{
+                                    Spacer()
+                                    Text("Slut på resultat...")
+                                        .font(.caption2)
+                                    Spacer()
+                                }
+                        })
+                        })
+                    default:
+                        EmptyView()
+                })
+                })
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
             .offset(y: reader.frame(in: .global).height - 150)
