@@ -21,6 +21,9 @@ struct MapViewUI: UIViewRepresentable {
         mapView.isRotateEnabled = false
         mapView.addAnnotations(graves)
         mapView.delegate = context.coordinator
+        let poiCategories: [MKPointOfInterestCategory] = [.evCharger, .gasStation, .nationalPark, .park, .parking, .publicTransport, .restroom, .store]
+        let poiFilter = MKPointOfInterestFilter(including: poiCategories)
+        mapView.pointOfInterestFilter = poiFilter
         return mapView
     }
     
