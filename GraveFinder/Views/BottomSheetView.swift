@@ -170,8 +170,6 @@ struct BottomSheet : View {
                                     selectedGrave = grave
                                     offset = 0
                                     let graveLocation = viewModel.createGraveLocation(name: grave.deceased!, latitude: grave.location.latitude!, longitude: grave.location.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
-                                    offset = 0
-                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased!, latitude: grave.location.latitude!, longitude: grave.location.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                         viewModel.selectedGraves.append(graveLocation)
                                         print("Dead person: \(graveLocation) added")
