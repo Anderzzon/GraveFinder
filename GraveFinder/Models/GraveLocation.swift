@@ -9,11 +9,11 @@ import Foundation
 import MapKit
 
 final class GraveLocation: NSObject, Identifiable {
-    let name: String
-    let life: String
-    let latitude: Double
-    let longitude: Double
-    let location: CLLocation
+    private let name: String
+    private let life: String
+    private let latitude: Double
+    private let longitude: Double
+    private let location: CLLocation
     private let regionRadius: CLLocationDistance = 1000
     let region: MKCoordinateRegion?
     let id = UUID()
