@@ -18,6 +18,7 @@ struct BottomSheet : View {
 	@State var output: String = ""
 	@State var input: String = ""
 	@State var typing = false
+	@State var pulledUp = false
 	@State private var isSearching = false
 	@State private var currentPage = 0
 	var body: some View{
@@ -35,14 +36,22 @@ struct BottomSheet : View {
 						.font(.system(size: 22))
 						.foregroundColor(.gray)
 
-					TextField("Search...", text: $txt, onEditingChanged: {_ in
-						offset = (-reader.frame(in: .global).height + 150)
+					TextField("Search...", text: $txt, onEditingChanged: {EditMode in
+
+						if(!self.pulledUp){
+							offset = (-reader.frame(in: .global).height + 150)
+							self.pulledUp = true
+						}
+						if(!EditMode){
+							self.pulledUp = false
+						}
 					}, onCommit: {
 						viewModel.totalList.removeAll()
 						self.searchTxt = self.txt
 						self.isSearching = true
 						self.currentPage = 1
 						self.viewModel.fetchGraves(for: self.searchTxt, atPage: self.currentPage)
+
 					})
 				}
 				.padding(.vertical,10)
@@ -110,7 +119,6 @@ struct BottomSheet : View {
 					}
 					if value.startLocation.y < reader.frame(in: .global).midX{
 						if value.translation.height > 0 && offset < 0{
-
 							offset = (-reader.frame(in: .global).height + 150) + value.translation.height
 						}
 					}
@@ -118,6 +126,7 @@ struct BottomSheet : View {
 			}).onEnded({ (value) in
 				withAnimation{
 					if value.startLocation.y > reader.frame(in: .global).midX{
+						self.pulledUp = false
 						if -value.translation.height > reader.frame(in: .global).midX{
 							offset = (-reader.frame(in: .global).height + 150)
 							return
