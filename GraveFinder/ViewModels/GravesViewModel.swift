@@ -48,5 +48,10 @@ class GravesViewModel: ObservableObject {
         return grave.location.latitude != nil && grave.location.longitude != nil && grave.deceased != nil
     }
     
+    func createGraveLocation(name: String, latitude: Double, longitude: Double, birth: String, death: String) -> GraveLocation {
+        let graveLocation = GraveLocation(name: name, latitude: latitude, longitude: longitude, birth: birth, death: death)
+        return graveLocation
+    }
+    
 }
 
