@@ -13,11 +13,13 @@ class GravesViewModel: ObservableObject {
     @Published var totalGravesList = [Grave]()
     @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
     @Published var currentPage = 1
+    @Published var totalPages = 0
     @State var latestQuery = ""
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
             totalGravesList.append(contentsOf: searchResults.graves)
+            totalPages = searchResults.pages
         }
     }
     
@@ -48,21 +50,25 @@ class GravesViewModel: ObservableObject {
     var task : AnyCancellable?
     
     func fetchGraves(for query:String, at page: Int) {
+        print("fetching")
         latestQuery = query
         guard page > 0 else { return }
+        
+        let searchQuery = query.lowercased()
+            .replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: " ", with: "+")
         
         var components = URLComponents()
         components.scheme = "https"
         components.host = "etjanst.stockholm.se"
         components.path = "/Hittagraven/ajax/search"
         components.queryItems = [
-            URLQueryItem(name: "searchtext", value: query),
+            URLQueryItem(name: "searchtext", value: searchQuery),
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        let urlFromComponent = components.url
-        
-        guard let url = urlFromComponent else {return}
+        guard let url = components.url else {return}
         
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map { $0.data }
