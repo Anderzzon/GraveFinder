@@ -9,9 +9,11 @@ import SwiftUI
 
 struct AutoCompleteText: View {
     private var grave:Grave
+    private var highlight:Bool
     
-    init(for grave:Grave){
+    init(for grave:Grave, andHighLightIf highlight:Bool){
         self.grave = grave
+        self.highlight = highlight
     }
     
     var body: some View {
@@ -33,7 +35,7 @@ struct AutoCompleteText: View {
                 .foregroundColor(Color.gray)
             
             
-        }.padding()
+        }.padding().background(highlight ? Color.blue.opacity(0.4) : Color.white.opacity(0))
     }
 }
 
@@ -41,6 +43,6 @@ struct AutoCompleteText_Previews: PreviewProvider {
     static var previews: some View {
         let grave = Grave(deceased: "Anonymous Svensson", dateBuried: "2020-10-12", dateOfBirth: "2020-20-20", dateOfDeath: "2020-20-20", cemetery: "Skogskyrkogården", location: Location(latitude: nil, longitude: nil))
         
-        AutoCompleteText(for: grave)
+        AutoCompleteText(for: grave, andHighLightIf: false)
     }
 }

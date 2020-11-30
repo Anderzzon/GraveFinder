@@ -10,22 +10,24 @@ import SwiftUI
 
 class GravesViewModel: ObservableObject {
     
-    @Published var totalList = [Grave]()
-    @Published var autoComplete = SearchResults(graves: [Grave](), pages: 1)
+    @Published var totalGravesList = [Grave]()
+    @Published var currentPage = 1
+    @State var latestQuery = ""
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
-            totalList.append(contentsOf: searchResults.graves)
+            totalGravesList.append(contentsOf: searchResults.graves)
         }
     }
     
     @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
     var task : AnyCancellable?
     
-    func fetchGraves(for query:String, atPage page: Int, withEndpoint endpoint:String ) {
+    func fetchGraves(for query:String, at page: Int) {
+        latestQuery = query
         guard page > 0 else { return }
         let parsedQuery = query.replacingOccurrences(of: " ", with: "+")
-        let stringUrl = "https://etjanst.stockholm.se/Hittagraven/ajax/" + endpoint + "?SearchText=" + parsedQuery + "&page=" + "\(page)"
+        let stringUrl = "https://etjanst.stockholm.se/Hittagraven/ajax/search" + "?SearchText=" + parsedQuery + "&page=" + "\(page)"
         
         guard let url = URL(string: stringUrl) else { return }
         
@@ -45,19 +47,11 @@ class GravesViewModel: ObservableObject {
             .replaceError(with: SearchResults(graves: [Grave](), pages: 0))
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
-            .assign(to: self.getAssigneeFor(endpoint: endpoint), on: self)
+            .assign(to: \GravesViewModel.searchResults, on: self)
             
     }
     func validate(_ grave:Grave) -> Bool {
         return grave.location.latitude != nil && grave.location.longitude != nil && grave.deceased != nil
-    }
-    func getAssigneeFor(endpoint: String) -> ReferenceWritableKeyPath<GravesViewModel,SearchResults> {
-        switch endpoint {
-        case Constants.autoCompleteSearch:
-            return \GravesViewModel.autoComplete
-        default:
-            return \GravesViewModel.searchResults
-        }
     }
 }
 
