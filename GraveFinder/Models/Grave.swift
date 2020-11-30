@@ -14,6 +14,7 @@ struct Grave:Codable, Hashable, Identifiable {
     let dateOfBirth:String?
     let dateOfDeath:String?
     let cemetery:String?
+    let graveType:String?
     let location:Location
     let id = UUID()
     
@@ -22,7 +23,8 @@ struct Grave:Codable, Hashable, Identifiable {
         case dateBuried = "buriedDate"
         case dateOfBirth = "birthDate"
         case dateOfDeath = "deathDate"
-        case location = "coordinates"
         case cemetery
+        case graveType = "blockType"
+        case location = "coordinates"
     }
 }
