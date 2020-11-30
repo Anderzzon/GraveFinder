@@ -61,7 +61,6 @@ struct BottomSheet : View {
                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                         
                     }).onChange(of: query, perform: { _ in
-                        viewModel.currentPage = 1
                         viewModel.selectedGraves.removeAll()
                         if(query.count > 0){
                             viewModel.totalGravesList.removeAll()
@@ -69,7 +68,7 @@ struct BottomSheet : View {
                             showContent = .searchResults
                         } else {
                             showContent = .nothing
-                        }
+                            showContent = .nothing
                     })
                 }
                 .padding(.vertical,10)
@@ -80,6 +79,7 @@ struct BottomSheet : View {
                 .cornerRadius(15)
                 .padding()
                 ScrollView(.vertical, showsIndicators: true, content: {
+                ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
                     case .searchResults:
                         LazyVStack(alignment: .leading, spacing: 5, content:{
@@ -89,7 +89,7 @@ struct BottomSheet : View {
                                 
                                 if let latitude = grave.location.latitude,
                                    let longitude = grave.location.longitude {
-                                    
+                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                     AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                         .foregroundColor(.black)
                                         .onTapGesture {
@@ -100,8 +100,7 @@ struct BottomSheet : View {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                 viewModel.selectedGraves.append(graveLocation)
                                                 print("Dead person: \(graveLocation) added")
-                                            }
-                                        }
+                                    } else if let cemetery = grave.cemetery {
                                 } else if let cemetery = grave.cemetery {
                                     if grave.graveType != nil && grave.graveType == "memorial" {
                                         
@@ -123,6 +122,7 @@ struct BottomSheet : View {
                                             }
                                     } else {
                                         AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                             .foregroundColor(.black)
                                             .onTapGesture {
                                                 viewModel.selectedGraves.removeAll()
@@ -138,17 +138,17 @@ struct BottomSheet : View {
                                                     
                                                 }
                                             }
-                                    }
                                 } else {
                                     AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: true)
                                 }
                             }
+                            }
                             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                                 HStack(alignment: .center) {
-                                    Spacer()
                                     Button(action: {
-                                        viewModel.currentPage += 1
+                                    Button(action: {
                                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                                    }, label: {
                                     }, label: {
                                         Text("Visa fler...")
                                     }).padding(.bottom, 20)
@@ -161,13 +161,12 @@ struct BottomSheet : View {
                                         .font(.caption2)
                                     Spacer()
                                 }
-                            }
+                        })
                         })
                     default:
                         EmptyView()
-                    }
                 })
-            }
+                })
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
             .offset(y: reader.frame(in: .global).height - 150)

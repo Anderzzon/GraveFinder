@@ -50,7 +50,6 @@ class GravesViewModel: ObservableObject {
     var task : AnyCancellable?
     
     func fetchGraves(for query:String, at page: Int) {
-        print("fetching")
         latestQuery = query
         guard page > 0 else { return }
         
