@@ -16,7 +16,7 @@ struct Grave:Codable, Hashable, Identifiable {
     let cemetery:String?
     let graveType:String?
     let location:Location
-    let id = UUID()
+    let id:String
     
     enum CodingKeys: String, CodingKey {
         case deceased = "label"
@@ -26,5 +26,6 @@ struct Grave:Codable, Hashable, Identifiable {
         case cemetery
         case graveType = "blockType"
         case location = "coordinates"
+        case id
     }
 }
