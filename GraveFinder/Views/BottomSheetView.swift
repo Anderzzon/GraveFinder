@@ -83,7 +83,7 @@ struct BottomSheet : View {
                                 
                                 if let latitude = grave.location.latitude,
                                    let longitude = grave.location.longitude {
-                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                    GravesView(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                         .onTapGesture {
                                             viewModel.selectedGraves.removeAll()
                                             selectedGrave = grave
@@ -97,7 +97,7 @@ struct BottomSheet : View {
                                 } else if let cemetery = grave.cemetery {
                                     if grave.graveType != nil && grave.graveType == "memorial" {
                                         
-                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                        GravesView(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                             .foregroundColor(.black)
                                             .onTapGesture {
                                                 viewModel.selectedGraves.removeAll()
@@ -114,7 +114,7 @@ struct BottomSheet : View {
                                                 }
                                             }
                                     } else {
-                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
+                                        GravesView(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                             .foregroundColor(.black)
                                             .onTapGesture {
                                                 viewModel.selectedGraves.removeAll()
