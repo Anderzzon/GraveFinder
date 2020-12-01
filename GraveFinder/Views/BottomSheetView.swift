@@ -1,10 +1,3 @@
-//
-//  BottomSheetView.swift
-//  GraveFinder
-//
-//  Created by Shafigh Khalili on 2020-11-25.
-//
-
 import SwiftUI
 
 struct BottomSheet : View {
@@ -15,7 +8,7 @@ struct BottomSheet : View {
     @State private var isSearching = false
     @State private var isAutoCompleting = false
     @State private var selectedGrave:Grave? = nil
-    @State private var isDisabled = false
+    
     //@Binding var offset : CGFloat
     //var value : CGFloat
     
@@ -24,7 +17,7 @@ struct BottomSheet : View {
     @State var typing = false
     
     @State var searchTxt = ""
-    //	@Binding var offset : CGFloat
+    //    @Binding var offset : CGFloat
     @State var offset : CGFloat = 0
     @State var pulledUp = false
     @State private var currentPage = 0
@@ -61,6 +54,7 @@ struct BottomSheet : View {
                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                         
                     }).onChange(of: query, perform: { _ in
+                        viewModel.currentPage = 1
                         viewModel.selectedGraves.removeAll()
                         if(query.count > 0){
                             viewModel.totalGravesList.removeAll()
@@ -68,7 +62,7 @@ struct BottomSheet : View {
                             showContent = .searchResults
                         } else {
                             showContent = .nothing
-                            showContent = .nothing
+                        }
                     })
                 }
                 .padding(.vertical,10)
@@ -78,7 +72,7 @@ struct BottomSheet : View {
                 .background(BlurView(style: .systemMaterial))
                 .cornerRadius(15)
                 .padding()
-                ScrollView(.vertical, showsIndicators: true, content: {
+                
                 ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
                     case .searchResults:
@@ -90,8 +84,6 @@ struct BottomSheet : View {
                                 if let latitude = grave.location.latitude,
                                    let longitude = grave.location.longitude {
                                     AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                        .foregroundColor(.black)
                                         .onTapGesture {
                                             viewModel.selectedGraves.removeAll()
                                             selectedGrave = grave
@@ -100,7 +92,8 @@ struct BottomSheet : View {
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                 viewModel.selectedGraves.append(graveLocation)
                                                 print("Dead person: \(graveLocation) added")
-                                    } else if let cemetery = grave.cemetery {
+                                            }
+                                        }
                                 } else if let cemetery = grave.cemetery {
                                     if grave.graveType != nil && grave.graveType == "memorial" {
                                         
@@ -122,7 +115,6 @@ struct BottomSheet : View {
                                             }
                                     } else {
                                         AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                        AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                             .foregroundColor(.black)
                                             .onTapGesture {
                                                 viewModel.selectedGraves.removeAll()
@@ -138,20 +130,18 @@ struct BottomSheet : View {
                                                     
                                                 }
                                             }
-                                } else {
-                                    AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: true)
+                                    }
                                 }
-                            }
                             }
                             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                                 HStack(alignment: .center) {
+                                    Spacer()
                                     Button(action: {
-                                    Button(action: {
+                                        viewModel.currentPage += 1
                                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                                     }, label: {
-                                    }, label: {
                                         Text("Visa fler...")
-                                    }).padding(.bottom, 20)
+                                    }).padding(.bottom, 40)
                                     Spacer()
                                 }
                             } else {
@@ -159,17 +149,19 @@ struct BottomSheet : View {
                                     Spacer()
                                     Text("Slut på resultat...")
                                         .font(.caption2)
+                                        .padding(.bottom, 40)
                                     Spacer()
                                 }
-                        })
+                            }
                         })
                     default:
                         EmptyView()
+                    }
                 })
-                })
+            }
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
-            .offset(y: reader.frame(in: .global).height - 150)
+            .offset(y: reader.frame(in: .global).height - 140)
             .offset(y: offset)
             .gesture(DragGesture().onChanged({ (value) in
                 withAnimation{
