@@ -31,6 +31,7 @@ struct AutoCompleteText: View {
                         .font(.caption2)
                 Text("Kyrkogård: \(cemetery)")
                         .font(.caption2)
+                    
             })
             Spacer()
             self.isDisabled ? Image(systemName: "nosign")

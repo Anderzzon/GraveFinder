@@ -72,6 +72,7 @@ struct BottomSheet : View {
                             showContent = .noResults
                         }
                     })
+                    .disableAutocorrection(true)
                 }
                 .padding(.vertical,10)
                 .padding(.horizontal)
@@ -96,8 +97,8 @@ struct BottomSheet : View {
                                        let longitude = grave.location.longitude {
                                         
                                         AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                            .foregroundColor(.black)
                                             .onTapGesture {
+                                                self.hideKeyboard()
                                                 viewModel.selectedGraves.removeAll()
                                                 selectedGrave = grave
                                                 offset = 0
@@ -111,13 +112,13 @@ struct BottomSheet : View {
                                         if grave.graveType != nil && grave.graveType == "memorial" {
                                             
                                             AutoCompleteText(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
-                                                .foregroundColor(.black)
                                                 .onTapGesture {
                                                     viewModel.selectedGraves.removeAll()
                                                     selectedGrave = grave
                                                     offset = 0
                                                     
                                                     if let memorialLocation = viewModel.staticMemorials[cemetery] {
+                                                        self.hideKeyboard()
                                                         let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: memorialLocation.latitude!, longitude: memorialLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
                                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                             viewModel.selectedGraves.append(graveLocation)
@@ -230,3 +231,10 @@ struct BlurView : UIViewRepresentable {
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
     }
 }
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
