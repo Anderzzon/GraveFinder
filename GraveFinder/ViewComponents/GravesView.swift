@@ -8,50 +8,72 @@
 import SwiftUI
 
 struct GravesView: View {
+    @ObservedObject var viewModel : GravesViewModel
+    @Binding private var selectedGrave:Grave?
+    @Binding private var offset:CGFloat
     private var grave:Grave
-    private var highlight:Bool
     private var isDisabled:Bool
+    private var isFavorite:Bool
     
-    init(for grave:Grave, andHighLightIf highlight:Bool, isDisabled disabled:Bool){
+    
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, favorite:Bool, offset:Binding<CGFloat>, viewModel:GravesViewModel){
+        
         self.grave = grave
-        self.highlight = highlight
+        self._selectedGrave = selectedGrave
         self.isDisabled = disabled
+        self.isFavorite = favorite
+        self._offset = offset
+        self.viewModel = viewModel
     }
     
     var body: some View {
+        // Left icon Map pin / "Cannot" sign
         HStack {
-            VStack(alignment: .leading, spacing: 10, content: {
-                let deceased = grave.deceased ?? "Ej specificierad"
-                let dateBuried = grave.dateBuried ?? "Ej specificierad"
-                let cemetery = grave.cemetery ?? "Ej specificierad"
+            HStack{
+                self.isDisabled ? Image(systemName: "nosign")
+                    .foregroundColor(.gray)
+                    .padding(.all, 10)
+                    :
+                    Image(systemName: "mappin.and.ellipse")
+                    .foregroundColor(Color.gray)
+                    .padding(.all, 10)
                 
-                Text(deceased)
-                    .font(.caption).bold()
-                Text("Begravd: \(dateBuried)")
+                // Grave information
+                VStack(alignment: .leading, spacing: 10){
+                    let deceased = grave.deceased ?? "Okänd"
+                    let dateBuried = grave.dateBuried ?? "Ej specificerad"
+                    let cemetery = grave.cemetery ?? "Ej specificerad"
+                    
+                    Text(deceased)
+                        .font(.caption).bold()
+                    Text("Begravd: \(dateBuried)")
                         .font(.caption2)
-                Text("Kyrkogård: \(cemetery)")
+                    Text("Kyrkogård: \(cemetery)")
                         .font(.caption2)
-            })
-            Spacer()
-            self.isDisabled ? Image(systemName: "nosign")
-                .foregroundColor(.gray)
-                .padding(.trailing, 10)
-                :
-                Image(systemName: "mappin.and.ellipse")
-                .foregroundColor(Color.gray)
-                .padding(.trailing, 10)
-            
-            
+                }
+                Spacer()
+            }.onTapGesture {
+                //Grave info card tap to show on map
+                if !isDisabled {
+                    viewModel.selectedGraves.removeAll()
+                    self.selectedGrave = grave
+                    self.offset = 0
+                    let graveLocation = GraveLocation(grave: grave)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        viewModel.selectedGraves.append(graveLocation)
+                    }
+                }
+            }
+            // Grave is favorite toggle
+            if !isDisabled {
+                Button(action: {
+                    viewModel.toggleToFavorites(grave: grave)
+                } , label: {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(.red)
+                }).padding()
+            }
         }.padding()
-        
-        .background(highlight ? Color.blue.opacity(0.4) : Color.white.opacity(0))
-    }
-}
-
-struct GravesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let grave = Grave(deceased: "Anonymous Svensson", dateBuried: "2020-10-12", dateOfBirth: "2020-20-20", dateOfDeath: "2020-20-20", cemetery: "Skogskyrkogården", graveType: "memorial", location: Location(latitude: nil, longitude: nil), id: "123")
-        
-        GravesView(for: grave, andHighLightIf: false, isDisabled: false)
+        .background(selectedGrave == grave ? Color.blue.opacity(0.4) : Color.white.opacity(0))
     }
 }
