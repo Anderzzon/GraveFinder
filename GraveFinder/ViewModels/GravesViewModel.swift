@@ -12,6 +12,7 @@ class GravesViewModel: ObservableObject {
     
     @Published var totalGravesList = [Grave]()
     @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
+    @Published var favoriteGraves = [Grave]()
     @Published var currentPage = 1
     @Published var totalPages = 0
     @State var latestQuery = ""
@@ -23,27 +24,27 @@ class GravesViewModel: ObservableObject {
         }
     }
     
-    @Published private(set) var staticMemorials:[String:Location] = [
-        "Skogskyrkogården":Location(latitude: 59.2782585, longitude: 18.0961542),
-        "Brännkyrka kyrkogård":Location(latitude: 59.2826874, longitude: 18.0219386),
-        "Spånga kyrkogård":Location(latitude: 59.3924017, longitude: 17.9134938),
-        "Bromma kyrkogård":Location(latitude: 59.3551232, longitude: 17.9198294),
-        "Hässelby begravningsplats":Location(latitude: 59.3646032, longitude: 17.8252801),
-        "Strandkyrkogården":Location(latitude: 59.234783, longitude: 18.1831843),
-        "Råcksta begravningsplats":Location(latitude: 59.354962, longitude: 17.8671203),
-        "Norra begravningsplatsen":Location(latitude: 59.356501, longitude: 18.0182928),
-        "Galärvarvskyrkogården":Location(latitude: 59.32787, longitude: 18.0942288)
+    static var staticMemorials:[String:Location] = [
+        "skogskyrkogården":Location(latitude: 59.2782585, longitude: 18.0961542),
+        "brännkyrka kyrkogård":Location(latitude: 59.2826874, longitude: 18.0219386),
+        "spånga kyrkogård":Location(latitude: 59.3924017, longitude: 17.9134938),
+        "bromma kyrkogård":Location(latitude: 59.3551232, longitude: 17.9198294),
+        "hässelby begravningsplats":Location(latitude: 59.3646032, longitude: 17.8252801),
+        "strandkyrkogården":Location(latitude: 59.234783, longitude: 18.1831843),
+        "råcksta begravningsplats":Location(latitude: 59.354962, longitude: 17.8671203),
+        "norra begravningsplatsen":Location(latitude: 59.356501, longitude: 18.0182928),
+        "galärvarvskyrkogården":Location(latitude: 59.32787, longitude: 18.0942288)
     ]
-    @Published private(set) var staticCemeteries:[String:Location] = [
-        "Skogskyrkogården":Location(latitude: 59.271181, longitude: 18.102697),
-        "Brännkyrka kyrkogård":Location(latitude: 59.282616, longitude: 18.024034),
-        "Spånga kyrkogård":Location(latitude: 59.391942, longitude: 17.911400),
-        "Bromma kyrkogård":Location(latitude: 59.355133, longitude: 17.920238),
-        "Hässelby begravningsplats":Location(latitude: 59.362864, longitude: 17.827611),
-        "Strandkyrkogården":Location(latitude: 59.237168, longitude: 18.186855),
-        "Råcksta begravningsplats":Location(latitude: 59.355020, longitude: 17.869861),
-        "Norra begravningsplatsen":Location(latitude: 59.355668, longitude: 18.023853),
-        "Galärvarvskyrkogården":Location(latitude: 59.328077, longitude: 18.093972)
+    static var staticCemeteries:[String:Location] = [
+        "skogskyrkogården":Location(latitude: 59.271181, longitude: 18.102697),
+        "brännkyrka kyrkogård":Location(latitude: 59.282616, longitude: 18.024034),
+        "spånga kyrkogård":Location(latitude: 59.391942, longitude: 17.911400),
+        "bromma kyrkogård":Location(latitude: 59.355133, longitude: 17.920238),
+        "hässelby begravningsplats":Location(latitude: 59.362864, longitude: 17.827611),
+        "strandkyrkogården":Location(latitude: 59.237168, longitude: 18.186855),
+        "råcksta begravningsplats":Location(latitude: 59.355020, longitude: 17.869861),
+        "norra begravningsplatsen":Location(latitude: 59.355668, longitude: 18.023853),
+        "galärvarvskyrkogården":Location(latitude: 59.328077, longitude: 18.093972)
     ]
     
     
@@ -81,6 +82,15 @@ class GravesViewModel: ObservableObject {
         let graveLocation = GraveLocation(name: name, latitude: latitude, longitude: longitude, birth: birth, death: death)
         return graveLocation
     }
-    
+    func toggleToFavorites(grave:Grave){
+        if favoriteGraves.contains(grave) {
+            let index = favoriteGraves.firstIndex(of: grave)
+            if let index = index {
+            self.favoriteGraves.remove(at: index)
+            }
+        } else {
+            favoriteGraves.append(grave)
+        }
+    }
 }
 

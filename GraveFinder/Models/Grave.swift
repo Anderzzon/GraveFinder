@@ -28,4 +28,11 @@ struct Grave:Codable, Hashable, Identifiable {
         case location = "coordinates"
         case id
     }
+    func isLocatable() -> Bool {
+        let firstCheck = self.location.latitude != nil && self.location.longitude != nil
+        let secondCheck = self.cemetery != nil && self.graveType == "memorial"
+        let thirdCheck = self.cemetery != nil
+        
+        return firstCheck || secondCheck || thirdCheck
+    }
 }
