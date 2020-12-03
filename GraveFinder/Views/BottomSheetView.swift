@@ -82,8 +82,8 @@ struct BottomSheet : View {
                                 grave in
                                 let isSelectedGrave = grave == selectedGrave
                                 
-                                if let latitude = grave.location.latitude,
-                                   let longitude = grave.location.longitude {
+                                if let latitude = grave.latitude,
+                                   let longitude = grave.longitude {
                                     GravesView(for: grave, andHighLightIf: isSelectedGrave, isDisabled: false)
                                         .onTapGesture {
                                             self.hideKeyboard()
@@ -107,7 +107,7 @@ struct BottomSheet : View {
                                                 
                                                 if let memorialLocation = viewModel.staticMemorials[cemetery] {
                                                     self.hideKeyboard()
-                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: memorialLocation.latitude!, longitude: memorialLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: memorialLocation.latitude, longitude: memorialLocation.longitude, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                         viewModel.selectedGraves.append(graveLocation)
                                                         print("Dead person: \(graveLocation) added")
@@ -123,7 +123,7 @@ struct BottomSheet : View {
                                                 offset = 0
                                                 
                                                 if let cemeteryLocation = viewModel.staticCemeteries[cemetery] {
-                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: cemeteryLocation.latitude!, longitude: cemeteryLocation.longitude!, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
+                                                    let graveLocation = viewModel.createGraveLocation(name: grave.deceased ?? "Ej specificierad", latitude: cemeteryLocation.latitude, longitude: cemeteryLocation.longitude, birth: grave.dateOfBirth ?? "", death: grave.dateOfDeath ?? "")
                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                         viewModel.selectedGraves.append(graveLocation)
                                                         print("Dead person: \(graveLocation) added")

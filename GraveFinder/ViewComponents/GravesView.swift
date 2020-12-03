@@ -48,10 +48,10 @@ struct GravesView: View {
     }
 }
 
-struct GravesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let grave = Grave(deceased: "Anonymous Svensson", dateBuried: "2020-10-12", dateOfBirth: "2020-20-20", dateOfDeath: "2020-20-20", cemetery: "Skogskyrkogården", graveType: "memorial", location: Location(latitude: nil, longitude: nil), id: "123")
-        
-        GravesView(for: grave, andHighLightIf: false, isDisabled: false)
-    }
-}
+//struct GravesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let grave = Grave(deceased: "Anonymous Svensson", dateBuried: "2020-10-12", dateOfBirth: "2020-20-20", dateOfDeath: "2020-20-20", cemetery: "Skogskyrkogården", graveType: "memorial", location: Location(latitude: nil, longitude: nil), id: "123")
+//        
+//        GravesView(for: grave, andHighLightIf: false, isDisabled: false)
+//    }
+//}
