@@ -39,22 +39,22 @@ final class GraveLocation: NSObject, Identifiable {
         
         self.life = birthday + " - " + deathday
         
-        if grave.location.latitude != nil && grave.location.longitude != nil {
-            self.latitude = grave.location.latitude!
-            self.longitude = grave.location.longitude!
+        if grave.latitude != nil && grave.longitude != nil {
+            self.latitude = grave.latitude!
+            self.longitude = grave.longitude!
             self.location = CLLocation(latitude: self.latitude, longitude: self.longitude)
             self.region = MKCoordinateRegion(center: self.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
             
         } else if grave.cemetery != nil && grave.graveType == "memorial" {
-            let location = GravesViewModel.staticMemorials[grave.cemetery!.lowercased()] ?? Location(latitude: 0.0, longitude: 0.0)
-            self.latitude = location.latitude!
-            self.longitude = location.longitude!
+            let location = GravesViewModel.getMemorialLocation(for: grave.cemetery!)
+            self.latitude = location.latitude
+            self.longitude = location.longitude
             self.location = CLLocation(latitude: latitude, longitude: longitude)
             self.region = MKCoordinateRegion(center: self.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         } else {
-            let location = GravesViewModel.staticCemeteries[grave.cemetery!.lowercased()] ?? Location(latitude: 0.0, longitude: 0.0)
-            self.latitude = location.latitude!
-            self.longitude = location.longitude!
+            let location = GravesViewModel.getCemeteryLocation(for: grave.cemetery!)
+            self.latitude = location.latitude
+            self.longitude = location.longitude
             self.location = CLLocation(latitude: latitude, longitude: longitude)
             self.region = MKCoordinateRegion(center: self.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         }

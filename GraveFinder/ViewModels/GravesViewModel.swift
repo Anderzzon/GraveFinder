@@ -24,27 +24,27 @@ class GravesViewModel: ObservableObject {
         }
     }
     
-    @Published private(set) var staticMemorials:[String:(latitude:Double,longitude:Double)] = [
-        "Skogskyrkogården":(latitude: 59.2782585, longitude: 18.0961542),
-        "Brännkyrka kyrkogård":(latitude: 59.2826874, longitude: 18.0219386),
-        "Spånga kyrkogård":(latitude: 59.3924017, longitude: 17.9134938),
-        "Bromma kyrkogård":(latitude: 59.3551232, longitude: 17.9198294),
-        "Hässelby begravningsplats":(latitude: 59.3646032, longitude: 17.8252801),
-        "Strandkyrkogården":(latitude: 59.234783, longitude: 18.1831843),
-        "Råcksta begravningsplats":(latitude: 59.354962, longitude: 17.8671203),
-        "Norra begravningsplatsen":(latitude: 59.356501, longitude: 18.0182928),
-        "Galärvarvskyrkogården":(latitude: 59.32787, longitude: 18.0942288)
+    static private let staticMemorials:[String:(latitude:Double,longitude:Double)] = [
+        "skogskyrkogården":(latitude: 59.2782585, longitude: 18.0961542),
+        "brännkyrka kyrkogård":(latitude: 59.2826874, longitude: 18.0219386),
+        "spånga kyrkogård":(latitude: 59.3924017, longitude: 17.9134938),
+        "bromma kyrkogård":(latitude: 59.3551232, longitude: 17.9198294),
+        "hässelby begravningsplats":(latitude: 59.3646032, longitude: 17.8252801),
+        "strandkyrkogården":(latitude: 59.234783, longitude: 18.1831843),
+        "råcksta begravningsplats":(latitude: 59.354962, longitude: 17.8671203),
+        "norra begravningsplatsen":(latitude: 59.356501, longitude: 18.0182928),
+        "galärvarvskyrkogården":(latitude: 59.32787, longitude: 18.0942288)
     ]
-    @Published private(set) var staticCemeteries:[String:(latitude:Double,longitude:Double)] = [
-        "Skogskyrkogården":(latitude: 59.271181, longitude: 18.102697),
-        "Brännkyrka kyrkogård":(latitude: 59.282616, longitude: 18.024034),
-        "Spånga kyrkogård":(latitude: 59.391942, longitude: 17.911400),
-        "Bromma kyrkogård":(latitude: 59.355133, longitude: 17.920238),
-        "Hässelby begravningsplats":(latitude: 59.362864, longitude: 17.827611),
-        "Strandkyrkogården":(latitude: 59.237168, longitude: 18.186855),
-        "Råcksta begravningsplats":(latitude: 59.355020, longitude: 17.869861),
-        "Norra begravningsplatsen":(latitude: 59.355668, longitude: 18.023853),
-        "Galärvarvskyrkogården":(latitude: 59.328077, longitude: 18.093972)
+    static private let staticCemeteries:[String:(latitude:Double,longitude:Double)] = [
+        "skogskyrkogården":(latitude: 59.271181, longitude: 18.102697),
+        "brännkyrka kyrkogård":(latitude: 59.282616, longitude: 18.024034),
+        "spånga kyrkogård":(latitude: 59.391942, longitude: 17.911400),
+        "bromma kyrkogård":(latitude: 59.355133, longitude: 17.920238),
+        "hässelby begravningsplats":(latitude: 59.362864, longitude: 17.827611),
+        "strandkyrkogården":(latitude: 59.237168, longitude: 18.186855),
+        "råcksta begravningsplats":(latitude: 59.355020, longitude: 17.869861),
+        "norra begravningsplatsen":(latitude: 59.355668, longitude: 18.023853),
+        "galärvarvskyrkogården":(latitude: 59.328077, longitude: 18.093972)
     ]
     
     
@@ -91,6 +91,14 @@ class GravesViewModel: ObservableObject {
         } else {
             favoriteGraves.append(grave)
         }
+    }
+    static func getMemorialLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
+        let location = staticMemorials[cemetery.lowercased()] ?? (latitude:0, longitude:0)
+        return location
+    }
+    static func getCemeteryLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
+        let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
+        return location
     }
 }
 
