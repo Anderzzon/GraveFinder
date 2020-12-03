@@ -12,6 +12,7 @@ class GravesViewModel: ObservableObject {
     
     @Published var totalGravesList = [Grave]()
     @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
+    @Published var favoriteGraves = [Grave]()
     @Published var currentPage = 1
     @Published var totalPages = 0
     @State var latestQuery = ""
@@ -50,7 +51,6 @@ class GravesViewModel: ObservableObject {
     var task : AnyCancellable?
     
     func fetchGraves(for query:String, at page: Int) {
-        print("beginning fetch")
         latestQuery = query
         guard page > 0 else { return }
         
@@ -69,7 +69,7 @@ class GravesViewModel: ObservableObject {
         ]
         
         guard let url = components.url else {return}
-        print("beginning urlsession")
+        
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map {$0.data}
             .decode(type: SearchResults.self, decoder: JSONDecoder())
@@ -82,6 +82,15 @@ class GravesViewModel: ObservableObject {
         let graveLocation = GraveLocation(name: name, latitude: latitude, longitude: longitude, birth: birth, death: death)
         return graveLocation
     }
-    
+    func toggleToFavorites(grave:Grave){
+        if favoriteGraves.contains(grave) {
+            let index = favoriteGraves.firstIndex(of: grave)
+            if let index = index {
+            self.favoriteGraves.remove(at: index)
+            }
+        } else {
+            favoriteGraves.append(grave)
+        }
+    }
 }
 

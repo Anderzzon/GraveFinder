@@ -53,4 +53,11 @@ struct Grave:Decodable, Hashable, Identifiable {
         longitude = try? locationContainer.decode(Double.self, forKey: .longitude)
         
         }
+    func isLocatable() -> Bool {
+        let firstCheck = self.location.latitude != nil && self.location.longitude != nil
+        let secondCheck = self.cemetery != nil && self.graveType == "memorial"
+        let thirdCheck = self.cemetery != nil
+        
+        return firstCheck || secondCheck || thirdCheck
+    }
 }
