@@ -13,7 +13,7 @@ final class GraveLocation: NSObject, Identifiable {
     private let life: String
     private let latitude: Double
     private let longitude: Double
-    private let location: CLLocation
+    let location: CLLocation
     private let regionRadius: CLLocationDistance = 1000
     let region: MKCoordinateRegion?
     let id = UUID()

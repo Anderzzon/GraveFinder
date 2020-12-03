@@ -14,7 +14,7 @@
 		031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF23A256BC94E0047A5F4 /* ContentView.swift */; };
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
-		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
+		032EDEC8256D390900A28FAD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationManager.swift */; };
 		7845964D256D004200A97B7F /* Grave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7845964C256D004200A97B7F /* Grave.swift */; };
 		7845964F256D00B100A97B7F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7845964E256D00B100A97B7F /* Location.swift */; };
 		78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459650256D01E700A97B7F /* GravesViewModel.swift */; };
@@ -35,7 +35,7 @@
 		031BF23C256BC9500047A5F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		031BF241256BC9500047A5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		032EDEC7256D390900A28FAD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7845964C256D004200A97B7F /* Grave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grave.swift; sourceTree = "<group>"; };
 		7845964E256D00B100A97B7F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		78459650256D01E700A97B7F /* GravesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesViewModel.swift; sourceTree = "<group>"; };
@@ -92,7 +92,6 @@
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
-				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
 				031BF241256BC9500047A5F4 /* Info.plist */,
 				031BF23E256BC9500047A5F4 /* Preview Content */,
@@ -129,6 +128,7 @@
 		7845964B256CFF6000A97B7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				032EDEC7256D390900A28FAD /* LocationManager.swift */,
 				7845964C256D004200A97B7F /* Grave.swift */,
 				7845964E256D00B100A97B7F /* Location.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
@@ -232,7 +232,7 @@
 			files = (
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
-				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
+				032EDEC8256D390900A28FAD /* LocationManager.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
 				03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,

@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var viewModel = GravesViewModel()
+    @StateObject private var locationManager = LocationManager()
 
     var body: some View {
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
            
-                MapView(viewModel: viewModel)
+            MapView(viewModel: viewModel, locationManager: locationManager)
                 BottomSheet(viewModel: viewModel)
             
         })
@@ -23,6 +24,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(viewModel: GravesViewModel())
+        MapView(viewModel: GravesViewModel(), locationManager: LocationManager())
     }
 }
