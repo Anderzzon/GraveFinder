@@ -77,7 +77,6 @@ struct BottomSheet : View {
                                 let isFavorite = viewModel.favoriteGraves.contains(grave)
                                 
                                 GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: !grave.isLocatable(), favorite: isFavorite, offset: $offset, viewModel: viewModel)
-
                             }
                             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                                 HStack(alignment: .center) {
