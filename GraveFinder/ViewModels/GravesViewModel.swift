@@ -6,9 +6,11 @@
 //
 import Combine
 import SwiftUI
+import CoreData
 
 
 class GravesViewModel: ObservableObject {
+    @Environment(\.managedObjectContext) private var viewContext
     
     @Published var totalGravesList = [Grave]()
     @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
@@ -16,6 +18,15 @@ class GravesViewModel: ObservableObject {
     @Published var currentPage = 1
     @Published var totalPages = 0
     @State var latestQuery = ""
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
+        animation: .default)
+    private var favorites: FetchedResults<FavGraves> {
+        didSet {
+            print(favorites)
+        }
+    }
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
@@ -83,13 +94,11 @@ class GravesViewModel: ObservableObject {
         return graveLocation
     }
     func toggleToFavorites(grave:Grave){
-        if favoriteGraves.contains(grave) {
-            let index = favoriteGraves.firstIndex(of: grave)
-            if let index = index {
-            self.favoriteGraves.remove(at: index)
-            }
+        
+        if favorites.contains(where: {$0.id == grave.id}){
+            self.deleteItems(grave: grave)
         } else {
-            favoriteGraves.append(grave)
+            self.addItem(grave: grave)
         }
     }
     static func getMemorialLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
@@ -99,6 +108,48 @@ class GravesViewModel: ObservableObject {
     static func getCemeteryLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
         let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
         return location
+    }
+    func addItem(grave:Grave) {
+        
+        guard let entity = NSEntityDescription(
+            let newFav = FavGraves(context: viewContext)
+            newFav.id = grave.id ?? ""
+            newFav.deceased = grave.deceased ?? "Ej namngiven"
+            newFav.cemetery = grave.cemetery ?? "Ej specificerad"
+            newFav.dateBuried = grave.dateBuried ?? "Ej specificerad"
+            newFav.dateOfBirth = grave.dateOfBirth ?? "Ej specificerad"
+            newFav.dateOfDeath = grave.dateOfDeath ?? "Ej specificerad"
+            newFav.graveType = grave.graveType ?? "Ej specificerad"
+            newFav.latitude = grave.latitude!
+            newFav.longitude = grave.longitude!
+
+            print(newFav)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        
+    }
+
+    func deleteItems(grave: Grave) {
+        
+            guard let index = favorites.firstIndex(where: {$0.id == grave.id}) else {return}
+            viewContext.delete(favorites[index])
+            
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        
     }
 }
 

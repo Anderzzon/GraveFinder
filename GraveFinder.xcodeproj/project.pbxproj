@@ -21,6 +21,10 @@
 		78688CAA2571165800413618 /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA92571165800413618 /* GravesView.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
 		78EF0395257653A200635427 /* View.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0394257653A200635427 /* View.extensions.swift */; };
+		78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78EF04EC25798B0000635427 /* GraveFinder.xcdatamodeld */; };
+		78EF051225798C3B00635427 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF051125798C3B00635427 /* Persistence.swift */; };
+		78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */; };
+		78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */; };
 		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,10 @@
 		78688CA92571165800413618 /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		78EF0394257653A200635427 /* View.extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.extensions.swift; sourceTree = "<group>"; };
+		78EF04ED25798B0000635427 /* FavGraves.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavGraves.xcdatamodel; sourceTree = "<group>"; };
+		78EF051125798C3B00635427 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataClass.swift"; sourceTree = "<group>"; };
+		78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,9 +98,11 @@
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
+				78EF051125798C3B00635427 /* Persistence.swift */,
 				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
 				031BF23C256BC9500047A5F4 /* Assets.xcassets */,
 				031BF241256BC9500047A5F4 /* Info.plist */,
+				78EF04EC25798B0000635427 /* GraveFinder.xcdatamodeld */,
 				031BF23E256BC9500047A5F4 /* Preview Content */,
 			);
 			path = GraveFinder;
@@ -127,6 +137,8 @@
 		7845964B256CFF6000A97B7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */,
+				78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */,
 				7845964C256D004200A97B7F /* Grave.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
 				03102EFB256EDF6F004FBE3F /* GraveLocation.swift */,
@@ -227,14 +239,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */,
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
+				78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */,
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
 				03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
+				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
 				78688CA52570FB2100413618 /* Strings.swift in Sources */,
+				78EF051225798C3B00635427 /* Persistence.swift in Sources */,
 				78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */,
 				78688CAA2571165800413618 /* GravesView.swift in Sources */,
 				E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */,
@@ -428,6 +444,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		78EF04EC25798B0000635427 /* GraveFinder.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				78EF04ED25798B0000635427 /* FavGraves.xcdatamodel */,
+			);
+			currentVersion = 78EF04ED25798B0000635427 /* FavGraves.xcdatamodel */;
+			path = GraveFinder.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 031BF22D256BC94E0047A5F4 /* Project object */;
 }
