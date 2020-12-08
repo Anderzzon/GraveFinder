@@ -6,12 +6,29 @@
 //
 
 import Foundation
-struct SearchResults : Codable, Hashable {
-    var graves:[Grave]
+struct SearchResults: Decodable, Hashable {
+    var graves:[Grave] {
+        didSet {
+            print(graves)
+        }
+    }
     var pages:Int
     
     enum CodingKeys: String, CodingKey {
         case graves = "items"
         case pages
+    }
+    
+    init(graves:[Grave], pages:Int){
+        self.graves = graves
+        self.pages = pages
+    }
+    
+    init(from decoder:Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        pages = try container.decode(Int.self, forKey: .pages)
+        graves = try container.decode([Grave].self, forKey: .graves)
     }
 }

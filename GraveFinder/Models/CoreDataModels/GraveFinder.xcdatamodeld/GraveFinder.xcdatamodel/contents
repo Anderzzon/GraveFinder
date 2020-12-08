@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B50" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="GraveCD" representedClassName="GraveCD" syncable="YES" codeGenerationType="category">
+        <attribute name="cemetery" optional="YES" attributeType="String"/>
+        <attribute name="dateBuried" optional="YES" attributeType="String"/>
+        <attribute name="dateOfBirth" optional="YES" attributeType="String"/>
+        <attribute name="dateOfDeath" optional="YES" attributeType="String"/>
+        <attribute name="deceased" optional="YES" attributeType="String"/>
+        <attribute name="graveType" optional="YES" attributeType="String"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationCD" inverseName="grave" inverseEntity="LocationCD"/>
+    </entity>
+    <entity name="LocationCD" representedClassName="LocationCD" syncable="YES" codeGenerationType="category">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="grave" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraveCD" inverseName="location" inverseEntity="GraveCD"/>
+    </entity>
+    <elements>
+        <element name="GraveCD" positionX="-9" positionY="36" width="128" height="134"/>
+        <element name="LocationCD" positionX="-9" positionY="36" width="128" height="74"/>
+    </elements>
+</model>

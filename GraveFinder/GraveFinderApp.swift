@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct GraveFinderApp: App {
+    let viewContext = PersistenceController.shared.container.viewContext
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(\.managedObjectContext, viewContext)
         }
     }
 }
