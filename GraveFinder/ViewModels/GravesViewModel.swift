@@ -111,7 +111,6 @@ class GravesViewModel: ObservableObject {
     }
     func addItem(grave:Grave) {
         
-        guard let entity = NSEntityDescription(
             let newFav = FavGraves(context: viewContext)
             newFav.id = grave.id ?? ""
             newFav.deceased = grave.deceased ?? "Ej namngiven"
