@@ -23,7 +23,6 @@ struct GravesView: View {
     private var isDisabled:Bool
     
     init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, offset:Binding<CGFloat>, viewModel:GravesViewModel){
-        
         self.grave = grave
         self._selectedGrave = selectedGrave
         self.isDisabled = disabled
@@ -69,7 +68,7 @@ struct GravesView: View {
                    }
                 }
            }
-            // Grave is favorite toggle
+            // Disable favorite button if grave not locatable
             if !isDisabled {
                 Button(action: {
                     self.toggleFavorite(grave: grave)
@@ -89,7 +88,6 @@ struct GravesView: View {
         }
     }
     func addGrave(grave:Grave){
-        print("adding")
         let newFav = FavGraves(context: moc)
         newFav.id = grave.id ?? ""
         newFav.deceased = grave.deceased ?? "Ej namngiven"
@@ -109,7 +107,6 @@ struct GravesView: View {
         }
     }
     func removeGrave(favGrave:FavGraves){
-        print("removing")
             moc.delete(favGrave)
             do {
                 try moc.save()
