@@ -10,11 +10,8 @@ import CoreData
 
 @main
 struct GraveFinderApp: App {
-    let viewContext:NSManagedObjectContext
+    let viewContext = PersistenceController.shared.container.viewContext
 
-    init(){
-        self.viewContext = PersistenceController.shared.container.viewContext
-    }
     var body: some Scene {
         WindowGroup {
             ContentView().environment(\.managedObjectContext, viewContext)
