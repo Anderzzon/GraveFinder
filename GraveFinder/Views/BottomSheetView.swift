@@ -2,12 +2,17 @@ import SwiftUI
 
 struct BottomSheet : View {
     @ObservedObject var viewModel : GravesViewModel
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
+        animation: .default)
+    var favorites: FetchedResults<FavGraves>
     //    @Binding var searchTxt:String
     
     @State  var query = ""
     @State private var isSearching = false
     @State private var isAutoCompleting = false
     @State private var selectedGrave:Grave? = nil
+    @State var refresh = false
     
     //@Binding var offset : CGFloat
     //var value : CGFloat
@@ -74,9 +79,7 @@ struct BottomSheet : View {
                             ForEach(viewModel.totalGravesList){
                                 grave in
                                 
-                                let isFavorite = viewModel.favoriteGraves.contains(grave)
-                                
-                                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: !grave.isLocatable(), favorite: isFavorite, offset: $offset, viewModel: viewModel)
+                                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: !grave.isLocatable(), offset: $offset, viewModel: viewModel)
                             }
                             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                                 HStack(alignment: .center) {

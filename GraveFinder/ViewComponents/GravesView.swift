@@ -6,22 +6,27 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct GravesView: View {
+    @Environment(\.managedObjectContext) private var moc
     @ObservedObject var viewModel : GravesViewModel
     @Binding private var selectedGrave:Grave?
     @Binding private var offset:CGFloat
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
+        animation: .default)
+    var favorites: FetchedResults<FavGraves>
+    
     private var grave:Grave
     private var isDisabled:Bool
-    private var isFavorite:Bool
     
-    
-    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, favorite:Bool, offset:Binding<CGFloat>, viewModel:GravesViewModel){
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, offset:Binding<CGFloat>, viewModel:GravesViewModel){
         
         self.grave = grave
         self._selectedGrave = selectedGrave
         self.isDisabled = disabled
-        self.isFavorite = favorite
         self._offset = offset
         self.viewModel = viewModel
     }
@@ -59,29 +64,62 @@ struct GravesView: View {
                     self.selectedGrave = grave
                     self.offset = 0
                     let graveLocation = GraveLocation(grave: grave)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         viewModel.selectedGraves.append(graveLocation)
-                    }
+                   }
                 }
-            }
+           }
             // Grave is favorite toggle
             if !isDisabled {
                 Button(action: {
-                    viewModel.toggleToFavorites(grave: grave)
+                    self.toggleFavorite(grave: grave)
                 } , label: {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    Image(systemName: checkIfFavorite() ? "heart.fill" : "heart")
                         .foregroundColor(.red)
                 }).padding()
             }
         }.padding()
         .background(selectedGrave == grave ? Color.blue.opacity(0.4) : Color.white.opacity(0))
     }
+    func toggleFavorite(grave:Grave){
+        if let index = favorites.firstIndex(where: {$0.id == grave.id}){
+            removeGrave(favGrave: favorites[index])
+        } else {
+            addGrave(grave: grave)
+        }
+    }
+    func addGrave(grave:Grave){
+        print("adding")
+        let newFav = FavGraves(context: moc)
+        newFav.id = grave.id ?? ""
+        newFav.deceased = grave.deceased ?? "Ej namngiven"
+        newFav.cemetery = grave.cemetery ?? "Ej specificerad"
+        newFav.dateBuried = grave.dateBuried ?? "Ej specificerad"
+        newFav.dateOfBirth = grave.dateOfBirth ?? "Ej specificerad"
+        newFav.dateOfDeath = grave.dateOfDeath ?? "Ej specificerad"
+        newFav.graveType = grave.graveType ?? "Ej specificerad"
+        newFav.latitude = grave.latitude!
+        newFav.longitude = grave.longitude!
+        do {
+            try moc.save()
+        } catch {
+           //TODO: Handle Error
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    func removeGrave(favGrave:FavGraves){
+        print("removing")
+            moc.delete(favGrave)
+            do {
+                try moc.save()
+            } catch {
+               //TODO: Handle Error
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+    }
+    func checkIfFavorite()->Bool{
+        return favorites.contains(where: {$0.id == grave.id})
+    }
 }
-
-//struct GravesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let grave = Grave(deceased: "Anonymous Svensson", dateBuried: "2020-10-12", dateOfBirth: "2020-20-20", dateOfDeath: "2020-20-20", cemetery: "Skogskyrkogården", graveType: "memorial", location: Location(latitude: nil, longitude: nil), id: "123")
-//        
-//        GravesView(for: grave, andHighLightIf: false, isDisabled: false)
-//    }
-//}

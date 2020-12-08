@@ -49,8 +49,13 @@ struct Grave:Decodable, Hashable, Identifiable {
         
         let locationContainer = try container.nestedContainer(keyedBy: CodingKeys.LocationKeys.self, forKey: .location)
         
-        latitude = try? locationContainer.decode(Double.self, forKey: .latitude)
-        longitude = try? locationContainer.decode(Double.self, forKey: .longitude)
+        let tempLat = try? locationContainer.decode(Double.self, forKey: .latitude)
+        let tempLong = try? locationContainer.decode(Double.self, forKey: .longitude)
+        
+        let latlng = Grave.getLatLng(tempLat: tempLat, tempLong: tempLong, cemetery: cemetery, graveType: graveType)
+        
+        self.latitude = latlng.latitude
+        self.longitude = latlng.longitude
         
         }
     func isLocatable() -> Bool {
@@ -59,5 +64,16 @@ struct Grave:Decodable, Hashable, Identifiable {
         let thirdCheck = self.cemetery != nil
         
         return firstCheck || secondCheck || thirdCheck
+    }
+    static func getLatLng(tempLat:Double?, tempLong:Double?, cemetery:String?, graveType:String?)->(latitude:Double?, longitude:Double?){
+        if tempLat == nil && tempLong == nil && cemetery == nil {
+            return (latitude:nil, longitude:nil)
+        } else if tempLat != nil && tempLong != nil {
+            return (latitude:tempLat, longitude:tempLong)
+        } else if cemetery != nil && graveType == "memorial" {
+            return GravesViewModel.getMemorialLocation(for: cemetery!)
+        } else {
+            return GravesViewModel.getCemeteryLocation(for: cemetery!)
+        }
     }
 }
