@@ -86,7 +86,7 @@ struct GravesView: View {
         } else {
             //addGrave(grave: grave)
             FavGraves.addGrave(grave: grave)
-            FavGraves.saveChanges()
+            //FavGraves.saveChanges()
         }
     }
 //    func addGrave(grave:Grave){

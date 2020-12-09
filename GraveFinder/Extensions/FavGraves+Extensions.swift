@@ -33,9 +33,10 @@ extension FavGraves {
 //            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
 //        }
         //return newFav
-    }
-    static func saveChanges() {
         PersistenceController.shared.saveContext()
     }
+//    static func saveChanges() {
+//        PersistenceController.shared.saveContext()
+//    }
     
 }

@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-@objc(Item)
 public class FavGraves: NSManagedObject {
 
 }
