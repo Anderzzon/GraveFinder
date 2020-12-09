@@ -84,39 +84,10 @@ struct GravesView: View {
     }
     func toggleFavorite(grave:Grave){
         if let index = favorites.firstIndex(where: {$0.id == grave.id}){
-            removeGrave(favGrave: favorites[index])
+            favorites[index].removeFromCoreData()
         } else {
-            addGrave(grave: grave)
+            grave.addToCoreData()
         }
-    }
-    func addGrave(grave:Grave){
-        let newFav = FavGraves(context: moc)
-        newFav.id = grave.id ?? ""
-        newFav.deceased = grave.deceased ?? "Ej namngiven"
-        newFav.cemetery = grave.cemetery ?? "Ej specificerad"
-        newFav.dateBuried = grave.dateBuried ?? "Ej specificerad"
-        newFav.dateOfBirth = grave.dateOfBirth ?? "Ej specificerad"
-        newFav.dateOfDeath = grave.dateOfDeath ?? "Ej specificerad"
-        newFav.graveType = grave.graveType ?? "Ej specificerad"
-        newFav.latitude = grave.latitude!
-        newFav.longitude = grave.longitude!
-        do {
-            try moc.save()
-        } catch {
-           //TODO: Handle Error
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    func removeGrave(favGrave:FavGraves){
-            moc.delete(favGrave)
-            do {
-                try moc.save()
-            } catch {
-               //TODO: Handle Error
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
     }
     func checkIfFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})
