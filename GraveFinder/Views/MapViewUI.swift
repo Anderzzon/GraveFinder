@@ -32,10 +32,12 @@ struct MapViewUI: UIViewRepresentable {
         if graves.count != mapView.annotations.count {
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(graves)
+            mapView.showsUserLocation = true
             
         }
         if graves.count == 1 {
             mapView.setRegion(graves[0].region!, animated: true)
+            mapView.showsUserLocation = true
         }
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
