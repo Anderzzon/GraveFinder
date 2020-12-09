@@ -3,7 +3,7 @@ import SwiftUI
 struct BottomSheet : View {
     
     enum ShowContent {
-        case searchResults, nothing
+        case searchResults, favorites, nothing
     }
     
     @ObservedObject var viewModel : GravesViewModel
@@ -20,6 +20,7 @@ struct BottomSheet : View {
     @State var offset : CGFloat = 0
     @State var pulledUp = false
     @State private var showContent = ShowContent.nothing
+    @State private var onlyFavorites = 0
     
     var body: some View{
         GeometryReader{reader in
@@ -48,6 +49,10 @@ struct BottomSheet : View {
                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                         
                     }).onChange(of: query, perform: { _ in
+                        if onlyFavorites == 1{
+                            onlyFavorites = 0
+                            showContent = .searchResults
+                        }
                         viewModel.currentPage = 1
                         viewModel.selectedGraves.removeAll()
                         if(query.count > 0){
@@ -67,7 +72,19 @@ struct BottomSheet : View {
                 .background(BlurView(style: .systemMaterial))
                 .cornerRadius(15)
                 .padding()
-                
+                VStack {
+                    Picker(selection: self.$onlyFavorites, label: Text("")) {
+                        Text("All").tag(0)
+                        Text("Favorites").tag(1)
+                    }.pickerStyle(SegmentedPickerStyle()).onChange(of: onlyFavorites){_ in
+                        if(onlyFavorites == 0){
+                            showContent = .searchResults
+                        } else {
+                            showContent = .favorites
+                        }
+                    }
+                    
+                }
                 ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
                     case .searchResults:
@@ -97,6 +114,15 @@ struct BottomSheet : View {
                                     Spacer()
                                 }
                             }
+                        })
+                    case .favorites:
+                        LazyVStack(alignment: .leading, spacing: 5, content:{
+                            ForEach(favorites){
+                                favorite in
+                                let grave = Grave(favorite: favorite)
+                                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: false, offset: $offset, viewModel: viewModel)
+                            }
+                            
                         })
                     default:
                         EmptyView()
