@@ -7,11 +7,7 @@
 
 import Foundation
 struct SearchResults: Decodable, Hashable {
-    var graves:[Grave] {
-        didSet {
-            print(graves)
-        }
-    }
+    var graves:[Grave]
     var pages:Int
     
     enum CodingKeys: String, CodingKey {
