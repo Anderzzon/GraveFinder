@@ -16,7 +16,6 @@
 		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 		7845964D256D004200A97B7F /* Grave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7845964C256D004200A97B7F /* Grave.swift */; };
 		78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459650256D01E700A97B7F /* GravesViewModel.swift */; };
-		78603F782580B4F900068473 /* GraveLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78603F772580B4F900068473 /* GraveLocation.swift */; };
 		78688CA52570FB2100413618 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA42570FB2100413618 /* Strings.swift */; };
 		78688CAA2571165800413618 /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA92571165800413618 /* GravesView.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
@@ -40,7 +39,6 @@
 		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		7845964C256D004200A97B7F /* Grave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grave.swift; sourceTree = "<group>"; };
 		78459650256D01E700A97B7F /* GravesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesViewModel.swift; sourceTree = "<group>"; };
-		78603F772580B4F900068473 /* GraveLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveLocation.swift; sourceTree = "<group>"; };
 		78688CA42570FB2100413618 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		78688CA92571165800413618 /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */,
 				7845964C256D004200A97B7F /* Grave.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
-				78603F772580B4F900068473 /* GraveLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,7 +242,6 @@
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
-				78603F782580B4F900068473 /* GraveLocation.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
