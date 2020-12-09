@@ -62,7 +62,9 @@ struct GravesView: View {
                 if !isDisabled {
                     viewModel.selectedGraves.removeAll()
                     self.selectedGrave = grave
-                    self.offset = 0
+                    withAnimation {
+                        self.offset = 0
+                    }
                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     viewModel.selectedGraves.append(grave)
                    }
