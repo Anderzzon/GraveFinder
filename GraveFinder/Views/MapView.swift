@@ -36,10 +36,23 @@ struct MapView: View {
             }
         }.alert(isPresented: $showGraveDeatil, content: {
             let name = viewModel.selectedGraves[0].title ?? "Grave"
-            return Alert(title: Text(name), message: Text("Navigera till \(name)"), primaryButton: .default(Text("OK")), secondaryButton: .cancel())
+            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
+                navigate()
+            }, secondaryButton: .cancel())
         })
     }
+    func navigate() {
+        
+        let graveAnnotation = viewModel.selectedGraves[0] 
+        let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
+            let mapItem = MKMapItem(placemark: placemark)
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+            mapItem.name = placemark.title
+            mapItem.openInMaps(launchOptions: launchOptions)
+    }
 }
+
+
 //
 //struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {

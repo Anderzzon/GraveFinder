@@ -32,21 +32,31 @@ struct MapViewUI: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
         
         print("Graves count: \(graves.count)")
-        if graves.count != mapView.annotations.count {
-            if !mapView.showsUserLocation {
-                mapView.showsUserLocation = true
-            }
-            mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations(graves)
-            
-            
-        }
+//        if graves.count != mapView.annotations.count {
+//            if !mapView.showsUserLocation {
+//                mapView.showsUserLocation = true
+//            }
+//            mapView.removeAnnotations(mapView.annotations)
+//            //mapView.addAnnotations(graves)
+//
+//
+//        }
+//        if graves.count == 1 {
+//            mapView.showsUserLocation = true
+//
+//            mapView.setRegion(graves[0].region!, animated: true)
+//            mapView.addAnnotations(graves)
+//
+//        }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotations(graves)
         if graves.count == 1 {
             mapView.showsUserLocation = true
+        
             mapView.setRegion(graves[0].region!, animated: true)
-            mapView.addAnnotations(graves)
             
         }
+        
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
         print("Region \(region)")
@@ -54,10 +64,14 @@ struct MapViewUI: UIViewRepresentable {
     }
     
     func makeCoordinator() -> MapCoordinator {
-        .init()
+        Coordinator(self)
     }
     
-    final class MapCoordinator: NSObject, MKMapViewDelegate {
+    class MapCoordinator: NSObject, MKMapViewDelegate {
+        var parent: MapViewUI
+        init(_ parent: MapViewUI) {
+            self.parent = parent
+        }
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard let graveAnnotation = annotation as? Grave else {
                 return nil
@@ -71,13 +85,15 @@ struct MapViewUI: UIViewRepresentable {
             annotationView.titleVisibility = .visible
             return annotationView
         }
+        
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            print("Annotiations pressed")
+            parent.showGraveDetail = true
+            
+        }
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("Annotiations pressed")
-        showGraveDetail = true
-        
-    }
+
     
     
 }
