@@ -9,9 +9,11 @@ import SwiftUI
 import MapKit
 
 struct MapViewUI: UIViewRepresentable {
+    @Binding var showGraveDetail: Bool
     var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var graves: [Grave]
     let mapViewType: MKMapType
+    
     //@ObservedObject var viewModel: GravesViewModel
     
     func makeUIView(context: Context) -> MKMapView {
@@ -28,17 +30,33 @@ struct MapViewUI: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
+        
         print("Graves count: \(graves.count)")
-        if graves.count != mapView.annotations.count {
-            mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations(graves)
+//        if graves.count != mapView.annotations.count {
+//            if !mapView.showsUserLocation {
+//                mapView.showsUserLocation = true
+//            }
+//            mapView.removeAnnotations(mapView.annotations)
+//            //mapView.addAnnotations(graves)
+//
+//
+//        }
+//        if graves.count == 1 {
+//            mapView.showsUserLocation = true
+//
+//            mapView.setRegion(graves[0].region!, animated: true)
+//            mapView.addAnnotations(graves)
+//
+//        }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotations(graves)
+        if graves.count == 1 {
             mapView.showsUserLocation = true
+        
+            mapView.setRegion(graves[0].region!, animated: true)
             
         }
-        if graves.count == 1 {
-            mapView.setRegion(graves[0].region!, animated: true)
-            mapView.showsUserLocation = true
-        }
+        
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
         print("Region \(region)")
@@ -46,10 +64,14 @@ struct MapViewUI: UIViewRepresentable {
     }
     
     func makeCoordinator() -> MapCoordinator {
-        .init()
+        Coordinator(self)
     }
     
-    final class MapCoordinator: NSObject, MKMapViewDelegate {
+    class MapCoordinator: NSObject, MKMapViewDelegate {
+        var parent: MapViewUI
+        init(_ parent: MapViewUI) {
+            self.parent = parent
+        }
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard let graveAnnotation = annotation as? Grave else {
                 return nil
@@ -57,12 +79,21 @@ struct MapViewUI: UIViewRepresentable {
             
             let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Dead") as? MKMarkerAnnotationView ?? MKMarkerAnnotationView(annotation: graveAnnotation, reuseIdentifier: "Grave")
             annotationView.canShowCallout = true
+            annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             annotationView.glyphText = "⚰️"
             annotationView.markerTintColor = .lightGray
             annotationView.titleVisibility = .visible
             return annotationView
         }
+        
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            print("Annotiations pressed")
+            parent.showGraveDetail = true
+            
+        }
     }
+    
+
     
     
 }
