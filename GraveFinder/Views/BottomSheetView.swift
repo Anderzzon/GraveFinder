@@ -90,6 +90,7 @@ struct BottomSheet : View {
                             showContent = .searchResults
                         } else {
                             showContent = .favorites
+                            hideKeyboard()
                         }
                     }
                 }
