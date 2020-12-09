@@ -16,8 +16,8 @@ struct BottomSheet : View {
     @State private var isSearching = false
     @State private var isAutoCompleting = false
     @State private var selectedGrave:Grave?
-    @State var refresh = false
-    @State var offset : CGFloat = 0
+    @State private var offset : CGFloat = 0
+    @State private var searchBarHeight:CGFloat = 130
     @State var pulledUp = false
     @State private var showContent = ShowContent.nothing
     @State private var onlyFavorites = 0
@@ -25,53 +25,62 @@ struct BottomSheet : View {
     var body: some View{
         GeometryReader{reader in
             VStack{
-                Capsule()
-                    .fill(Color.gray.opacity(0.5))
-                    .frame(width: 50, height: 5)
-                    .padding(.top)
-                    .padding(.bottom,5)
-                HStack(spacing: 15){
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 22))
-                        .foregroundColor(.gray)
-                    TextField("Search...", text: $query,onEditingChanged: {EditMode in
+                VStack{
+                        Capsule()
+                            .fill(Color.gray.opacity(0.5))
+                            .frame(width: 50, height: 5)
+                            .padding(.top)
+                            .padding(.bottom,5)
+                        HStack(spacing: 15){
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 22))
+                                .foregroundColor(.gray)
+                            TextField("Search...", text: $query,onEditingChanged: {EditMode in
+                                
+                                if(!self.pulledUp){
+                                    offset = (-reader.frame(in: .global).height + searchBarHeight)
+                                    self.pulledUp = true
+                                }
+                                if(!EditMode){
+                                    self.pulledUp = false
+                                }
+                            }, onCommit: {
+                                viewModel.currentPage = 1
+                                viewModel.totalGravesList.removeAll()
+                                viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                                
+                            }).onChange(of: query, perform: { _ in
+                                if onlyFavorites == 1{
+                                    onlyFavorites = 0
+                                    showContent = .searchResults
+                                }
+                                viewModel.currentPage = 1
+                                viewModel.selectedGraves.removeAll()
+                                if(query.count > 0){
+                                    viewModel.totalGravesList.removeAll()
+                                    viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                                    showContent = .searchResults
+                                } else {
+                                    showContent = .nothing
+                                }
+                            })
+                            .disableAutocorrection(true)
+                        }
+                        .padding(.vertical,10)
+                        .padding(.horizontal)
+                        .background(BlurView(style: .systemMaterial))
+                        .cornerRadius(15)
+                        .padding()
                         
-                        if(!self.pulledUp){
-                            offset = (-reader.frame(in: .global).height + 150)
-                            self.pulledUp = true
-                        }
-                        if(!EditMode){
-                            self.pulledUp = false
-                        }
-                    }, onCommit: {
-                        viewModel.currentPage = 1
-                        viewModel.totalGravesList.removeAll()
-                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                        
-                    }).onChange(of: query, perform: { _ in
-                        if onlyFavorites == 1{
-                            onlyFavorites = 0
-                            showContent = .searchResults
-                        }
-                        viewModel.currentPage = 1
-                        viewModel.selectedGraves.removeAll()
-                        if(query.count > 0){
-                            viewModel.totalGravesList.removeAll()
-                            viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                            showContent = .searchResults
-                        } else {
-                            showContent = .nothing
-                        }
-                    })
-                    .disableAutocorrection(true)
+
                 }
-                .padding(.vertical,10)
-                .padding(.horizontal)
-                // BlurView....
-                // For Dark Mode Adoption....
-                .background(BlurView(style: .systemMaterial))
-                .cornerRadius(15)
-                .padding()
+                .padding(.bottom, 20)
+                .background(GeometryReader{geo in
+                    Color.gray.opacity(0.5).onAppear(){
+                        let _ = setGeometry(geo: geo)
+                    }
+                })
+
                 VStack {
                     Picker(selection: self.$onlyFavorites, label: Text("")) {
                         Text("All").tag(0)
@@ -83,7 +92,6 @@ struct BottomSheet : View {
                             showContent = .favorites
                         }
                     }
-                    
                 }
                 ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
@@ -131,18 +139,18 @@ struct BottomSheet : View {
             }
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
-            .offset(y: reader.frame(in: .global).height - 140)
+            .offset(y: reader.frame(in: .global).height - searchBarHeight)
             .offset(y: offset)
             .gesture(DragGesture().onChanged({ (value) in
                 withAnimation{
                     if value.startLocation.y > reader.frame(in: .global).midX{
-                        if value.translation.height < 0 && offset > (-reader.frame(in: .global).height + 150){
+                        if value.translation.height < 0 && offset > (-reader.frame(in: .global).height + searchBarHeight){
                             offset = value.translation.height
                         }
                     }
                     if value.startLocation.y < reader.frame(in: .global).midX{
                         if value.translation.height > 0 && offset < 0{
-                            offset = (-reader.frame(in: .global).height + 150) + value.translation.height
+                            offset = (-reader.frame(in: .global).height + searchBarHeight) + value.translation.height
                         }
                     }
                 }
@@ -151,20 +159,24 @@ struct BottomSheet : View {
                     if value.startLocation.y > reader.frame(in: .global).midX{
                         self.pulledUp = false
                         if -value.translation.height > reader.frame(in: .global).midX{
-                            offset = (-reader.frame(in: .global).height + 150)
+                            offset = (-reader.frame(in: .global).height + searchBarHeight)
                             return
                         }
                         offset = 0
                     }
                     if value.startLocation.y < reader.frame(in: .global).midX{
                         if value.translation.height < reader.frame(in: .global).midX{
-                            offset = (-reader.frame(in: .global).height + 150)
+                            offset = (-reader.frame(in: .global).height + searchBarHeight)
                             return
                         }
                     }
                 }
             }))
         }.ignoresSafeArea(.all, edges: .bottom)
+    }
+    func setGeometry(geo:GeometryProxy)-> some View{
+        searchBarHeight = geo.frame(in: .local).size.height
+        return EmptyView()
     }
 }
 

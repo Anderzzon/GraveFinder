@@ -11,13 +11,13 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel = GravesViewModel()
-    
     var body: some View {
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
-    
+        GeometryReader{ geometry in
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
                 MapView(viewModel: viewModel)
                 BottomSheet(viewModel: viewModel)
-        })
+            })
+        }
     }
 }
 
