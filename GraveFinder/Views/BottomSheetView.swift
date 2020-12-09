@@ -7,7 +7,6 @@ struct BottomSheet : View {
     }
     
     @ObservedObject var viewModel : GravesViewModel
-    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
@@ -36,7 +35,6 @@ struct BottomSheet : View {
                         .font(.system(size: 22))
                         .foregroundColor(.gray)
                     TextField("Search...", text: $query,onEditingChanged: {EditMode in
-                        print("editing")
                         
                         if(!self.pulledUp){
                             offset = (-reader.frame(in: .global).height + 150)
