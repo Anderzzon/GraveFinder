@@ -57,6 +57,7 @@ struct GravesView: View {
                 }
                 Spacer()
             }.onTapGesture {
+                hideKeyboard()
                 //Grave info card tap to show on map
                 if !isDisabled {
                     viewModel.selectedGraves.removeAll()
