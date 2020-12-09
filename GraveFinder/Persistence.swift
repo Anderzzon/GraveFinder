@@ -10,7 +10,7 @@ import CoreData
 struct PersistenceController {
     static let shared = PersistenceController()
 
-    let container: NSPersistentContainer
+    var container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "GraveFinder")
@@ -33,5 +33,17 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+    }
+    var context: NSManagedObjectContext { container.viewContext }
+    
+    func saveContext() {
+        print("saving")
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                NSLog("Unresolved error saving context: \(error), \(error.userInfo)")
+            }
+        }
     }
 }
