@@ -9,9 +9,11 @@ import SwiftUI
 import MapKit
 
 struct MapViewUI: UIViewRepresentable {
+    @Binding var showGraveDetail: Bool
     var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var graves: [Grave]
     let mapViewType: MKMapType
+    
     //@ObservedObject var viewModel: GravesViewModel
     
     func makeUIView(context: Context) -> MKMapView {
@@ -63,6 +65,7 @@ struct MapViewUI: UIViewRepresentable {
             
             let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Dead") as? MKMarkerAnnotationView ?? MKMarkerAnnotationView(annotation: graveAnnotation, reuseIdentifier: "Grave")
             annotationView.canShowCallout = true
+            annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             annotationView.glyphText = "⚰️"
             annotationView.markerTintColor = .lightGray
             annotationView.titleVisibility = .visible
@@ -71,9 +74,8 @@ struct MapViewUI: UIViewRepresentable {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        //guard let placemark = view.annotation as? MKAnnotation else { return }
-        print("Annotaion pressed")
+        print("Annotiations pressed")
+        showGraveDetail = true
         
     }
     
