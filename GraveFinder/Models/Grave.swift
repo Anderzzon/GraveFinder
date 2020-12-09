@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-struct Grave:Decodable, Hashable, Identifiable {
+class Grave:NSObject, Decodable, Identifiable {
     let deceased:String?
     let dateBuried:String?
     let dateOfBirth:String?
@@ -17,6 +17,10 @@ struct Grave:Decodable, Hashable, Identifiable {
     let graveType:String?
     let latitude:Double?
     let longitude:Double?
+    private let life:String?
+    private let location: CLLocation
+    private let regionRadius: CLLocationDistance = 1000
+    let region: MKCoordinateRegion?
     let id:String?
     
     enum CodingKeys: String, CodingKey {
@@ -35,10 +39,11 @@ struct Grave:Decodable, Hashable, Identifiable {
         }
     }
     
-    init(from decoder:Decoder) throws {
+    required init(from decoder:Decoder) throws {
         
+        //Parsing JSON with decoder
         let container = try decoder.container(keyedBy: CodingKeys.self)
-    
+        
         id = try? container.decode(String.self, forKey: .id)
         deceased = try? container.decode(String.self, forKey: .deceased)
         dateBuried = try? container.decode(String.self, forKey: .dateBuried)
@@ -52,12 +57,23 @@ struct Grave:Decodable, Hashable, Identifiable {
         let tempLat = try? locationContainer.decode(Double.self, forKey: .latitude)
         let tempLong = try? locationContainer.decode(Double.self, forKey: .longitude)
         
+        // If lat/lng is nil try to fetch locatin from static alternatives
         let latlng = Grave.getLatLng(tempLat: tempLat, tempLong: tempLong, cemetery: cemetery, graveType: graveType)
-        
         self.latitude = latlng.latitude
         self.longitude = latlng.longitude
         
-        }
+        // init map annotation values
+        self.location = CLLocation(latitude: latlng.latitude ?? 0, longitude: latlng.longitude ?? 0)
+        self.region = MKCoordinateRegion(center: self.location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        
+        //init annotation marker values
+        let birthday = dateOfBirth ?? ""
+        let deathday = dateOfDeath ?? ""
+        self.life = birthday + " - " + deathday
+       
+        super.init()
+ 
+    }
     func isLocatable() -> Bool {
         let firstCheck = self.latitude != nil && self.longitude != nil
         let secondCheck = self.cemetery != nil && self.graveType == "memorial"
@@ -76,4 +92,11 @@ struct Grave:Decodable, Hashable, Identifiable {
             return GravesViewModel.getCemeteryLocation(for: cemetery!)
         }
     }
+}
+
+extension Grave:MKAnnotation {
+    var coordinate: CLLocationCoordinate2D { location.coordinate }
+    var title:String? { deceased }
+    var subtitle:String? { life }
+    
 }

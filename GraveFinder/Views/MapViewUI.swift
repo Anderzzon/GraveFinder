@@ -10,7 +10,7 @@ import MapKit
 
 struct MapViewUI: UIViewRepresentable {
     var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    var graves: [GraveLocation]
+    var graves: [Grave]
     let mapViewType: MKMapType
     //@ObservedObject var viewModel: GravesViewModel
     
@@ -49,7 +49,7 @@ struct MapViewUI: UIViewRepresentable {
     
     final class MapCoordinator: NSObject, MKMapViewDelegate {
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            guard let graveAnnotation = annotation as? GraveLocation else {
+            guard let graveAnnotation = annotation as? Grave else {
                 return nil
             }
             

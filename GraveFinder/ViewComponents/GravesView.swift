@@ -62,9 +62,8 @@ struct GravesView: View {
                     viewModel.selectedGraves.removeAll()
                     self.selectedGrave = grave
                     self.offset = 0
-                    let graveLocation = GraveLocation(grave: grave)
                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        viewModel.selectedGraves.append(graveLocation)
+                    viewModel.selectedGraves.append(grave)
                    }
                 }
            }
@@ -78,7 +77,7 @@ struct GravesView: View {
                 }).padding()
             }
         }.padding()
-        .background(selectedGrave == grave ? Color.blue.opacity(0.4) : Color.white.opacity(0))
+        .background(checkIfHighlight() ? Color.blue.opacity(0.4) : Color.white.opacity(0))
     }
     func toggleFavorite(grave:Grave){
         if let index = favorites.firstIndex(where: {$0.id == grave.id}){
@@ -118,5 +117,8 @@ struct GravesView: View {
     }
     func checkIfFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})
+    }
+    func checkIfHighlight()->Bool{
+        return selectedGrave?.id == grave.id
     }
 }

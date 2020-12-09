@@ -1,28 +1,24 @@
 import SwiftUI
 
 struct BottomSheet : View {
+    
+    enum ShowContent {
+        case searchResults, nothing
+    }
+    
     @ObservedObject var viewModel : GravesViewModel
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
     var favorites: FetchedResults<FavGraves>
-    //    @Binding var searchTxt:String
     
     @State  var query = ""
     @State private var isSearching = false
     @State private var isAutoCompleting = false
-    @State private var selectedGrave:Grave? = nil
+    @State private var selectedGrave:Grave?
     @State var refresh = false
-    
-    //@Binding var offset : CGFloat
-    //var value : CGFloat
-    //    @Binding var offset : CGFloat
     @State var offset : CGFloat = 0
     @State var pulledUp = false
-    
-    enum ShowContent {
-        case searchResults, nothing
-    }
     @State private var showContent = ShowContent.nothing
     
     var body: some View{
@@ -67,7 +63,7 @@ struct BottomSheet : View {
                 .padding(.vertical,10)
                 .padding(.horizontal)
                 // BlurView....
-                // FOr Dark Mode Adoption....
+                // For Dark Mode Adoption....
                 .background(BlurView(style: .systemMaterial))
                 .cornerRadius(15)
                 .padding()

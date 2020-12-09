@@ -13,7 +13,7 @@ class GravesViewModel: ObservableObject {
     @Environment(\.managedObjectContext) private var viewContext
     
     @Published var totalGravesList = [Grave]()
-    @Published var selectedGraves = [GraveLocation]() //Array to support posibility of multiple graves on map later
+    @Published var selectedGraves = [Grave]() //Array to support posibility of multiple graves on map later
     @Published var favoriteGraves = [Grave]()
     @Published var currentPage = 1
     @Published var totalPages = 0
@@ -79,10 +79,6 @@ class GravesViewModel: ObservableObject {
             .eraseToAnyPublisher()
             .receive(on: RunLoop.main)
             .assign(to: \GravesViewModel.searchResults, on: self)
-    }
-    func createGraveLocation(name: String, latitude: Double, longitude: Double, birth: String, death: String) -> GraveLocation {
-        let graveLocation = GraveLocation(name: name, latitude: latitude, longitude: longitude, birth: birth, death: death)
-        return graveLocation
     }
     static func getMemorialLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
         let location = staticMemorials[cemetery.lowercased()] ?? (latitude:0, longitude:0)

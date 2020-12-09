@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		03102EE5256E539C004FBE3F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EE4256E539C004FBE3F /* MapView.swift */; };
 		03102EF8256ED6F5004FBE3F /* MapViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EF7256ED6F5004FBE3F /* MapViewUI.swift */; };
-		03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03102EFB256EDF6F004FBE3F /* GraveLocation.swift */; };
 		031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */; };
 		031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031BF23A256BC94E0047A5F4 /* ContentView.swift */; };
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
@@ -31,7 +30,6 @@
 /* Begin PBXFileReference section */
 		03102EE4256E539C004FBE3F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		03102EF7256ED6F5004FBE3F /* MapViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUI.swift; sourceTree = "<group>"; };
-		03102EFB256EDF6F004FBE3F /* GraveLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveLocation.swift; sourceTree = "<group>"; };
 		031BF235256BC94E0047A5F4 /* GraveFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraveFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveFinderApp.swift; sourceTree = "<group>"; };
 		031BF23A256BC94E0047A5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 				78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */,
 				7845964C256D004200A97B7F /* Grave.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
-				03102EFB256EDF6F004FBE3F /* GraveLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,7 +242,6 @@
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
-				03102EFC256EDF6F004FBE3F /* GraveLocation.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,

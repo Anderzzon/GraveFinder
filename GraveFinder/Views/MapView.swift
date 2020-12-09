@@ -13,7 +13,7 @@ struct MapView: View {
     @State private var region: MKCoordinateRegion?
     @State private var mapType: MKMapType = .standard
     
-    @State private var annotations = [GraveLocation]()
+    @State private var annotations = [Grave]()
     
     init(viewModel: GravesViewModel) {
         self.viewModel = viewModel
