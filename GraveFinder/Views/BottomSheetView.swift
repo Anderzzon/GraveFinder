@@ -71,13 +71,16 @@ struct BottomSheet : View {
                         .background(BlurView(style: .systemMaterial))
                         .cornerRadius(15)
                         .padding()
+                        
 
                 }
+                .padding(.bottom, 20)
                 .background(GeometryReader{geo in
                     Color.gray.opacity(0.5).onAppear(){
                         let _ = setGeometry(geo: geo)
                     }
                 })
+
                 VStack {
                     Picker(selection: self.$onlyFavorites, label: Text("")) {
                         Text("All").tag(0)
@@ -89,27 +92,6 @@ struct BottomSheet : View {
                             showContent = .favorites
                         }
                     }
-                    
-                }
-                .padding(.vertical,10)
-                .padding(.horizontal)
-                // BlurView....
-                // For Dark Mode Adoption....
-                .background(BlurView(style: .systemMaterial))
-                .cornerRadius(15)
-                .padding()
-                VStack {
-                    Picker(selection: self.$onlyFavorites, label: Text("")) {
-                        Text("All").tag(0)
-                        Text("Favorites").tag(1)
-                    }.pickerStyle(SegmentedPickerStyle()).onChange(of: onlyFavorites){_ in
-                        if(onlyFavorites == 0){
-                            showContent = .searchResults
-                        } else {
-                            showContent = .favorites
-                        }
-                    }
-                    
                 }
                 ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
