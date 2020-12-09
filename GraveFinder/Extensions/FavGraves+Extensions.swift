@@ -11,7 +11,7 @@ import UIKit
 
 extension FavGraves {
     
-    static func addGrave(grave:Grave) -> FavGraves {
+    static func addGrave(grave:Grave) {
         
         let context = PersistenceController.shared.context
         
@@ -32,7 +32,7 @@ extension FavGraves {
 //            let nsError = error as NSError
 //            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
 //        }
-        return newFav
+        //return newFav
     }
     static func saveChanges() {
         PersistenceController.shared.saveContext()
