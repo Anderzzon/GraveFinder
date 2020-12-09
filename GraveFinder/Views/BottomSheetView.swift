@@ -3,10 +3,11 @@ import SwiftUI
 struct BottomSheet : View {
     
     enum ShowContent {
-        case searchResults, nothing
+        case searchResults, favorites, nothing
     }
     
     @ObservedObject var viewModel : GravesViewModel
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
@@ -19,7 +20,7 @@ struct BottomSheet : View {
     @State var refresh = false
     @State var offset : CGFloat = 0
     @State var pulledUp = false
-    @State private var showContent = ShowContent.nothing
+    @State private var showContent = ShowContent.favorites
     
     var body: some View{
         GeometryReader{reader in
@@ -97,6 +98,15 @@ struct BottomSheet : View {
                                     Spacer()
                                 }
                             }
+                        })
+                    case .favorites:
+                        LazyVStack(alignment: .leading, spacing: 5, content:{
+                            ForEach(favorites){
+                                favorite in
+                                let grave = Grave(favorite: favorite)
+                                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: false, offset: $offset, viewModel: viewModel)
+                            }
+                            
                         })
                     default:
                         EmptyView()

@@ -39,6 +39,24 @@ class Grave:NSObject, Decodable, Identifiable {
         }
     }
     
+    init(favorite:FavGraves){
+        deceased = favorite.deceased
+        dateBuried = favorite.dateBuried
+        dateOfBirth = favorite.dateOfBirth
+        dateOfDeath = favorite.dateOfDeath
+        cemetery = favorite.cemetery
+        graveType = favorite.graveType
+        latitude = favorite.latitude
+        longitude = favorite.longitude
+        let birthday = dateOfBirth ?? ""
+        let deathday = dateOfDeath ?? ""
+        life = birthday + " - " + deathday
+        
+        // init map annotation values
+        location = CLLocation(latitude: latitude!, longitude: longitude!)
+        region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        id = favorite.id
+    }
     required init(from decoder:Decoder) throws {
         
         //Parsing JSON with decoder
@@ -70,9 +88,9 @@ class Grave:NSObject, Decodable, Identifiable {
         let birthday = dateOfBirth ?? ""
         let deathday = dateOfDeath ?? ""
         self.life = birthday + " - " + deathday
-       
+        
         super.init()
- 
+        
     }
     func isLocatable() -> Bool {
         let firstCheck = self.latitude != nil && self.longitude != nil
