@@ -74,7 +74,7 @@ struct BottomSheet : View {
                 .padding()
                 .padding(.horizontal,10)
                 .background(
-                    Capsule().fill(Color.gray.opacity(0.4)),
+                    Capsule().fill(Color.gray.opacity(0.2)),
                     alignment: .leading
                 )
                 VStack{
@@ -156,6 +156,7 @@ struct BottomSheet : View {
                     }
                 })
             }
+            .padding()
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
             .offset(y: reader.frame(in: .global).height - searchBarHeight)
