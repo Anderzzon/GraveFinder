@@ -91,10 +91,12 @@ struct GravesView: View {
 //    }
     
     func toggleFavorite(grave:Grave){
-        if let index = favorites.firstIndex(where: {$0.id == grave.id}){
-            favorites[index].removeFromCoreData()
+        if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
+            viewModel.deleteFromCoreData(grave: grave)
+            //favorites[index].removeFromCoreData()
         } else {
-            FavGraves.addGrave(grave: grave)
+            //FavGraves.addGrave(grave: grave)
+            viewModel.saveToCoreData(grave: grave)
         }
     }
 //    func addGrave(grave:Grave){

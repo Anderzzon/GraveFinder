@@ -6,8 +6,6 @@
 //
 import Combine
 import SwiftUI
-import CoreData
-
 
 class GravesViewModel: ObservableObject {
     @Environment(\.managedObjectContext) private var viewContext
@@ -18,6 +16,7 @@ class GravesViewModel: ObservableObject {
     @Published var currentPage = 1
     @Published var totalPages = 0
     @State var latestQuery = ""
+    var coreDataHelper = CoreDataHelper()
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
@@ -87,6 +86,14 @@ class GravesViewModel: ObservableObject {
     static func getCemeteryLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
         let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
         return location
+    }
+    
+    func saveToCoreData(grave: Grave) {
+        coreDataHelper.addToCoreData(grave: grave)
+    }
+    
+    func deleteFromCoreData(grave: Grave) {
+        coreDataHelper.removeFromCoreData(grave: grave)
     }
 
 }
