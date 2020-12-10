@@ -25,18 +25,8 @@ extension FavGraves {
         newFav.graveType = grave.graveType ?? "Ej specificerad"
         newFav.latitude = grave.latitude!
         newFav.longitude = grave.longitude!
-//        do {
-//            try moc.save()
-//        } catch {
-//           //TODO: Handle Error
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-        //return newFav
+
         PersistenceController.shared.saveContext()
     }
-//    static func saveChanges() {
-//        PersistenceController.shared.saveContext()
-//    }
     
 }
