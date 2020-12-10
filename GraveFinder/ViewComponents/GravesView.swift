@@ -80,13 +80,21 @@ struct GravesView: View {
         }.padding()
         .background(checkIfHighlight() ? Color.blue.opacity(0.4) : Color.white.opacity(0))
     }
+//    func toggleFavorite(grave:Grave){
+//        if let index = favorites.firstIndex(where: {$0.id == grave.id}){
+//            removeGrave(favGrave: favorites[index])
+//        } else {
+//            //addGrave(grave: grave)
+//            FavGraves.addGrave(grave: grave)
+//            //FavGraves.saveChanges()
+//        }
+//    }
+    
     func toggleFavorite(grave:Grave){
         if let index = favorites.firstIndex(where: {$0.id == grave.id}){
-            removeGrave(favGrave: favorites[index])
+            favorites[index].removeFromCoreData()
         } else {
-            //addGrave(grave: grave)
             FavGraves.addGrave(grave: grave)
-            //FavGraves.saveChanges()
         }
     }
 //    func addGrave(grave:Grave){

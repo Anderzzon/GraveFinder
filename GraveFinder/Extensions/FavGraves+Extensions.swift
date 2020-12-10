@@ -29,4 +29,10 @@ extension FavGraves {
         PersistenceController.shared.saveContext()
     }
     
+    func removeFromCoreData() {
+        let context = PersistenceController.shared.context
+        context.delete(self)
+        PersistenceController.shared.saveContext()
+    }
+    
 }
