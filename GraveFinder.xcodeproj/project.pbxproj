@@ -166,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				78EF0394257653A200635427 /* View.extensions.swift */,
+				035419A42581014E00B98CEB /* FavGraves+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +248,7 @@
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
 				035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
+				035419A52581014E00B98CEB /* FavGraves+Extensions.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
 				78688CA52570FB2100413618 /* Strings.swift in Sources */,

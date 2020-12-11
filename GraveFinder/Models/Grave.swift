@@ -99,6 +99,25 @@ class Grave:NSObject, Decodable, Identifiable {
         
         return firstCheck || secondCheck || thirdCheck
     }
+    func addToCoreData(){
+            
+        let context = PersistenceController.shared.context
+            
+            let newFav = FavGraves(context: context)
+            newFav.id = self.id ?? ""
+            newFav.deceased = self.deceased ?? "Ej namngiven"
+            newFav.cemetery = self.cemetery ?? "Ej specificerad"
+            newFav.dateBuried = self.dateBuried ?? "Ej specificerad"
+            newFav.dateOfBirth = self.dateOfBirth ?? "Ej specificerad"
+            newFav.dateOfDeath = self.dateOfDeath ?? "Ej specificerad"
+            newFav.graveType = self.graveType ?? "Ej specificerad"
+            newFav.latitude = self.latitude!
+            newFav.longitude = self.longitude!
+
+            PersistenceController.shared.saveContext()
+        
+    }
+    
     static func getLatLng(tempLat:Double?, tempLong:Double?, cemetery:String?, graveType:String?)->(latitude:Double?, longitude:Double?){
         if tempLat == nil && tempLong == nil && cemetery == nil {
             return (latitude:nil, longitude:nil)

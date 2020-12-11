@@ -21,78 +21,97 @@ struct BottomSheet : View {
     @State var pulledUp = false
     @State private var showContent = ShowContent.nothing
     @State private var onlyFavorites = 0
+
+    @State private var selectedIndex = 0
+    @State private var graveOptions = ["All", "Favorites"]
+    @State private var frames = Array<CGRect>(repeating: .zero, count: 2)
     
     var body: some View{
         GeometryReader{reader in
+            
             VStack{
-                VStack{
-                        Capsule()
-                            .fill(Color.gray.opacity(0.5))
-                            .frame(width: 50, height: 5)
-                            .padding(.top)
-                            .padding(.bottom,5)
-                        HStack(spacing: 15){
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 22))
-                                .foregroundColor(.gray)
-                            TextField("Search...", text: $query,onEditingChanged: {EditMode in
-                                
-                                if(!self.pulledUp){
-                                    offset = (-reader.frame(in: .global).height + searchBarHeight)
-                                    self.pulledUp = true
-                                }
-                                if(!EditMode){
-                                    self.pulledUp = false
-                                }
-                            }, onCommit: {
-                                viewModel.currentPage = 1
-                                viewModel.totalGravesList.removeAll()
-                                viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                                
-                            }).onChange(of: query, perform: { _ in
-                                if onlyFavorites == 1{
-                                    onlyFavorites = 0
-                                    showContent = .searchResults
-                                }
-                                viewModel.currentPage = 1
-                                viewModel.selectedGraves.removeAll()
-                                if(query.count > 0){
-                                    viewModel.totalGravesList.removeAll()
-                                    viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                                    showContent = .searchResults
-                                } else {
-                                    showContent = .nothing
-                                }
-                            })
-                            .disableAutocorrection(true)
+                Capsule()
+                    .fill(Color.gray.opacity(0.5))
+                    .frame(width: 50, height: 5)
+                    .padding(.top)
+                    .padding(.bottom,5)
+                HStack(spacing: 15){
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("Search...", text: $query,onEditingChanged: {EditMode in
+
+                        if(!self.pulledUp){
+                            offset = (-reader.frame(in: .global).height + searchBarHeight)
+                            self.pulledUp = true
                         }
-                        .padding(.vertical,10)
-                        .padding(.horizontal)
-                        .background(BlurView(style: .systemMaterial))
-                        .cornerRadius(15)
-                        .padding()
-                        
+                        if(!EditMode){
+                            self.pulledUp = false
+                        }
+                    }, onCommit: {
+                        viewModel.currentPage = 1
+                        viewModel.totalGravesList.removeAll()
+                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
 
-                }
-                .padding(.bottom, 20)
-                .background(GeometryReader{geo in
-                    Color.gray.opacity(0.5).onAppear(){
-                        let _ = setGeometry(geo: geo)
-                    }
-                })
-
-                VStack {
-                    Picker(selection: self.$onlyFavorites, label: Text("")) {
-                        Text("All").tag(0)
-                        Text("Favorites").tag(1)
-                    }.pickerStyle(SegmentedPickerStyle()).onChange(of: onlyFavorites){_ in
-                        if(onlyFavorites == 0){
+                    })
+                    .onChange(of: query, perform: { _ in
+                        self.setOptions(index: 0)
+                        if onlyFavorites == 1{
+                            onlyFavorites = 0
+                            showContent = .searchResults
+                        }
+                        viewModel.currentPage = 1
+                        viewModel.selectedGraves.removeAll()
+                        if(query.count > 0){
+                            viewModel.totalGravesList.removeAll()
+                            viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                             showContent = .searchResults
                         } else {
-                            showContent = .favorites
+                            showContent = .nothing
+                        }
+                    })
+                    .disableAutocorrection(true)
+                }
+                .padding()
+                .padding(.horizontal,10)
+                .background(
+                    Capsule().fill(Color.gray.opacity(0.2)),
+                    alignment: .leading
+                )
+                VStack{
+                    HStack(spacing: 10) {
+                        ForEach(self.graveOptions.indices, id: \.self) { index in
+                            Button(action: {setOptions(index: index)}) {
+                                Text(self.graveOptions[index])
+                            }
+                            .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
+                                }
+                            )
+                            .foregroundColor(Color.black).font(.caption)
                         }
                     }
+                    .background(
+                        Capsule().fill(
+                            Color.white.opacity(0.8))
+                            .frame(width: self.frames[self.selectedIndex].width,
+                                   height: self.frames[self.selectedIndex].height, alignment: .topLeading)
+                            .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX)
+                        , alignment: .leading
+                    )
+                    .background(Capsule().stroke(Color.gray, lineWidth: 0.2))
+
                 }
+
+                .background(
+                    Capsule().fill(
+                        Color.white.opacity(0.4))
+                    , alignment: .leading
+                )
+
+                .foregroundColor(Color.black)
+                .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
                 ScrollView(.vertical, showsIndicators: true, content: {
                     switch showContent {
                     case .searchResults:
@@ -137,6 +156,7 @@ struct BottomSheet : View {
                     }
                 })
             }
+            .padding()
             .background(BlurView(style: .systemMaterial))
             .cornerRadius(15)
             .offset(y: reader.frame(in: .global).height - searchBarHeight)
@@ -177,6 +197,18 @@ struct BottomSheet : View {
     func setGeometry(geo:GeometryProxy)-> some View{
         searchBarHeight = geo.frame(in: .local).size.height
         return EmptyView()
+    }
+    private func setFrame(index: Int, frame: CGRect) {
+        self.frames[index] = frame
+    }
+    private func setOptions(index: Int){
+
+        self.selectedIndex = index
+        if(index == 0){
+            showContent = .searchResults
+        } else {
+            showContent = .favorites
+        }
     }
 }
 

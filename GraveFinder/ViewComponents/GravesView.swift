@@ -54,6 +54,10 @@ struct GravesView: View {
                         .font(.caption2)
                     Text("Kyrkogård: \(cemetery)")
                         .font(.caption2)
+                        .foregroundColor(.white)
+                        .padding(5)
+                        .background(Color.gray)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 Spacer()
             }.onTapGesture {
@@ -62,7 +66,9 @@ struct GravesView: View {
                 if !isDisabled {
                     viewModel.selectedGraves.removeAll()
                     self.selectedGrave = grave
-                    self.offset = 0
+                    withAnimation {
+                        self.offset = 0
+                    }
                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     viewModel.selectedGraves.append(grave)
                    }
@@ -77,8 +83,11 @@ struct GravesView: View {
                         .foregroundColor(.red)
                 }).padding()
             }
-        }.padding()
-        .background(checkIfHighlight() ? Color.blue.opacity(0.4) : Color.white.opacity(0))
+        }
+        .padding([.top,.bottom])
+        .background(checkIfHighlight() ? Color.gray.opacity(0.4) : Color.white.opacity(0))
+        .cornerRadius(10)
+        .shadow(radius: 10)
     }
 //    func toggleFavorite(grave:Grave){
 //        if let index = favorites.firstIndex(where: {$0.id == grave.id}){

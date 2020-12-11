@@ -80,7 +80,8 @@ struct MapViewUI: UIViewRepresentable {
             let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "Dead") as? MKMarkerAnnotationView ?? MKMarkerAnnotationView(annotation: graveAnnotation, reuseIdentifier: "Grave")
             annotationView.canShowCallout = true
             annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            annotationView.glyphText = "⚰️"
+            annotationView.glyphImage = UIImage(named: "gravemarker")
+            annotationView.glyphTintColor = .black
             annotationView.markerTintColor = .lightGray
             annotationView.titleVisibility = .visible
             return annotationView
