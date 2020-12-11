@@ -45,7 +45,7 @@ class NetStatus: ObservableObject {
     }
     
     init() {
-        
+        startMonitoring()
     }
     
     deinit {

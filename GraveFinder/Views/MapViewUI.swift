@@ -10,7 +10,7 @@ import MapKit
 
 struct MapViewUI: UIViewRepresentable {
     @Binding var showGraveDetail: Bool
-    var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    //var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     var graves: [Grave]
     let mapViewType: MKMapType
     
@@ -18,7 +18,7 @@ struct MapViewUI: UIViewRepresentable {
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
-        mapView.setRegion(region, animated: true)
+        //mapView.setRegion(region, animated: true)
         mapView.mapType = mapViewType
         mapView.isRotateEnabled = false
         mapView.addAnnotations(graves)
@@ -48,8 +48,11 @@ struct MapViewUI: UIViewRepresentable {
 //            mapView.addAnnotations(graves)
 //
 //        }
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotations(graves)
+
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(graves)
+        
+
         if graves.count == 1 {
             mapView.showsUserLocation = true
         
@@ -59,7 +62,7 @@ struct MapViewUI: UIViewRepresentable {
         
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
-        print("Region \(region)")
+        //print("Region \(region)")
         mapView.mapType = mapViewType
     }
     
