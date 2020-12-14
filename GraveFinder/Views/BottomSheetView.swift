@@ -103,7 +103,6 @@ struct BottomSheet : View {
                     .background(Capsule().stroke(Color.gray, lineWidth: 0.2))
 
                 }
-
                 .background(
                     Capsule().fill(
                         Color.white.opacity(0.4))

@@ -15,7 +15,10 @@ class GravesViewModel: ObservableObject {
     @Published var favoriteGraves = [Grave]()
     @Published var currentPage = 1
     @Published var totalPages = 0
+    @Published var alert:Alert? = nil
+    @Published var alertIsPresented:Bool = false
     @State var latestQuery = ""
+    @State var showNotificationAlert = false
     var coreDataHelper = CoreDataHelper()
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
@@ -96,5 +99,13 @@ class GravesViewModel: ObservableObject {
         coreDataHelper.removeFromCoreData(grave: grave)
     }
 
+    func setAlert(alert:Alert){
+        self.alert = alert
+        self.alertIsPresented = true
+    }
+    func removeAlert(){
+        self.alertIsPresented = false
+        self.alert = nil
+    }
 }
 

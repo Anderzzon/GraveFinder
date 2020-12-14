@@ -13,6 +13,7 @@ struct GravesView: View {
     @ObservedObject var viewModel : GravesViewModel
     @Binding private var selectedGrave:Grave?
     @Binding private var offset:CGFloat
+    @State private var isPresented = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
@@ -69,19 +70,29 @@ struct GravesView: View {
                     withAnimation {
                         self.offset = 0
                     }
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    viewModel.selectedGraves.append(grave)
-                   }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        viewModel.selectedGraves.append(grave)
+                    }
                 }
-           }
+            }
             // Disable favorite button if grave not locatable
             if !isDisabled {
-                Button(action: {
-                    self.toggleFavorite(grave: grave)
-                } , label: {
-                    Image(systemName: checkIfFavorite() ? "heart.fill" : "heart")
-                        .foregroundColor(.red)
-                }).padding()
+                VStack{
+                    Button(action: {
+                        self.isPresented = true
+                    }, label: {
+                        Image(systemName: "bell")
+                    })
+                    .padding()
+                    .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
+                    
+                    Button(action: {
+                        self.toggleFavorite(for: grave)
+                    } , label: {
+                        Image(systemName: checkIfFavorite() ? "heart.fill" : "heart")
+                            .foregroundColor(.red)
+                    }).padding()
+                }
             }
         }
         .padding([.top,.bottom])
@@ -89,17 +100,31 @@ struct GravesView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
     }
-//    func toggleFavorite(grave:Grave){
-//        if let index = favorites.firstIndex(where: {$0.id == grave.id}){
-//            removeGrave(favGrave: favorites[index])
-//        } else {
-//            //addGrave(grave: grave)
-//            FavGraves.addGrave(grave: grave)
-//            //FavGraves.saveChanges()
+    
+//    func addNotification(for grave:Grave){
+//        NotificationService.getNotificationSettings{ settings in
+//            if settings.authorizationStatus == .notDetermined {
+//                NotificationService.requestNotificationAuthorization { didAllow, Error in
+//                    if !didAllow {
+//                        return 
+//                    } else {
+//                        NotificationService.createNotification(for: grave)
+//                    }
+//                }
+//            } else if settings.authorizationStatus == .denied {
+//                viewModel.setAlert(alert: Alert(
+//                                    title: Text("Notification Service"),
+//                                    message: Text("Notificationer måste aktiveras i dina inställningar."),
+//                                    primaryButton: .default(Text("Inställningar"), action: {
+//                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+//                                    }),
+//                                    secondaryButton: .cancel(Text("Avbryt"))))
+//            } else {
+//                NotificationService.createNotification(for: grave)
+//            }
 //        }
 //    }
-    
-    func toggleFavorite(grave:Grave){
+    func toggleFavorite(for grave:Grave){
         if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
             viewModel.deleteFromCoreData(grave: grave)
             //favorites[index].removeFromCoreData()
@@ -107,35 +132,6 @@ struct GravesView: View {
             //FavGraves.addGrave(grave: grave)
             viewModel.saveToCoreData(grave: grave)
         }
-    }
-//    func addGrave(grave:Grave){
-//        let newFav = FavGraves(context: moc)
-//        newFav.id = grave.id ?? ""
-//        newFav.deceased = grave.deceased ?? "Ej namngiven"
-//        newFav.cemetery = grave.cemetery ?? "Ej specificerad"
-//        newFav.dateBuried = grave.dateBuried ?? "Ej specificerad"
-//        newFav.dateOfBirth = grave.dateOfBirth ?? "Ej specificerad"
-//        newFav.dateOfDeath = grave.dateOfDeath ?? "Ej specificerad"
-//        newFav.graveType = grave.graveType ?? "Ej specificerad"
-//        newFav.latitude = grave.latitude!
-//        newFav.longitude = grave.longitude!
-//        do {
-//            try moc.save()
-//        } catch {
-//           //TODO: Handle Error
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//    }
-    func removeGrave(favGrave:FavGraves){
-            moc.delete(favGrave)
-            do {
-                try moc.save()
-            } catch {
-               //TODO: Handle Error
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
     }
     func checkIfFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})

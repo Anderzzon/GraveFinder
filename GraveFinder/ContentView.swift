@@ -24,7 +24,14 @@ struct ContentView: View {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
                     MapView(viewModel: viewModel)
                     BottomSheet(viewModel: viewModel)
-                })
+                        .alert(
+                            isPresented: $viewModel.alertIsPresented,
+                            content: {
+                                viewModel.alert ?? Alert(title: Text("Error"))
+                            }
+                        )
+                    }
+                )
             }
         }
     }

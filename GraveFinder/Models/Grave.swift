@@ -38,7 +38,20 @@ class Grave:NSObject, Decodable, Identifiable {
             case longitude = "lon"
         }
     }
-    
+    override init(){
+        self.region = nil
+        self.life = "None"
+        self.deceased = "John Doe"
+        self.dateBuried = "YYYY-MM-DD"
+        self.dateOfBirth = "YYYY-MM-DD"
+        self.dateOfDeath = "YYYY-MM-DD"
+        self.cemetery = "Unknown"
+        self.graveType = "Unknown"
+        self.location = CLLocation()
+        self.latitude = nil
+        self.longitude = nil
+        self.id = "123"
+    }
     init(favorite:FavGraves){
         deceased = favorite.deceased
         dateBuried = favorite.dateBuried
