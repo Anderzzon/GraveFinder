@@ -78,14 +78,16 @@ struct GravesView: View {
             // Disable favorite button if grave not locatable
             if !isDisabled {
                 VStack{
-                    Button(action: {
-                        self.isPresented = true
-                    }, label: {
-                        Image(systemName: "bell")
-                    })
-                    .padding()
-                    .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
-                    
+                    //Add option for notifications only if favorite
+                    if checkIfFavorite() {
+                        Button(action: {
+                            self.isPresented = true
+                        }, label: {
+                            Image(systemName: "bell")
+                        })
+                        .padding()
+                        .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
+                    }
                     Button(action: {
                         self.toggleFavorite(for: grave)
                     } , label: {
@@ -100,36 +102,10 @@ struct GravesView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
     }
-    
-//    func addNotification(for grave:Grave){
-//        NotificationService.getNotificationSettings{ settings in
-//            if settings.authorizationStatus == .notDetermined {
-//                NotificationService.requestNotificationAuthorization { didAllow, Error in
-//                    if !didAllow {
-//                        return 
-//                    } else {
-//                        NotificationService.createNotification(for: grave)
-//                    }
-//                }
-//            } else if settings.authorizationStatus == .denied {
-//                viewModel.setAlert(alert: Alert(
-//                                    title: Text("Notification Service"),
-//                                    message: Text("Notificationer måste aktiveras i dina inställningar."),
-//                                    primaryButton: .default(Text("Inställningar"), action: {
-//                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-//                                    }),
-//                                    secondaryButton: .cancel(Text("Avbryt"))))
-//            } else {
-//                NotificationService.createNotification(for: grave)
-//            }
-//        }
-//    }
     func toggleFavorite(for grave:Grave){
         if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
             viewModel.deleteFromCoreData(grave: grave)
-            //favorites[index].removeFromCoreData()
         } else {
-            //FavGraves.addGrave(grave: grave)
             viewModel.saveToCoreData(grave: grave)
         }
     }
