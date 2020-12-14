@@ -21,7 +21,9 @@ class NotificationSelectionViewModel:ObservableObject {
         self.grave = grave
         initToggleValues()
     }
-    
+    func graveHasBirthday()->Bool {
+        return grave.dateOfBirth != nil 
+    }
     func initToggleValues(){
         print("init")
         NotificationService.checkNotificationExists(for: grave, withType: .birthday){
@@ -41,8 +43,9 @@ class NotificationSelectionViewModel:ObservableObject {
         }
     }
     
-    func toggleNotification(grave:Grave, type:NotificationType){
+    func toggleNotification(grave:Grave, type:NotificationService.NotificationType){
         print("toggle prior check")
+        
         NotificationService.checkNotificationExists(for: grave, withType: type){
             exists in
             

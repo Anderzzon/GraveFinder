@@ -19,21 +19,19 @@ struct NotificationSelectionView: View {
         Form{
             Section(header: Text("Notiser")) {
                 HStack{
+                    Text("Notifiera mig på födelsdag").font(.caption)
+                    Spacer()
+                    Toggle(isOn: $viewModel.notifyBDay, label: {}).labelsHidden().onTapGesture {
+                        viewModel.toggleNotification(grave: viewModel.grave, type: .birthday)
+                    }
+                }
+                HStack{
                     VStack{
                         Text("Notifiera mig på dödsdag").font(.caption)
                     }
                     Spacer()
                     Toggle(isOn: $viewModel.notifyDDay, label: {}).labelsHidden().onTapGesture {
-                        print("test")
                         viewModel.toggleNotification(grave: viewModel.grave, type: .deathday)
-                    }
-                }
-                
-                HStack{
-                    Text("Notifiera mig på födelsdag").font(.caption)
-                    Spacer()
-                    Toggle(isOn: $viewModel.notifyBDay, label: {}).labelsHidden().onTapGesture {
-                        viewModel.toggleNotification(grave: viewModel.grave, type: .birthday)
                     }
                 }
                 HStack{

@@ -10,8 +10,10 @@ import UIKit
 import SwiftUI
 
 class NotificationService {
-
-     static let center = UNUserNotificationCenter.current()
+    enum NotificationType {
+        case birthday, deathday, burialday
+    }
+    static let center = UNUserNotificationCenter.current()
     
     static func getNotificationSettings(completion: @escaping (UNNotificationSettings)->Void){
         return center.getNotificationSettings(completionHandler: completion)
@@ -28,22 +30,13 @@ class NotificationService {
     
     static func createNotification(for grave:Grave, with type:NotificationType){
         
-        var typeString:String {
-            switch type {
-            case .birthday:  return "birthday"
-            case .deathday: return "deathday"
-            case .burialday: return "burialday"
-            }
-        }
+        let typeString = getTypeString(type: type)
         
         let content = UNMutableNotificationContent()
         content.title = "GraveFinder Reminder:"
-        content.subtitle = "Idag är dödsdag för \(grave.deceased ?? "en av dina favoriter.")"
-        content.body = "En dag att tänka på de som gått bort för tidigt ur våra liv. Och en påminnelse att ta vara på de som finns kvar!"
+        content.subtitle = "Idag är \(typeString) för \(grave.deceased ?? "en av dina favoriter.")"
         content.sound = UNNotificationSound.default
-       
-        //TODO: Attach image to content.attachments
-        
+               
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         let request = UNNotificationRequest(identifier: "grave.\(grave.id!).\(typeString)", content: content, trigger: trigger)
         
@@ -53,14 +46,19 @@ class NotificationService {
     static func checkNotificationExists(for grave:Grave, withType type:NotificationType, completion: @escaping (Bool) -> Void ){
         center.getPendingNotificationRequests(){
             notifications in
-            
-            notifications.forEach({notification in
-                                    print(notification)})
-            
+            let typeString = getTypeString(type: type)
+            completion(notifications.contains(where: {$0.identifier == "grave.\(grave.id!).\(typeString)"}))
         }
+    }
+    static func getTypeString(type:NotificationType)->String {
+        var typeString:String {
+            switch type {
+            case .birthday: return "födelsesdag"
+            case .deathday: return "dödsdag"
+            case .burialday: return "begravningsdag"
+            }
+        }
+        return typeString
     }
 }
 
-enum NotificationType {
-    case birthday, deathday, burialday
-}
