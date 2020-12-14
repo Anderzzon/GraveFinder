@@ -69,9 +69,10 @@ struct GravesView: View {
                     withAnimation {
                         self.offset = 0
                     }
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                   //DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     viewModel.selectedGraves.append(grave)
-                   }
+                   //}
+                    
                 }
            }
             // Disable favorite button if grave not locatable
