@@ -189,6 +189,8 @@
 			dependencies = (
 			);
 			name = GraveFinder;
+			packageProductDependencies = (
+			);
 			productName = GraveFinder;
 			productReference = 031BF235256BC94E0047A5F4 /* GraveFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -216,6 +218,8 @@
 				Base,
 			);
 			mainGroup = 031BF22C256BC94E0047A5F4;
+			packageReferences = (
+			);
 			productRefGroup = 031BF236256BC94E0047A5F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -389,7 +393,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GraveFinder/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				DEVELOPMENT_TEAM = 929AVN2CVW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GraveFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -411,7 +415,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GraveFinder/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				DEVELOPMENT_TEAM = 929AVN2CVW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GraveFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
