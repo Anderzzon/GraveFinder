@@ -24,28 +24,7 @@ struct ContentView: View {
             ), content: {
                 MapView(viewModel: viewModel)
                 if netStatus.noInternet {
-                    VStack {
-                        HStack {
-                            // Banner Content Here
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("\(Image(systemName: "exclamationmark.triangle")) Alert")
-                                    .bold()
-                                Text("No internet connection detected")
-                                    .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
-                            }
-                            .padding()
-                            Spacer()
-                        }
-                    }
-                    .background(
-                        Capsule()
-                            .fill(Color.red)
-                            .frame(height: 80),
-                        alignment: .leading
-                    )
-                    .foregroundColor(Color.white)
-                    .padding(12)
-                    .cornerRadius(8)
+                    NotificaitonModifier()
                 }
             })
         } else {
@@ -56,30 +35,9 @@ struct ContentView: View {
                 ), content: {
 
                     MapView(viewModel: viewModel)
-                    BottomSheet(viewModel: viewModel)
+                    BottomSheetView(viewModel: viewModel)
                     if netStatus.noInternet {
-                        VStack {
-                            HStack {
-                                // Banner Content Here
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("\(Image(systemName: "exclamationmark.triangle")) Alert")
-                                        .bold()
-                                    Text("No internet connection detected")
-                                        .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
-                                }
-                                .padding()
-                                Spacer()
-                            }
-                        }
-                        .background(
-                            Capsule()
-                                .fill(Color.red)
-                                .frame(height: 80),
-                            alignment: .leading
-                        )
-                        .foregroundColor(Color.white)
-                        .padding(12)
-                        .cornerRadius(8)
+                        NotificaitonModifier()
                     }
                 })
             }
