@@ -13,33 +13,41 @@ struct ContentView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     @ObservedObject var viewModel = GravesViewModel()
-
+    
     @ObservedObject var netStatus: NetStatus
-
+    
     var body: some View {
-
-        if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
-            //iPhone landscape
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .top
-            ), content: {
-                MapView(viewModel: viewModel)
-                if netStatus.noInternet {
-                    NotificaitonModifier()
-                }
-            })
-        } else {
-            //Other
-
-            GeometryReader{ geometry in
+        
+        Group {
+            
+            if netStatus.noInternet {
+                NotificationModifier()
+            }
+            
+            if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
+                //iPhone landscape
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
-
                     MapView(viewModel: viewModel)
-                    BottomSheetView(viewModel: viewModel)
-                    if netStatus.noInternet {
-                        NotificaitonModifier()
-                    }
                 })
+            } else {
+                //Other
+                
+                GeometryReader{ geometry in
+                    ZStack(alignment: Alignment(horizontal: .center, vertical: .top
+                    ), content: {
+                        
+                        MapView(viewModel: viewModel)
+                        BottomSheetView(viewModel: viewModel)
+                            .alert(
+                                isPresented: $viewModel.alertIsPresented,
+                                content: {
+                                    viewModel.alert ?? Alert(title: Text("Error"))
+                                }
+                            )
+                    }
+                    )
+                }
             }
         }
     }

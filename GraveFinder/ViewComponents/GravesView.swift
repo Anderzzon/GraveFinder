@@ -13,6 +13,7 @@ struct GravesView: View {
     @ObservedObject var viewModel : GravesViewModel
     @Binding private var selectedGrave:Grave?
     @Binding private var offset:CGFloat
+    @State private var isPresented = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
@@ -70,15 +71,28 @@ struct GravesView: View {
                     }
                     viewModel.selectGrave(grave: grave)
                 }
-           }
+            }
             // Disable favorite button if grave not locatable
             if !isDisabled {
-                Button(action: {
-                    self.toggleFavorite(grave: grave)
-                } , label: {
-                    Image(systemName: checkIfFavorite() ? "heart.fill" : "heart")
-                        .foregroundColor(.red)
-                }).padding()
+                VStack{
+                    //Add option for notifications only if favorite
+                    if checkIsFavorite() && checkIsNotifiable() {
+                        Button(action: {
+                            self.isPresented = true
+                        }, label: {
+                            Image(systemName: "bell.fill")
+                                .foregroundColor(.black)
+                        })
+                        .padding()
+                        .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
+                    }
+                    Button(action: {
+                        self.toggleFavorite(for: grave)
+                    } , label: {
+                        Image(systemName: checkIsFavorite() ? "heart.fill" : "heart")
+                            .foregroundColor(.red)
+                    }).padding()
+                }
             }
         }
         .padding([.top,.bottom])
@@ -86,8 +100,7 @@ struct GravesView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
     }
-    
-    func toggleFavorite(grave:Grave){
+    func toggleFavorite(for grave:Grave){
         if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
             viewModel.deleteFromCoreData(grave: grave)
         } else {
@@ -105,7 +118,13 @@ struct GravesView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
     }
-    func checkIfFavorite()->Bool{
+    func checkIsNotifiable()->Bool {
+        let firstCheck = grave.dateOfBirth != nil && !grave.dateOfBirth!.isEmpty
+        let secondCheck = grave.dateOfDeath != nil && !grave.dateOfDeath!.isEmpty
+        let thirdCheck = grave.dateBuried != nil && !grave.dateBuried!.isEmpty
+        return firstCheck || secondCheck || thirdCheck
+    }
+    func checkIsFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})
     }
     func checkIfHighlight()->Bool{

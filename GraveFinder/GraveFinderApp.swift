@@ -13,7 +13,7 @@ struct GraveFinderApp: App {
     
     @StateObject var netStatus = NetStatus()
     let viewContext = PersistenceController.shared.container.viewContext
-
+    
     var body: some Scene {
         WindowGroup {
             ContentView( netStatus: netStatus).environment(\.managedObjectContext, viewContext).environmentObject(netStatus)
