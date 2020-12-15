@@ -48,19 +48,19 @@ class NotificationSelectionViewModel:ObservableObject {
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .birthday)){
             exists in
             DispatchQueue.main.sync {
-            self.notifyBDay = exists
+                self.notifyBDay = exists
             }
         }
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .deathday)){
             exists in
             DispatchQueue.main.sync {
-            self.notifyDDay = exists
+                self.notifyDDay = exists
             }
         }
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .burialday)){
             exists in
             DispatchQueue.main.sync{
-            self.notifyBurialDay = exists
+                self.notifyBurialDay = exists
             }
         }
     }
@@ -77,17 +77,16 @@ class NotificationSelectionViewModel:ObservableObject {
     func getID(for grave:Grave, with type:NotificationDate)->String{
         return "grave.\(grave.id!).\(getDayTypeForNotification(type: type))"
     }
-    func toggleNotification(grave:Grave, type:NotificationDate){
-        NotificationService.checkNotificationExists(for: getID(for:grave, with: type)){
-                    exists in
-                    if !exists {
-                        self.createNotification(for: grave, with: type)
-                    } else {
-                        self.removeNotification(for: grave, with: type)
-                    }
+    func toggleNotification(isOn:Bool, grave:Grave, type:NotificationDate){
+        if isOn {
+            self.createNotification(for: grave, with: type)
+        } else {
+            self.removeNotification(for: grave, with: type)
         }
+        
     }
     func createNotification(for grave:Grave, with type:NotificationDate){
+        print("create")
         guard let dates = getDateComponents(for: grave, with: type) else { return }
         let identifier = getID(for: grave, with: type)
         let content = getContent(for: grave, with: type)
@@ -95,6 +94,7 @@ class NotificationSelectionViewModel:ObservableObject {
         NotificationService.createNotification(for: identifier, at: dates, with: content, at: trigger)
     }
     func removeNotification(for grave:Grave, with type:NotificationDate){
+        print("remove")
         let identifier = getID(for: grave, with: type)
         NotificationService.removeNotification(for: identifier)
     }

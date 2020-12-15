@@ -104,7 +104,7 @@ class GravesViewModel: ObservableObject {
         selectedGraves.removeAll()
         selectedGraves.append(grave)
     }
-
+    
     func setAlert(alert:Alert){
         self.alert = alert
         self.alertIsPresented = true

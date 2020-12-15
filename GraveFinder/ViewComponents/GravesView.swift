@@ -76,11 +76,12 @@ struct GravesView: View {
             if !isDisabled {
                 VStack{
                     //Add option for notifications only if favorite
-                    if checkIfFavorite() {
+                    if checkIsFavorite() && checkIsNotifiable() {
                         Button(action: {
                             self.isPresented = true
                         }, label: {
-                            Image(systemName: "bell")
+                            Image(systemName: "bell.fill")
+                                .foregroundColor(.black)
                         })
                         .padding()
                         .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
@@ -88,7 +89,7 @@ struct GravesView: View {
                     Button(action: {
                         self.toggleFavorite(for: grave)
                     } , label: {
-                        Image(systemName: checkIfFavorite() ? "heart.fill" : "heart")
+                        Image(systemName: checkIsFavorite() ? "heart.fill" : "heart")
                             .foregroundColor(.red)
                     }).padding()
                 }
@@ -117,7 +118,13 @@ struct GravesView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
     }
-    func checkIfFavorite()->Bool{
+    func checkIsNotifiable()->Bool {
+        let firstCheck = grave.dateOfBirth != nil && !grave.dateOfBirth!.isEmpty
+        let secondCheck = grave.dateOfDeath != nil && !grave.dateOfDeath!.isEmpty
+        let thirdCheck = grave.dateBuried != nil && !grave.dateBuried!.isEmpty
+        return firstCheck || secondCheck || thirdCheck
+    }
+    func checkIsFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})
     }
     func checkIfHighlight()->Bool{
