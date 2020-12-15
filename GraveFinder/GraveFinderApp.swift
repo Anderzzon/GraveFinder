@@ -11,7 +11,7 @@ import CoreData
 @main
 struct GraveFinderApp: App {
     
-    @StateObject var netStatus = NetStatus()
+    @StateObject var netStatus = NetStatus.shared
     let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some Scene {

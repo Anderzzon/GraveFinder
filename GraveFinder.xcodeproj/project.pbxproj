@@ -119,7 +119,6 @@
 				7845964A256CFF5700A97B7F /* ViewModels */,
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
-				7878D0662588D91A0099E6E6 /* NetStatus.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
 				78EF051125798C3B00635427 /* Persistence.swift */,
 				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
@@ -143,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				035419EA2582554200B98CEB /* CoreDataHelper.swift */,
+				7878D0662588D91A0099E6E6 /* NetStatus.swift */,
 				78390009258385460030B008 /* NotificationService.swift */,
 			);
 			path = Services;
