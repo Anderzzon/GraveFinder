@@ -95,6 +95,12 @@ class GravesViewModel: ObservableObject {
     func deleteFromCoreData(grave: Grave) {
         coreDataHelper.removeFromCoreData(grave: grave)
     }
+    
+    //Used for adding grave to array to show it on map
+    func selectGrave(grave: Grave) {
+        selectedGraves.removeAll()
+        selectedGraves.append(grave)
+    }
 
 }
 
