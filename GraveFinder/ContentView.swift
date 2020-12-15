@@ -18,36 +18,30 @@ struct ContentView: View {
     
     var body: some View {
         
-        Group {
-            
-            if netStatus.noInternet {
-                NotificationModifier()
-            }
-            
-            if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
-                //iPhone landscape
+        if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
+            //iPhone landscape
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .top
+            ), content: {
+                MapView(viewModel: viewModel)
+                if netStatus.noInternet { NotificationModifier() }
+            })
+        } else {
+            //Other
+            GeometryReader{ geometry in
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
+                    
                     MapView(viewModel: viewModel)
-                })
-            } else {
-                //Other
-                
-                GeometryReader{ geometry in
-                    ZStack(alignment: Alignment(horizontal: .center, vertical: .top
-                    ), content: {
-                        
-                        MapView(viewModel: viewModel)
-                        BottomSheetView(viewModel: viewModel)
-                            .alert(
-                                isPresented: $viewModel.alertIsPresented,
-                                content: {
-                                    viewModel.alert ?? Alert(title: Text("Error"))
-                                }
-                            )
-                    }
-                    )
+                    BottomSheetView(viewModel: viewModel)
+                        .alert(
+                            isPresented: $viewModel.alertIsPresented,
+                            content: {
+                                viewModel.alert ?? Alert(title: Text("Error"))
+                            }
+                        )
+                    if netStatus.noInternet { NotificationModifier() }
                 }
+                )
             }
         }
     }
