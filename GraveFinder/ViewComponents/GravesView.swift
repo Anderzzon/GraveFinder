@@ -64,15 +64,11 @@ struct GravesView: View {
                 hideKeyboard()
                 //Grave info card tap to show on map
                 if !isDisabled {
-                    viewModel.selectedGraves.removeAll()
                     self.selectedGrave = grave
                     withAnimation {
                         self.offset = 0
                     }
-                   //DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    viewModel.selectedGraves.append(grave)
-                   //}
-                    
+                    viewModel.selectGrave(grave: grave)
                 }
            }
             // Disable favorite button if grave not locatable
@@ -90,44 +86,15 @@ struct GravesView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
     }
-//    func toggleFavorite(grave:Grave){
-//        if let index = favorites.firstIndex(where: {$0.id == grave.id}){
-//            removeGrave(favGrave: favorites[index])
-//        } else {
-//            //addGrave(grave: grave)
-//            FavGraves.addGrave(grave: grave)
-//            //FavGraves.saveChanges()
-//        }
-//    }
     
     func toggleFavorite(grave:Grave){
         if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
             viewModel.deleteFromCoreData(grave: grave)
-            //favorites[index].removeFromCoreData()
         } else {
-            //FavGraves.addGrave(grave: grave)
             viewModel.saveToCoreData(grave: grave)
         }
     }
-//    func addGrave(grave:Grave){
-//        let newFav = FavGraves(context: moc)
-//        newFav.id = grave.id ?? ""
-//        newFav.deceased = grave.deceased ?? "Ej namngiven"
-//        newFav.cemetery = grave.cemetery ?? "Ej specificerad"
-//        newFav.dateBuried = grave.dateBuried ?? "Ej specificerad"
-//        newFav.dateOfBirth = grave.dateOfBirth ?? "Ej specificerad"
-//        newFav.dateOfDeath = grave.dateOfDeath ?? "Ej specificerad"
-//        newFav.graveType = grave.graveType ?? "Ej specificerad"
-//        newFav.latitude = grave.latitude!
-//        newFav.longitude = grave.longitude!
-//        do {
-//            try moc.save()
-//        } catch {
-//           //TODO: Handle Error
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
-//    }
+
     func removeGrave(favGrave:FavGraves){
             moc.delete(favGrave)
             do {

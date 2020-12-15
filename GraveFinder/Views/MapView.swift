@@ -17,7 +17,7 @@ struct MapView: View {
     @State private var showGraveDeatil = false
 
     @State private var selectedIndex = 0
-    @State private var mapOptions = ["Standard", "Hybrid","Satelite"]
+    @State private var mapOptions = ["Standard","Satelite","Hybrid"]
     @State private var frames = Array<CGRect>(repeating: .zero, count: 3)
     init(viewModel: GravesViewModel) {
         self.viewModel = viewModel
