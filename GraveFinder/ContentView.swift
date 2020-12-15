@@ -13,15 +13,27 @@ struct ContentView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     @ObservedObject var viewModel = GravesViewModel()
-    
+
+    @ObservedObject var netStatus: NetStatus
+
     var body: some View {
+
         if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
             //iPhone landscape
-            MapView(viewModel: viewModel)
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .top
+            ), content: {
+                MapView(viewModel: viewModel)
+                if netStatus.noInternet {
+                    NotificaitonModifier()
+                }
+            })
         } else {
             //Other
+
             GeometryReader{ geometry in
-                ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom), content: {
+                ZStack(alignment: Alignment(horizontal: .center, vertical: .top
+                ), content: {
+
                     MapView(viewModel: viewModel)
                     BottomSheet(viewModel: viewModel)
                         .alert(

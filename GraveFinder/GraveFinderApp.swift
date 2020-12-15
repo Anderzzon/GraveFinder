@@ -10,12 +10,13 @@ import CoreData
 
 @main
 struct GraveFinderApp: App {
+    
+    @StateObject var netStatus = NetStatus()
     let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, viewContext)
+            ContentView( netStatus: netStatus).environment(\.managedObjectContext, viewContext).environmentObject(netStatus)
         }
     }
 }

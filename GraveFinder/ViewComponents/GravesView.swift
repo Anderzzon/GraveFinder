@@ -65,14 +65,11 @@ struct GravesView: View {
                 hideKeyboard()
                 //Grave info card tap to show on map
                 if !isDisabled {
-                    viewModel.selectedGraves.removeAll()
                     self.selectedGrave = grave
                     withAnimation {
                         self.offset = 0
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        viewModel.selectedGraves.append(grave)
-                    }
+                    viewModel.selectGrave(grave: grave)
                 }
             }
             // Disable favorite button if grave not locatable
@@ -108,6 +105,17 @@ struct GravesView: View {
         } else {
             viewModel.saveToCoreData(grave: grave)
         }
+    }
+
+    func removeGrave(favGrave:FavGraves){
+            moc.delete(favGrave)
+            do {
+                try moc.save()
+            } catch {
+               //TODO: Handle Error
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
     }
     func checkIfFavorite()->Bool{
         return favorites.contains(where: {$0.id == grave.id})

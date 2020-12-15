@@ -15,6 +15,7 @@
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
 		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 		035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035419EA2582554200B98CEB /* CoreDataHelper.swift */; };
+		03541A4B2583933100B98CEB /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03541A4A2583933100B98CEB /* NetStatus.swift */; };
 		7839000A258385460030B008 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78390009258385460030B008 /* NotificationService.swift */; };
 		783900162586970D0030B008 /* NotificationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783900152586970D0030B008 /* NotificationSelectionView.swift */; };
 		783900192587849E0030B008 /* NotificationSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783900182587849D0030B008 /* NotificationSelectionViewModel.swift */; };
@@ -28,6 +29,12 @@
 		78EF051225798C3B00635427 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF051125798C3B00635427 /* Persistence.swift */; };
 		78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */; };
 		78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */; };
+		E26F75F72587F9E800F5D0EF /* SearchViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75F62587F9E800F5D0EF /* SearchViewModifier.swift */; };
+		E26F76002588088900F5D0EF /* ToggleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */; };
+		E26F760525880FD200F5D0EF /* SearchGravesModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */; };
+		E26F76092588109900F5D0EF /* FavGravesModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F76082588109900F5D0EF /* FavGravesModifier.swift */; };
+		E26F760C2588121800F5D0EF /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760B2588121800F5D0EF /* BottomSheetModifier.swift */; };
+		E26F760F2588165D00F5D0EF /* NotificaitonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760E2588165D00F5D0EF /* NotificaitonModifier.swift */; };
 		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +62,12 @@
 		78EF051125798C3B00635427 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataClass.swift"; sourceTree = "<group>"; };
 		78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E26F75F62587F9E800F5D0EF /* SearchViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModifier.swift; sourceTree = "<group>"; };
+		E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleViewModifier.swift; sourceTree = "<group>"; };
+		E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGravesModifier.swift; sourceTree = "<group>"; };
+		E26F76082588109900F5D0EF /* FavGravesModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavGravesModifier.swift; sourceTree = "<group>"; };
+		E26F760B2588121800F5D0EF /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
+		E26F760E2588165D00F5D0EF /* NotificaitonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificaitonModifier.swift; sourceTree = "<group>"; };
 		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +117,7 @@
 				7845964A256CFF5700A97B7F /* ViewModels */,
 				78459649256CFF4A00A97B7F /* Views */,
 				031BF238256BC94E0047A5F4 /* GraveFinderApp.swift */,
+				03541A4A2583933100B98CEB /* NetStatus.swift */,
 				031BF23A256BC94E0047A5F4 /* ContentView.swift */,
 				78EF051125798C3B00635427 /* Persistence.swift */,
 				032EDEC7256D390900A28FAD /* LocationDelegate.swift */,
@@ -135,6 +149,7 @@
 		78459649256CFF4A00A97B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E26F75F92587FC7500F5D0EF /* CustomViews */,
 				E2C787CF256E575D008ACA90 /* BottomSheetView.swift */,
 				03102EE4256E539C004FBE3F /* MapView.swift */,
 				03102EF7256ED6F5004FBE3F /* MapViewUI.swift */,
@@ -187,6 +202,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E26F75F92587FC7500F5D0EF /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				E26F75F62587F9E800F5D0EF /* SearchViewModifier.swift */,
+				E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */,
+				E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */,
+				E26F76082588109900F5D0EF /* FavGravesModifier.swift */,
+				E26F760B2588121800F5D0EF /* BottomSheetModifier.swift */,
+				E26F760E2588165D00F5D0EF /* NotificaitonModifier.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,6 +231,8 @@
 			dependencies = (
 			);
 			name = GraveFinder;
+			packageProductDependencies = (
+			);
 			productName = GraveFinder;
 			productReference = 031BF235256BC94E0047A5F4 /* GraveFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -230,6 +260,8 @@
 				Base,
 			);
 			mainGroup = 031BF22C256BC94E0047A5F4;
+			packageReferences = (
+			);
 			productRefGroup = 031BF236256BC94E0047A5F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,22 +291,28 @@
 				783900192587849E0030B008 /* NotificationSelectionViewModel.swift in Sources */,
 				78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */,
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
+				E26F760C2588121800F5D0EF /* BottomSheetModifier.swift in Sources */,
 				78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */,
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
 				7839000A258385460030B008 /* NotificationService.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
 				035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */,
+				03541A4B2583933100B98CEB /* NetStatus.swift in Sources */,
+				E26F76002588088900F5D0EF /* ToggleViewModifier.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
 				783900162586970D0030B008 /* NotificationSelectionView.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
 				78688CA52570FB2100413618 /* Strings.swift in Sources */,
+				E26F75F72587F9E800F5D0EF /* SearchViewModifier.swift in Sources */,
 				78EF051225798C3B00635427 /* Persistence.swift in Sources */,
 				78459651256D01E700A97B7F /* GravesViewModel.swift in Sources */,
 				78688CAA2571165800413618 /* GravesView.swift in Sources */,
 				E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */,
+				E26F760525880FD200F5D0EF /* SearchGravesModifier.swift in Sources */,
 				03102EF8256ED6F5004FBE3F /* MapViewUI.swift in Sources */,
+				E26F76092588109900F5D0EF /* FavGravesModifier.swift in Sources */,
 				7845964D256D004200A97B7F /* Grave.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
