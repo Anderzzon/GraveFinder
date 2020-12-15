@@ -17,6 +17,7 @@ class GravesViewModel: ObservableObject {
     @Published var totalPages = 0
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
+    @Published var notificationOptionsPresenting:Bool = false
     @State var latestQuery = ""
     @State var showNotificationAlert = false
     var coreDataHelper = CoreDataHelper()
@@ -50,7 +51,6 @@ class GravesViewModel: ObservableObject {
         "norra begravningsplatsen":(latitude: 59.355668, longitude: 18.023853),
         "galärvarvskyrkogården":(latitude: 59.328077, longitude: 18.093972)
     ]
-    
     
     var task : AnyCancellable?
     
@@ -104,7 +104,39 @@ class GravesViewModel: ObservableObject {
         selectedGraves.removeAll()
         selectedGraves.append(grave)
     }
-    
+    func showNotificationOptions(){
+        NotificationService.getSettings(){ settings in
+            switch settings.authorizationStatus {
+            case .authorized, .ephemeral:
+                DispatchQueue.main.async {
+                    self.notificationOptionsPresenting = true
+                }
+            case .denied:
+                DispatchQueue.main.async{
+                    self.setAlert(alert: Alert(
+                                        title: Text("Notification Service").font(.system(.title)),
+                                        message: Text("Notifikationer måste aktiveras i inställningarna"),
+                                        primaryButton: .default( Text("Inställningar"),
+                                                                 action: {
+                                                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                                                 }),
+                                        secondaryButton: .cancel()))
+                }
+            case .notDetermined:
+                DispatchQueue.main.async {
+                    NotificationService.requestNotificationAuthorization(){
+                        didAllow, error in
+                        if !didAllow {
+                            return
+                        } else {
+                            self.notificationOptionsPresenting = true
+                        }
+                    }
+                }
+            default: break
+            }
+        }
+    }
     func setAlert(alert:Alert){
         self.alert = alert
         self.alertIsPresented = true

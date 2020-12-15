@@ -24,7 +24,8 @@ struct NotificationSelectionView: View {
                         Spacer()
                         Toggle(isOn: $viewModel.notifyBDay, label: {})
                             .labelsHidden()
-                            .onChange(of: viewModel.notifyBDay){ value in
+                            .onChange(of: viewModel.notifyBDay) { value in
+                                print("tap")
                                 viewModel.toggleNotification(isOn: value, grave: viewModel.grave, type: .birthday)
                             }
                     }
@@ -54,8 +55,9 @@ struct NotificationSelectionView: View {
                 }
             }
         }
+        }.alert(isPresented: $viewModel.alertIsPresented,
+                content: {viewModel.alert ?? Alert(title: Text("Error"))})
     }
-}
 }
 
 struct NotificationSelectionView_Previews: PreviewProvider {

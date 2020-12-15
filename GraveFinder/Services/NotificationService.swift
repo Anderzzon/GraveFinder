@@ -13,7 +13,7 @@ class NotificationService {
     
     static let center = UNUserNotificationCenter.current()
     
-    static func getNotificationSettings(completion: @escaping (UNNotificationSettings)->Void){
+    static func getSettings(completion: @escaping (UNNotificationSettings)->Void){
         return center.getNotificationSettings(completionHandler: completion)
     }
     static func requestNotificationAuthorization(completion: @escaping (Bool, Error?)->Void){

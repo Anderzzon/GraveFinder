@@ -13,7 +13,6 @@ struct GravesView: View {
     @ObservedObject var viewModel : GravesViewModel
     @Binding private var selectedGrave:Grave?
     @Binding private var offset:CGFloat
-    @State private var isPresented = false
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
@@ -78,13 +77,13 @@ struct GravesView: View {
                     //Add option for notifications only if favorite
                     if checkIsFavorite() && checkIsNotifiable() {
                         Button(action: {
-                            self.isPresented = true
+                            viewModel.showNotificationOptions()
                         }, label: {
                             Image(systemName: "bell.fill")
                                 .foregroundColor(.black)
                         })
                         .padding()
-                        .sheet(isPresented: $isPresented, content: {NotificationSelectionView(grave: grave)})
+                        .sheet(isPresented: $viewModel.notificationOptionsPresenting, content: {NotificationSelectionView(grave: grave)})
                     }
                     Button(action: {
                         self.toggleFavorite(for: grave)
@@ -107,16 +106,16 @@ struct GravesView: View {
             viewModel.saveToCoreData(grave: grave)
         }
     }
-
+    
     func removeGrave(favGrave:FavGraves){
-            moc.delete(favGrave)
-            do {
-                try moc.save()
-            } catch {
-               //TODO: Handle Error
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        moc.delete(favGrave)
+        do {
+            try moc.save()
+        } catch {
+            //TODO: Handle Error
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     func checkIsNotifiable()->Bool {
         let firstCheck = grave.dateOfBirth != nil && !grave.dateOfBirth!.isEmpty
