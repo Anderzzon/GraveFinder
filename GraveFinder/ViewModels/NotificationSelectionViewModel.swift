@@ -15,6 +15,10 @@ class NotificationSelectionViewModel:ObservableObject {
     @Published var notifyDDay = false
     @Published var notifyBurialDay = false
     
+    enum NotificationDate {
+        case birthday, deathday, burialday
+    }
+    
     var grave:Grave
     
     init(grave:Grave){
@@ -41,34 +45,107 @@ class NotificationSelectionViewModel:ObservableObject {
         return true
     }
     func initToggleValues(){
-        NotificationService.checkNotificationExists(for: grave, withType: .birthday){
+        NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .birthday)){
             exists in
             DispatchQueue.main.sync {
             self.notifyBDay = exists
             }
         }
-        NotificationService.checkNotificationExists(for: grave, withType: .deathday){
+        NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .deathday)){
             exists in
             DispatchQueue.main.sync {
             self.notifyDDay = exists
             }
         }
-        NotificationService.checkNotificationExists(for: grave, withType: .burialday){
+        NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .burialday)){
             exists in
             DispatchQueue.main.sync{
             self.notifyBurialDay = exists
             }
         }
     }
-    
-    func toggleNotification(grave:Grave, type:NotificationService.NotificationType){
-        NotificationService.checkNotificationExists(for: grave, withType: type){
+    func getDayTypeForNotification(type:NotificationDate)->String {
+        var typeString:String {
+            switch type {
+            case .birthday: return "födelsesdag"
+            case .deathday: return "dödsdag"
+            case .burialday: return "begravningsdag"
+            }
+        }
+        return typeString
+    }
+    func getID(for grave:Grave, with type:NotificationDate)->String{
+        return "grave.\(grave.id!).\(getDayTypeForNotification(type: type))"
+    }
+    func toggleNotification(grave:Grave, type:NotificationDate){
+        NotificationService.checkNotificationExists(for: getID(for:grave, with: type)){
                     exists in
                     if !exists {
-                        NotificationService.createNotification(for: grave, with: type)
+                        self.createNotification(for: grave, with: type)
                     } else {
-                        NotificationService.removeNotification(for: grave, withType: type)
+                        self.removeNotification(for: grave, with: type)
                     }
         }
     }
+    func createNotification(for grave:Grave, with type:NotificationDate){
+        guard let dates = getDateComponents(for: grave, with: type) else { return }
+        let identifier = getID(for: grave, with: type)
+        let content = getContent(for: grave, with: type)
+        let trigger = getNotificationTrigger(for: dates)
+        NotificationService.createNotification(for: identifier, at: dates, with: content, at: trigger)
+    }
+    func removeNotification(for grave:Grave, with type:NotificationDate){
+        let identifier = getID(for: grave, with: type)
+        NotificationService.removeNotification(for: identifier)
+    }
+    func getDateComponents(for grave:Grave, with type:NotificationDate) -> DateComponents? {
+        guard let requestedDate = getDateForNotificationType(for: type) else { return nil}
+        if requestedDate.isEmpty { return nil}
+        
+        guard let month = parseDate(for: requestedDate, return: "month") else { return nil}
+        guard let day = parseDate(for: requestedDate, return: "day") else { return nil}
+        
+        var dates = DateComponents()
+        dates.hour = 9 //9.AM
+        dates.month = month
+        dates.day = day
+        
+        return dates
+    }
+    func getNotificationTrigger(for dates:DateComponents)->UNCalendarNotificationTrigger {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dates, repeats: true)
+        return trigger
+    }
+    func getContent(for grave:Grave, with type:NotificationDate) -> UNMutableNotificationContent {
+        let notificationDay = getDayTypeForNotification(type: type)
+        let content = UNMutableNotificationContent()
+        content.title = "GraveFinder Reminder:"
+        content.subtitle = "Idag är \(notificationDay) för \(grave.deceased ?? "en av dina favoriter.")"
+        content.sound = UNNotificationSound.default
+        return content
+    }
+    func parseDate(for date:String, return request:String) -> Int? {
+        let units = date.split(separator: "-")
+        guard let year = Int(units[0]) else { return nil }
+        guard let month = Int(units[1]) else { return nil }
+        guard let day = Int(units[2]) else { return nil }
+        
+        switch request {
+        case "day": return day
+        case "month": return month
+        case "year": return year
+        default: return nil
+        }
+    }
+    func getDateForNotificationType(for type: NotificationDate) -> String? {
+        var switchOnDate:String? {
+            switch type {
+            case .birthday: return grave.dateOfBirth
+            case .deathday: return grave.dateOfDeath
+            case .burialday: return grave.dateBuried
+            }
+        }
+        return switchOnDate
+    }
 }
+
