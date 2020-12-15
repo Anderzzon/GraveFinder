@@ -11,11 +11,7 @@ import SwiftUI
 
 class NotificationSelectionViewModel:ObservableObject {
     
-    @Published var notifyBDay = false {
-        didSet{
-            print("publishedvalue was set to", notifyBDay)
-        }
-    }
+    @Published var notifyBDay = false
     @Published var notifyDDay = false
     @Published var notifyBurialDay = false
     @Published var alertIsPresented:Bool = false
@@ -55,7 +51,6 @@ class NotificationSelectionViewModel:ObservableObject {
             exists in
             DispatchQueue.main.sync {
                 self.notifyBDay = exists
-                print("initing notifyBday with exists", exists)
             }
         }
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .deathday)){
