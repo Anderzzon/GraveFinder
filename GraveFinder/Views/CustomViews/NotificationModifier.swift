@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-
-internal extension ContentView {
-    func NotificaitonModifier() -> some View {
+extension ContentView {
+    func NotificationModifier() -> some View {
         VStack {
             HStack {
                 // Banner Content Here
