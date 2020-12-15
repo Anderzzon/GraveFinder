@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NotificationSelectionView: View {
-    @Environment(\.presentationMode) private var presentationMode
     @ObservedObject private var viewModel:NotificationSelectionViewModel
     
     init(grave:Grave){
