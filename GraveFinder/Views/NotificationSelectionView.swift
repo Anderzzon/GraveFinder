@@ -24,7 +24,6 @@ struct NotificationSelectionView: View {
                         Toggle(isOn: $viewModel.notifyBDay, label: {})
                             .labelsHidden()
                             .onChange(of: viewModel.notifyBDay) { value in
-                                print("tap")
                                 viewModel.toggleNotification(isOn: value, grave: viewModel.grave, type: .birthday)
                             }
                     }

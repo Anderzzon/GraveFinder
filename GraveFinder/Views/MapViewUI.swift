@@ -60,8 +60,8 @@ struct MapViewUI: UIViewRepresentable {
             
         }
         
-        //print("Annotations count: \(mapView.annotations.count)")
-        //print("updating")
+        print("Annotations count: \(mapView.annotations.count)")
+        print("updating")
         //print("Region \(region)")
         mapView.mapType = mapViewType
     }

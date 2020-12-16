@@ -47,7 +47,6 @@ class NotificationSelectionViewModel:ObservableObject {
         return true
     }
     func initToggleValues(){
-        print("initializing \(grave.id!)")
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .birthday)){
             exists in
             DispatchQueue.main.sync {
@@ -117,7 +116,6 @@ class NotificationSelectionViewModel:ObservableObject {
         }
     }
     func createNotification(for grave:Grave, with type:NotificationDate){
-        print("creating notification")
         guard let dates = getDateComponents(for: grave, with: type) else { return }
         let identifier = getID(for: grave, with: type)
         let content = getContent(for: grave, with: type)
@@ -125,7 +123,6 @@ class NotificationSelectionViewModel:ObservableObject {
         NotificationService.createNotification(for: identifier, at: dates, with: content, at: trigger)
     }
     func removeNotification(for grave:Grave, with type:NotificationDate){
-        print("removing notification")
         let identifier = getID(for: grave, with: type)
         NotificationService.removeNotification(for: identifier)
     }
