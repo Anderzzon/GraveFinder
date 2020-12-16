@@ -47,6 +47,7 @@ class NotificationSelectionViewModel:ObservableObject {
         return true
     }
     func initToggleValues(){
+        print("initializing \(grave.id!)")
         NotificationService.checkNotificationExists(for: getID(for: self.grave, with: .birthday)){
             exists in
             DispatchQueue.main.sync {

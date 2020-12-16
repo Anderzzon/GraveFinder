@@ -9,7 +9,7 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
-    @ObservedObject var viewModel: GravesViewModel
+    @ObservedObject var viewModel: BottomSheetViewModel
     @State private var region: MKCoordinateRegion?
     @State private var mapType: MKMapType = .standard
     
@@ -19,7 +19,7 @@ struct MapView: View {
     @State private var selectedIndex = 0
     @State private var mapOptions = ["Standard","Satelite","Hybrid"]
     @State private var frames = Array<CGRect>(repeating: .zero, count: 3)
-    init(viewModel: GravesViewModel) {
+    init(viewModel: BottomSheetViewModel) {
         self.viewModel = viewModel
     }
     

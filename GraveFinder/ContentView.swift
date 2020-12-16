@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
-    @ObservedObject var viewModel = GravesViewModel()
+    @ObservedObject var viewModel = BottomSheetViewModel()
     
     @ObservedObject var netStatus: NetStatus
     
@@ -49,6 +49,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MapView(viewModel: GravesViewModel())
+        MapView(viewModel: BottomSheetViewModel())
     }
 }

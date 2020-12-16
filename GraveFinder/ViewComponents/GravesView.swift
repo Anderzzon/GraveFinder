@@ -11,23 +11,17 @@ import CoreData
 struct GravesView: View {
     @Environment(\.managedObjectContext) private var moc
     @ObservedObject var viewModel : GravesViewModel
-    @Binding private var selectedGrave:Grave?
-    @Binding private var offset:CGFloat
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
     var favorites: FetchedResults<FavGraves>
     
-    private var grave:Grave
     private var isDisabled:Bool
     
-    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, offset:Binding<CGFloat>, viewModel:GravesViewModel){
-        self.grave = grave
-        self._selectedGrave = selectedGrave
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, offset:Binding<CGFloat>, selectedGraves:Binding<[Grave]>){
         self.isDisabled = disabled
-        self._offset = offset
-        self.viewModel = viewModel
+        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, offset: offset, selectedGrave: selectedGrave)
     }
     
     var body: some View {
@@ -44,9 +38,9 @@ struct GravesView: View {
                 
                 // Grave information
                 VStack(alignment: .leading, spacing: 10){
-                    let deceased = grave.deceased ?? "Okänd"
-                    let dateBuried = grave.dateBuried ?? "Ej specificerad"
-                    let cemetery = grave.cemetery ?? "Ej specificerad"
+                    let deceased = viewModel.grave.deceased ?? "Okänd"
+                    let dateBuried = viewModel.grave.dateBuried ?? "Ej specificerad"
+                    let cemetery = viewModel.grave.cemetery ?? "Ej specificerad"
                     
                     Text(deceased)
                         .font(.caption).bold()
@@ -64,18 +58,18 @@ struct GravesView: View {
                 hideKeyboard()
                 //Grave info card tap to show on map
                 if !isDisabled {
-                    self.selectedGrave = grave
+                    viewModel.setSelectedGrave()
                     withAnimation {
-                        self.offset = 0
+                        viewModel.setOffset(to: 0)
                     }
-                    viewModel.selectGrave(grave: grave)
+                    viewModel.selectGrave()
                 }
             }
             // Disable favorite button if grave not locatable
             if !isDisabled {
                 VStack{
                     //Add option for notifications only if favorite
-                    if checkIsFavorite() && checkIsNotifiable() {
+                    if checkIsFavorite() && viewModel.checkIsNotifiable() {
                         Button(action: {
                             viewModel.showNotificationOptions()
                         }, label: {
@@ -83,10 +77,10 @@ struct GravesView: View {
                                 .foregroundColor(.black)
                         })
                         .padding()
-                        .sheet(isPresented: $viewModel.notificationOptionsPresenting, content: {NotificationSelectionView(grave: grave)})
+                        .sheet(isPresented: $viewModel.notificationOptionsPresenting, content: { NotificationSelectionView(grave: viewModel.grave) })
                     }
                     Button(action: {
-                        self.toggleFavorite(for: grave)
+                        self.toggleFavorite()
                     } , label: {
                         Image(systemName: checkIsFavorite() ? "heart.fill" : "heart")
                             .foregroundColor(.red)
@@ -95,38 +89,19 @@ struct GravesView: View {
             }
         }
         .padding([.top,.bottom])
-        .background(checkIfHighlight() ? Color.gray.opacity(0.4) : Color.white.opacity(0))
+        .background(viewModel.checkIfHighlight() ? Color.gray.opacity(0.4) : Color.white.opacity(0))
         .cornerRadius(10)
         .shadow(radius: 10)
     }
-    func toggleFavorite(for grave:Grave){
-        if favorites.firstIndex(where: {$0.id == grave.id}) != nil{
-            viewModel.deleteFromCoreData(grave: grave)
+    func toggleFavorite(){
+        if favorites.firstIndex(where: {$0.id == viewModel.grave.id}) != nil {
+            viewModel.deleteFromCoreData()
         } else {
-            viewModel.saveToCoreData(grave: grave)
+            viewModel.saveToCoreData()
         }
-    }
-    
-    func removeGrave(favGrave:FavGraves){
-        moc.delete(favGrave)
-        do {
-            try moc.save()
-        } catch {
-            //TODO: Handle Error
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    func checkIsNotifiable()->Bool {
-        let firstCheck = grave.dateOfBirth != nil && !grave.dateOfBirth!.isEmpty
-        let secondCheck = grave.dateOfDeath != nil && !grave.dateOfDeath!.isEmpty
-        let thirdCheck = grave.dateBuried != nil && !grave.dateBuried!.isEmpty
-        return firstCheck || secondCheck || thirdCheck
     }
     func checkIsFavorite()->Bool{
-        return favorites.contains(where: {$0.id == grave.id})
+        return favorites.contains(where: {$0.id == viewModel.grave.id})
     }
-    func checkIfHighlight()->Bool{
-        return selectedGrave?.id == grave.id
-    }
+    
 }

@@ -30,7 +30,6 @@ class NotificationService {
     static func checkNotificationExists(for identifier:String, completion: @escaping (Bool) -> Void ){
         center.getPendingNotificationRequests(){
             notifications in
-            
             let exists = notifications.contains(where: {$0.identifier == identifier})
             completion(exists)
         }

@@ -13,7 +13,7 @@ internal extension BottomSheetView {
             ForEach(viewModel.totalGravesList){
                 grave in
 
-                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: !grave.isLocatable(), offset: $offset, viewModel: viewModel)
+                GravesView(for: grave, selectedGrave: $selectedGrave, disabledIf: !grave.isLocatable(), offset: $offset, selectedGraves: $viewModel.selectedGraves)
             }
             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                 HStack(alignment: .center) {

@@ -31,7 +31,7 @@ struct MapViewUI: UIViewRepresentable {
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
         
-        print("Graves count: \(graves.count)")
+        //print("Graves count: \(graves.count)")
 //        if graves.count != mapView.annotations.count {
 //            if !mapView.showsUserLocation {
 //                mapView.showsUserLocation = true
@@ -60,8 +60,8 @@ struct MapViewUI: UIViewRepresentable {
             
         }
         
-        print("Annotations count: \(mapView.annotations.count)")
-        print("updating")
+        //print("Annotations count: \(mapView.annotations.count)")
+        //print("updating")
         //print("Region \(region)")
         mapView.mapType = mapViewType
     }
