@@ -12,33 +12,26 @@ struct MapView: View {
     @ObservedObject var viewModel: BottomSheetViewModel
     @State internal var region: MKCoordinateRegion?
     @State internal var mapType: MKMapType = .standard
-    @Binding private var isLandscape:Bool
+
     @State internal var annotations = [Grave]()
     @State internal var showGraveDeatil = false
-    @Binding private var isLandscape:Bool
 
     @State internal var selectedIndex = 0
     @State internal var mapOptions = ["Standard","Satelite","Hybrid"]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
 
-    init(viewModel: BottomSheetViewModel,isLand:Binding<Bool>) {
+    init(viewModel: BottomSheetViewModel) {
         self.viewModel = viewModel
-        self._isLandscape = isLand
     }
     
     var body: some View {
         ZStack(alignment: .top){
             MapViewUI(showGraveDetail: $showGraveDeatil, graves: viewModel.selectedGraves, mapViewType: mapType).edgesIgnoringSafeArea(.all)
 
-            if isLandscape{
-                MapPickrsView()
-                    .foregroundColor(Color.black)
-                    .padding()
-            }
-            else{
-                MapPickrsView()
-                    .foregroundColor(Color.black)
-            }
+            MapPickrsView()
+                .foregroundColor(Color.black)
+                .padding()
+
             Spacer()
         }
         .alert(isPresented: $showGraveDeatil, content: {

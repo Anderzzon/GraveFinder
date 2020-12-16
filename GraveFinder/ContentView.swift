@@ -15,7 +15,6 @@ struct ContentView: View {
     @ObservedObject var viewModel = BottomSheetViewModel()
     
     @ObservedObject var netStatus: NetStatus
-    @State internal var landscape = true
     
     var body: some View {
         
@@ -24,7 +23,7 @@ struct ContentView: View {
             //iPhone landscape
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
-                MapView(viewModel: viewModel,isLand: $landscape )
+                MapView(viewModel: viewModel )
                 if netStatus.noInternet { NotificationModifier() }
                 
             })
@@ -34,7 +33,7 @@ struct ContentView: View {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
                     
-                    MapView(viewModel: viewModel, isLand: $landscape)
+                    MapView(viewModel: viewModel)
                     BottomSheetView(viewModel: viewModel)
                         .alert(
                             isPresented: $viewModel.alertIsPresented,
