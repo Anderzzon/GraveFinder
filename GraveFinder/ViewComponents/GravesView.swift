@@ -51,7 +51,9 @@ struct GravesView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 Spacer()
-            }.onTapGesture {
+            }
+            .background(Color.white.opacity(0.01))
+            .onTapGesture {
                 hideKeyboard()
                 //Grave info card tap to show on map
                 if !viewModel.locationMissing {
