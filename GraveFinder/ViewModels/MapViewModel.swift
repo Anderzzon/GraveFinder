@@ -11,10 +11,10 @@ import SwiftUI
 
 class MapViewModel: ObservableObject {
     
-    @Binding var selectedGrave:Grave?
+    @Binding var selectedGraves:[Grave]
     
-    init(selectedGrave:Binding<Grave?>) {
-        self._selectedGrave = selectedGrave
+    init(selectedGraves:Binding<[Grave]>) {
+        self._selectedGraves = selectedGraves
     }
     
 }
