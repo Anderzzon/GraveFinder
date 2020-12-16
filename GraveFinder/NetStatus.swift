@@ -44,7 +44,7 @@ class NetStatus: ObservableObject {
         return monitor?.currentPath.isExpensive ?? false
     }
     
-    init() {
+    private init() {
         startMonitoring()
     }
     

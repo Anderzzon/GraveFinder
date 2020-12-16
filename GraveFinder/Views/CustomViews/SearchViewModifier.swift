@@ -16,6 +16,7 @@ internal extension BottomSheetView {
             TextField("Search...", text: $query,onEditingChanged: {EditMode in
 
                 if(!self.pulledUp){
+                    sheetPos = SheetPosition.top
                     offset = (-readerHeight + searchBarHeight)
                     self.pulledUp = true
                 }

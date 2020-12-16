@@ -15,15 +15,18 @@ struct ContentView: View {
     @ObservedObject var viewModel = GravesViewModel()
     
     @ObservedObject var netStatus: NetStatus
+    @State internal var landscape = true
     
     var body: some View {
         
         if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
+
             //iPhone landscape
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
-                MapView(viewModel: viewModel)
+                MapView(viewModel: viewModel,isLand: $landscape )
                 if netStatus.noInternet { NotificationModifier() }
+                
             })
         } else {
             //Other
@@ -31,7 +34,7 @@ struct ContentView: View {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
                     
-                    MapView(viewModel: viewModel)
+                    MapView(viewModel: viewModel, isLand: $landscape)
                     BottomSheetView(viewModel: viewModel)
                         .alert(
                             isPresented: $viewModel.alertIsPresented,
@@ -44,11 +47,5 @@ struct ContentView: View {
                 )
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView(viewModel: GravesViewModel())
     }
 }

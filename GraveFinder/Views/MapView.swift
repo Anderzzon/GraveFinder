@@ -10,56 +10,35 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var viewModel: GravesViewModel
-    @State private var region: MKCoordinateRegion?
-    @State private var mapType: MKMapType = .standard
+    @State internal var region: MKCoordinateRegion?
+    @State internal var mapType: MKMapType = .standard
     
-    @State private var annotations = [Grave]()
-    @State private var showGraveDeatil = false
+    @State internal var annotations = [Grave]()
+    @State internal var showGraveDeatil = false
+    @Binding private var isLandscape:Bool
 
-    @State private var selectedIndex = 0
-    @State private var mapOptions = ["Standard","Satelite","Hybrid"]
-    @State private var frames = Array<CGRect>(repeating: .zero, count: 3)
-    init(viewModel: GravesViewModel) {
+    @State internal var selectedIndex = 0
+    @State internal var mapOptions = ["Standard","Satelite","Hybrid"]
+    @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
+
+    init(viewModel: GravesViewModel,isLand:Binding<Bool>) {
         self.viewModel = viewModel
+        self._isLandscape = isLand
     }
     
     var body: some View {
         ZStack(alignment: .top){
             MapViewUI(showGraveDetail: $showGraveDeatil, graves: viewModel.selectedGraves, mapViewType: mapType).edgesIgnoringSafeArea(.all)
 
-            VStack(alignment: .leading){
-                HStack(spacing: 10) {
-                    ForEach(self.mapOptions.indices, id: \.self) { index in
-                        Button(action: {setMapType(index: index)}) {
-                            Text(self.mapOptions[index])
-                        }
-                        .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
-                        .background(
-                            GeometryReader { geo in
-                                Color.clear.onAppear { self.setFrame(index: index, frame: geo.frame(in: .global)) }
-                            }
-                        )
-                        .foregroundColor(Color.black).font(.caption)
-                    }
-                }
-                .background(
-                    Capsule().fill(
-                        Color.white.opacity(0.8))
-                        .frame(width: self.frames[self.selectedIndex].width,
-                               height: self.frames[self.selectedIndex].height, alignment: .topLeading)
-                        .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX)
-                    , alignment: .leading
-                )
-                .animation(.default)
-                .background(Capsule().stroke(Color.gray, lineWidth: 0.2))
-
+            if isLandscape{
+                MapPickrsView()
+                    .foregroundColor(Color.black)
+                    .padding()
             }
-            .background(
-                Capsule().fill(
-                    Color.white.opacity(0.4))
-                , alignment: .leading
-            )
-            .foregroundColor(Color.black)
+            else{
+                MapPickrsView()
+                    .foregroundColor(Color.black)
+            }
             Spacer()
         }
         .alert(isPresented: $showGraveDeatil, content: {
@@ -73,15 +52,15 @@ struct MapView: View {
         
         let graveAnnotation = viewModel.selectedGraves[0] 
         let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
-            let mapItem = MKMapItem(placemark: placemark)
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
-            mapItem.name = placemark.title
-            mapItem.openInMaps(launchOptions: launchOptions)
+        let mapItem = MKMapItem(placemark: placemark)
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+        mapItem.name = placemark.title
+        mapItem.openInMaps(launchOptions: launchOptions)
     }
     func setFrame(index: Int, frame: CGRect) {
         self.frames[index] = frame
     }
-    private func setMapType(index: Int){
+    func setMapType(index: Int){
 
         self.selectedIndex = index
         switch index {
