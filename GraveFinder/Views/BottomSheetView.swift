@@ -32,7 +32,7 @@ struct BottomSheetView : View {
                     ToggleViewModifier()
                         .foregroundColor(Color.black)
                         .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
-                    ScrollView(.vertical, showsIndicators: true, content: {
+                    ScrollViewWithOffset(onOffsetChange:{_ in hideKeyboard()}, content: {
                         switch showContent {
                         case .searchResults:
                             SearchGravesModifier()
@@ -78,11 +78,3 @@ struct BlurView : UIViewRepresentable {
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
     }
 }
-
-#if canImport(UIKit)
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-#endif
