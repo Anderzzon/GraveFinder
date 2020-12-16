@@ -14,8 +14,6 @@ struct MapViewUI: UIViewRepresentable {
     var graves: [Grave]
     let mapViewType: MKMapType
     
-    //@ObservedObject var viewModel: GravesViewModel
-    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         //mapView.setRegion(region, animated: true)
@@ -30,24 +28,6 @@ struct MapViewUI: UIViewRepresentable {
     }
     
     func updateUIView(_ mapView: MKMapView, context: Context) {
-        
-        //print("Graves count: \(graves.count)")
-//        if graves.count != mapView.annotations.count {
-//            if !mapView.showsUserLocation {
-//                mapView.showsUserLocation = true
-//            }
-//            mapView.removeAnnotations(mapView.annotations)
-//            //mapView.addAnnotations(graves)
-//
-//
-//        }
-//        if graves.count == 1 {
-//            mapView.showsUserLocation = true
-//
-//            mapView.setRegion(graves[0].region!, animated: true)
-//            mapView.addAnnotations(graves)
-//
-//        }
 
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(graves)
