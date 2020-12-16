@@ -16,7 +16,9 @@ struct GraveFinderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView( netStatus: netStatus).environment(\.managedObjectContext, viewContext).environmentObject(netStatus)
+            ContentView()
+                .environment(\.managedObjectContext, viewContext)
+                .environmentObject(netStatus)
         }
     }
 }

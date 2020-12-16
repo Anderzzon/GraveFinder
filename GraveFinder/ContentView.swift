@@ -12,9 +12,10 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @EnvironmentObject var netStatus: NetStatus
+
     @ObservedObject var viewModel = BottomSheetViewModel()
     
-    @ObservedObject var netStatus: NetStatus
     
     var body: some View {
         
