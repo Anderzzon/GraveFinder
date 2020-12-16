@@ -35,7 +35,9 @@ struct ContentView: View {
                 ), content: {
                     
                     MapView(viewModel: viewModel)
-                    BottomSheetView(viewModel: viewModel)
+                    BottomSheetView(viewModel: viewModel).onTapGesture {
+                        hideKeyboard()
+                    }
                         .alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {
