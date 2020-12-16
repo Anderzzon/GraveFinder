@@ -9,25 +9,26 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
-    @ObservedObject var viewModel: BottomSheetViewModel
-    @State internal var region: MKCoordinateRegion?
-    @State internal var mapType: MKMapType = .standard
+    @ObservedObject var viewModel: MapViewModel
+    //@State internal var region: MKCoordinateRegion?
+    //@State internal var mapType: MKMapType = .standard
 
-    @State internal var annotations = [Grave]()
+    //@State internal var annotations = [Grave]()
     @State internal var showGraveDeatil = false
 
-    @State internal var selectedIndex = 0
-    @State internal var mapOptions = ["Standard","Satelite","Hybrid"]
+    //@State internal var selectedIndex = 0
+    //@State internal var mapOptions = ["Standard","Satelite","Hybrid"]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
 
-    init(viewModel: BottomSheetViewModel) {
-        self.viewModel = viewModel
+    init(graves: [Grave]) {
+        self.viewModel = MapViewModel(selectedGraves: graves)
     }
     
     var body: some View {
         ZStack(alignment: .top){
-            MapViewUI(showGraveDetail: $showGraveDeatil, graves: viewModel.selectedGraves, mapViewType: mapType).edgesIgnoringSafeArea(.all)
+            MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
 
+            Print("showGraveDetail", viewModel.showGraveDeatil)
             MapPickrsView()
                 .foregroundColor(Color.black)
                 .padding()
@@ -35,6 +36,7 @@ struct MapView: View {
             Spacer()
         }
         .alert(isPresented: $showGraveDeatil, content: {
+            print("Alert navigation")
             let name = viewModel.selectedGraves[0].title ?? "Grave"
             return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
                 navigate()
@@ -52,20 +54,6 @@ struct MapView: View {
     }
     func setFrame(index: Int, frame: CGRect) {
         self.frames[index] = frame
-    }
-    func setMapType(index: Int){
-
-        self.selectedIndex = index
-        switch index {
-        case 0:
-            mapType = .standard
-        case 1:
-            mapType = .satellite
-        case 2:
-            mapType = .hybrid
-        default:
-            mapType = .standard
-        }
     }
 }
 

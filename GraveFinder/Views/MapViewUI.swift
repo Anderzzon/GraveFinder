@@ -11,15 +11,16 @@ import MapKit
 struct MapViewUI: UIViewRepresentable {
     @Binding var showGraveDetail: Bool
     //var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 59.27212, longitude: 18.10164), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    var graves: [Grave]
-    let mapViewType: MKMapType
+    @ObservedObject var viewModel: MapViewModel
+    //var graves: [Grave]
+    //let mapViewType: MKMapType
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         //mapView.setRegion(region, animated: true)
-        mapView.mapType = mapViewType
+        mapView.mapType = viewModel.mapType
         mapView.isRotateEnabled = false
-        mapView.addAnnotations(graves)
+        mapView.addAnnotations(viewModel.selectedGraves)
         mapView.delegate = context.coordinator
         let poiCategories: [MKPointOfInterestCategory] = [.evCharger, .gasStation, .nationalPark, .park, .parking, .publicTransport, .restroom, .store]
         let poiFilter = MKPointOfInterestFilter(including: poiCategories)
@@ -30,20 +31,21 @@ struct MapViewUI: UIViewRepresentable {
     func updateUIView(_ mapView: MKMapView, context: Context) {
 
             mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations(graves)
+        mapView.addAnnotations(viewModel.selectedGraves)
         
 
-        if graves.count == 1 {
+        if viewModel.selectedGraves.count == 1 {
             mapView.showsUserLocation = true
         
-            mapView.setRegion(graves[0].region!, animated: true)
+            mapView.setRegion(viewModel.selectedGraves[0].region!, animated: true)
             
         }
         
         print("Annotations count: \(mapView.annotations.count)")
         print("updating")
         //print("Region \(region)")
-        mapView.mapType = mapViewType
+        mapView.mapType = viewModel.mapType
+        print("MapViewUI showGraveDetail", viewModel.showGraveDeatil)
     }
     
     func makeCoordinator() -> MapCoordinator {
@@ -73,7 +75,7 @@ struct MapViewUI: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
             print("Annotiations pressed")
             parent.showGraveDetail = true
-            
+            print("MapViewUI showGraveDetail", parent.viewModel.showGraveDeatil)
         }
     }
     

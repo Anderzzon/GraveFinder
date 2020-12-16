@@ -12,9 +12,9 @@ extension MapView {
         
         VStack(alignment: .leading){
             HStack(spacing: 10) {
-                ForEach(self.mapOptions.indices, id: \.self) { index in
-                    Button(action: {setMapType(index: index)}) {
-                        Text(self.mapOptions[index])
+                ForEach(viewModel.mapOptions.indices, id: \.self) { index in
+                    Button(action: {viewModel.setMapType(index: index)}) {
+                        Text(viewModel.mapOptions[index])
                     }
                     .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
                     .background(
@@ -28,9 +28,9 @@ extension MapView {
             .background(
                 Capsule().fill(
                     Color.white.opacity(0.8))
-                    .frame(width: self.frames[self.selectedIndex].width,
-                           height: self.frames[self.selectedIndex].height, alignment: .topLeading)
-                    .offset(x: self.frames[self.selectedIndex].minX - self.frames[0].minX)
+                    .frame(width: self.frames[viewModel.selectedIndex].width,
+                           height: self.frames[viewModel.selectedIndex].height, alignment: .topLeading)
+                    .offset(x: self.frames[viewModel.selectedIndex].minX - self.frames[0].minX)
                 , alignment: .leading
             )
             .animation(.default)
