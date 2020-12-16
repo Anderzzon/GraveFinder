@@ -41,7 +41,7 @@ struct BottomSheetView : View {
                         default:
                             EmptyView()
                         }
-                    })
+                    }).padding(.bottom, 40)
                 }
 
             }.ignoresSafeArea(.all, edges: .bottom)
