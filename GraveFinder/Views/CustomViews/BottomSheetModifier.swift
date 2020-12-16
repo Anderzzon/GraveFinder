@@ -20,8 +20,6 @@ struct Handle : View {
 struct BottomSheetModifier<Content: View> : View {
     @GestureState private var dragState = DragState.inactive
     @Binding var sheetPos: SheetPosition
-    @State var isEditing:Bool = false
-
 
     var content: (Binding<SheetPosition>) -> Content
     var body: some View {
