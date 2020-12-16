@@ -6,22 +6,19 @@ struct BottomSheetView : View {
         case searchResults, favorites, nothing
     }
     
-    @ObservedObject var viewModel : GravesViewModel
+    @ObservedObject var viewModel : BottomSheetViewModel
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
     var favorites: FetchedResults<FavGraves>
     
     @State  var query = ""
-    @State internal var isSearching = false
-    @State internal var isAutoCompleting = false
     @State internal var selectedGrave:Grave?
     @State internal var offset : CGFloat = 0
     @State internal var searchBarHeight:CGFloat = 130
     @State var pulledUp = false
     @State internal var showContent = ShowContent.nothing
     @State internal var onlyFavorites = 0
-
     @State internal var selectedIndex = 0
     @State internal var graveOptions = ["All", "Favorites"]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 2)

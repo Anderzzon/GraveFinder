@@ -14,6 +14,8 @@ class NotificationSelectionViewModel:ObservableObject {
     @Published var notifyBDay = false
     @Published var notifyDDay = false
     @Published var notifyBurialDay = false
+    @Published var alertIsPresented:Bool = false
+    @Published private(set) var alert:Alert? = nil
     
     enum NotificationDate {
         case birthday, deathday, burialday
@@ -78,15 +80,42 @@ class NotificationSelectionViewModel:ObservableObject {
         return "grave.\(grave.id!).\(getDayTypeForNotification(type: type))"
     }
     func toggleNotification(isOn:Bool, grave:Grave, type:NotificationDate){
-        if isOn {
-            self.createNotification(for: grave, with: type)
-        } else {
-            self.removeNotification(for: grave, with: type)
+        NotificationService.getSettings(){ settings in
+            switch settings.authorizationStatus {
+            case .authorized, .ephemeral:
+                if isOn {
+                    self.createNotification(for: grave, with: type)
+                } else {
+                    self.removeNotification(for: grave, with: type)
+                }
+                
+            case .denied:
+                DispatchQueue.main.async {
+                    self.setAlert(alert: Alert(
+                                title: Text("Notification Service").font(.system(.title)),
+                                message:Text("Notifikationer måste aktiveras i inställningar."),
+                                primaryButton: .default(
+                                    Text("Inställningar"), action: {
+                                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                        self.removeAlert()
+                                }),
+                                secondaryButton: .cancel()))
+                    
+                }
+            case .notDetermined:
+                NotificationService.requestNotificationAuthorization(){
+                    didAllow, error in
+                    if !didAllow {
+                        return
+                    } else {
+                        self.createNotification(for: grave, with: type)
+                    }
+                }
+            default: break
+            }
         }
-        
     }
     func createNotification(for grave:Grave, with type:NotificationDate){
-        print("create")
         guard let dates = getDateComponents(for: grave, with: type) else { return }
         let identifier = getID(for: grave, with: type)
         let content = getContent(for: grave, with: type)
@@ -94,7 +123,6 @@ class NotificationSelectionViewModel:ObservableObject {
         NotificationService.createNotification(for: identifier, at: dates, with: content, at: trigger)
     }
     func removeNotification(for grave:Grave, with type:NotificationDate){
-        print("remove")
         let identifier = getID(for: grave, with: type)
         NotificationService.removeNotification(for: identifier)
     }
@@ -146,6 +174,14 @@ class NotificationSelectionViewModel:ObservableObject {
             }
         }
         return switchOnDate
+    }
+    func setAlert(alert:Alert){
+        self.alert = alert
+        self.alertIsPresented = true
+    }
+    func removeAlert(){
+        self.alertIsPresented = false
+        self.alert = nil
     }
 }
 

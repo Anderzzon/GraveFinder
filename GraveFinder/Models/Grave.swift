@@ -119,9 +119,9 @@ class Grave:NSObject, Decodable, Identifiable {
         } else if tempLat != nil && tempLong != nil {
             return (latitude:tempLat, longitude:tempLong)
         } else if cemetery != nil && graveType == "memorial" {
-            return GravesViewModel.getMemorialLocation(for: cemetery!)
+            return BottomSheetViewModel.getMemorialLocation(for: cemetery!)
         } else {
-            return GravesViewModel.getCemeteryLocation(for: cemetery!)
+            return BottomSheetViewModel.getCemeteryLocation(for: cemetery!)
         }
     }
 }

@@ -9,10 +9,10 @@ import MapKit
 import SwiftUI
 
 struct MapView: View {
-    @ObservedObject var viewModel: GravesViewModel
+    @ObservedObject var viewModel: BottomSheetViewModel
     @State internal var region: MKCoordinateRegion?
     @State internal var mapType: MKMapType = .standard
-    
+    @Binding private var isLandscape:Bool
     @State internal var annotations = [Grave]()
     @State internal var showGraveDeatil = false
     @Binding private var isLandscape:Bool
@@ -21,7 +21,7 @@ struct MapView: View {
     @State internal var mapOptions = ["Standard","Satelite","Hybrid"]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
 
-    init(viewModel: GravesViewModel,isLand:Binding<Bool>) {
+    init(viewModel: BottomSheetViewModel,isLand:Binding<Bool>) {
         self.viewModel = viewModel
         self._isLandscape = isLand
     }

@@ -1,110 +1,88 @@
 //
-//  GravesViewModel.swift
+//  GraveViewModel.swift
 //  GraveFinder
 //
-//  Created by Alessio on 2020-11-24.
+//  Created by Alessio on 2020-12-16.
 //
+
+import Foundation
 import Combine
 import SwiftUI
 
-class GravesViewModel: ObservableObject {
-    @Environment(\.managedObjectContext) private var viewContext
+class GravesViewModel:ObservableObject {
     
-    @Published var totalGravesList = [Grave]()
-    @Published var selectedGraves = [Grave]() //Array to support posibility of multiple graves on map later
-    @Published var favoriteGraves = [Grave]()
-    @Published var currentPage = 1
-    @Published var totalPages = 0
+    @State var showNotificationAlert = false
+    
+    @Published var notificationOptionsPresenting:Bool = false
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
-    @State var latestQuery = ""
-    @State var showNotificationAlert = false
-    var coreDataHelper = CoreDataHelper()
+    @Published var locationMissing:Bool
     
-    var searchResults = SearchResults(graves: [Grave](), pages: 0) {
-        didSet {
-            totalGravesList.append(contentsOf: searchResults.graves)
-            totalPages = searchResults.pages
+    @Binding var selectedGraves:[Grave] //Array to support posibility of multiple graves on map later
+    @Binding var selectedGrave:Grave?
+    @Binding var offset:CGFloat
+    
+    private var coreDataHelper = CoreDataHelper()
+    var grave:Grave
+    
+    init(grave:Grave, selectedGraves:Binding<[Grave]>, offset:Binding<CGFloat>, selectedGrave:Binding<Grave?>, locationMissing:Bool){
+        self.grave = grave
+        self._selectedGraves = selectedGraves
+        self._offset = offset
+        self._selectedGrave = selectedGrave
+        self.locationMissing = locationMissing
+    }
+    
+    func showNotificationOptions(){
+        NotificationService.getSettings(){ settings in
+            switch settings.authorizationStatus {
+            case .authorized, .ephemeral:
+                DispatchQueue.main.async {
+                    self.notificationOptionsPresenting = true
+                }
+            case .denied:
+                DispatchQueue.main.async{
+                    self.setAlert(alert: Alert(
+                                        title: Text("Notification Service").font(.system(.title)),
+                                        message: Text("Notifikationer måste aktiveras i inställningarna"),
+                                        primaryButton: .default( Text("Inställningar"),
+                                                                 action: {
+                                                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                                                 }),
+                                        secondaryButton: .cancel()))
+                }
+            case .notDetermined:
+                DispatchQueue.main.async {
+                    NotificationService.requestNotificationAuthorization(){
+                        didAllow, error in
+                        if !didAllow {
+                            return
+                        } else {
+                            self.notificationOptionsPresenting = true
+                        }
+                    }
+                }
+            default: break
+            }
         }
     }
-    
-    static private let staticMemorials:[String:(latitude:Double,longitude:Double)] = [
-        "skogskyrkogården":(latitude: 59.2782585, longitude: 18.0961542),
-        "brännkyrka kyrkogård":(latitude: 59.2826874, longitude: 18.0219386),
-        "spånga kyrkogård":(latitude: 59.3924017, longitude: 17.9134938),
-        "bromma kyrkogård":(latitude: 59.3551232, longitude: 17.9198294),
-        "hässelby begravningsplats":(latitude: 59.3646032, longitude: 17.8252801),
-        "strandkyrkogården":(latitude: 59.234783, longitude: 18.1831843),
-        "råcksta begravningsplats":(latitude: 59.354962, longitude: 17.8671203),
-        "norra begravningsplatsen":(latitude: 59.356501, longitude: 18.0182928),
-        "galärvarvskyrkogården":(latitude: 59.32787, longitude: 18.0942288)
-    ]
-    static private let staticCemeteries:[String:(latitude:Double,longitude:Double)] = [
-        "skogskyrkogården":(latitude: 59.271181, longitude: 18.102697),
-        "brännkyrka kyrkogård":(latitude: 59.282616, longitude: 18.024034),
-        "spånga kyrkogård":(latitude: 59.391942, longitude: 17.911400),
-        "bromma kyrkogård":(latitude: 59.355133, longitude: 17.920238),
-        "hässelby begravningsplats":(latitude: 59.362864, longitude: 17.827611),
-        "strandkyrkogården":(latitude: 59.237168, longitude: 18.186855),
-        "råcksta begravningsplats":(latitude: 59.355020, longitude: 17.869861),
-        "norra begravningsplatsen":(latitude: 59.355668, longitude: 18.023853),
-        "galärvarvskyrkogården":(latitude: 59.328077, longitude: 18.093972)
-    ]
-    
-    
-    var task : AnyCancellable?
-    
-    func fetchGraves(for query:String, at page: Int) {
-        latestQuery = query
-        guard page > 0 else { return }
-        
-        let searchQuery = query.lowercased()
-            .replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacingOccurrences(of: " ", with: "+")
-        
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = "etjanst.stockholm.se"
-        components.path = "/Hittagraven/ajax/search"
-        components.queryItems = [
-            URLQueryItem(name: "searchtext", value: searchQuery),
-            URLQueryItem(name: "page", value: String(page))
-        ]
-        
-        guard let url = components.url else {return}
-        
-        task = URLSession.shared.dataTaskPublisher(for: url)
-            .map {$0.data}
-            .decode(type: SearchResults.self, decoder: JSONDecoder())
-            .replaceError(with: SearchResults(graves: [Grave](), pages: 0))
-            .eraseToAnyPublisher()
-            .receive(on: RunLoop.main)
-            .assign(to: \GravesViewModel.searchResults, on: self)
+    //Used for adding grave to array to show it on map
+    func selectGrave() {
+        selectedGraves.removeAll()
+        selectedGraves.append(self.grave)
     }
-    static func getMemorialLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
-        let location = staticMemorials[cemetery.lowercased()] ?? (latitude:0, longitude:0)
-        return location
-    }
-    static func getCemeteryLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
-        let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
-        return location
-    }
-    
-    func saveToCoreData(grave: Grave) {
+    func saveToCoreData() {
         coreDataHelper.addToCoreData(grave: grave)
     }
-    
-    func deleteFromCoreData(grave: Grave) {
+    func deleteFromCoreData() {
         coreDataHelper.removeFromCoreData(grave: grave)
     }
-    
-    //Used for adding grave to array to show it on map
-    func selectGrave(grave: Grave) {
-        selectedGraves.removeAll()
-        selectedGraves.append(grave)
+    func checkIsNotifiable()->Bool {
+        let firstCheck = grave.dateOfBirth != nil && !grave.dateOfBirth!.isEmpty
+        let secondCheck = grave.dateOfDeath != nil && !grave.dateOfDeath!.isEmpty
+        let thirdCheck = grave.dateBuried != nil && !grave.dateBuried!.isEmpty
+        return firstCheck || secondCheck || thirdCheck
     }
-    
     func setAlert(alert:Alert){
         self.alert = alert
         self.alertIsPresented = true
@@ -113,5 +91,18 @@ class GravesViewModel: ObservableObject {
         self.alertIsPresented = false
         self.alert = nil
     }
+    func setOffset(to value:CGFloat){
+        self.offset = value
+    }
+    func setSelectedGrave(){
+        self.selectedGrave = self.grave
+    }
+    func checkIfHighlight()->Bool{
+        return self.selectedGrave?.id == self.grave.id
+    }
+    func removeAllPendingNotifications(){
+        NotificationService.removeNotification(for: "grave.\(grave.id!).födelsesdag")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).dödsdag")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).begravningsdag")
+    }
 }
-

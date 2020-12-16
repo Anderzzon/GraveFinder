@@ -87,7 +87,7 @@ class NetStatus: ObservableObject {
     }
     
     func stopMonitoring() {
-        print("Stoped monitoring network")
+        print("Stopped monitoring network")
         guard isMonitoring, let monitor = monitor else { return }
         monitor.cancel()
         self.monitor = nil
