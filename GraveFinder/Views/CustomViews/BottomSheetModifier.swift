@@ -67,6 +67,7 @@ struct BottomSheetModifier<Content: View> : View {
 
         if verticalDirection > 0 {
             self.sheetPos = positionBelow
+            hideKeyboard()
         } else if verticalDirection < 0 {
             self.sheetPos = positionAbove
         } else {
