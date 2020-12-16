@@ -19,11 +19,13 @@ struct ContentView: View {
     var body: some View {
         
         if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
+
             //iPhone landscape
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
-                MapView(viewModel: viewModel)
+                MapView(viewModel: viewModel )
                 if netStatus.noInternet { NotificationModifier() }
+                
             })
         } else {
             //Other
