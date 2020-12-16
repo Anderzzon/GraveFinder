@@ -155,11 +155,11 @@
 		78459649256CFF4A00A97B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				783900152586970D0030B008 /* NotificationSelectionView.swift */,
 				E26F75F92587FC7500F5D0EF /* CustomViews */,
 				E2C787CF256E575D008ACA90 /* BottomSheetView.swift */,
 				03102EE4256E539C004FBE3F /* MapView.swift */,
 				03102EF7256ED6F5004FBE3F /* MapViewUI.swift */,
-				783900152586970D0030B008 /* NotificationSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
