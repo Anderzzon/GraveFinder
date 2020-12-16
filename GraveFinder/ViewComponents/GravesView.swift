@@ -17,8 +17,8 @@ struct GravesView: View {
         animation: .default)
     var favorites: FetchedResults<FavGraves>
         
-    init(for grave:Grave, selectedGrave:Binding<Grave?>, offset:Binding<CGFloat>, selectedGraves:Binding<[Grave]>){
-        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, offset: offset, selectedGrave: selectedGrave, locationMissing: !grave.isLocatable())
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, sheetPos:Binding<SheetPosition>, selectedGraves:Binding<[Grave]>){
+        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, sheetPos: sheetPos, selectedGrave: selectedGrave, locationMissing: !grave.isLocatable())
     }
     
     var body: some View {
@@ -51,13 +51,16 @@ struct GravesView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 Spacer()
-            }.onTapGesture {
+            }
+            .background(Color.white.opacity(0.01))
+            .onTapGesture {
                 hideKeyboard()
                 //Grave info card tap to show on map
                 if !viewModel.locationMissing {
                     viewModel.setSelectedGrave()
                     withAnimation {
-                        viewModel.setOffset(to: 0)
+                        viewModel.setSheetPos(to: SheetPosition.bottom)
+
                     }
                     viewModel.selectGrave()
                 }
