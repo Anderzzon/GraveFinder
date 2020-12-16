@@ -79,7 +79,7 @@ struct BottomSheetModifier<Content: View> : View {
 enum SheetPosition: CGFloat {
     case top = 10
     case middle = 400
-    case bottom = 700
+    case bottom = 680
 }
 
 enum DragState {
