@@ -16,6 +16,7 @@ class GravesViewModel:ObservableObject {
     @Published var notificationOptionsPresenting:Bool = false
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
+    @Published var locationMissing:Bool
     
     @Binding var selectedGraves:[Grave] //Array to support posibility of multiple graves on map later
     @Binding var selectedGrave:Grave?
@@ -24,11 +25,12 @@ class GravesViewModel:ObservableObject {
     private var coreDataHelper = CoreDataHelper()
     var grave:Grave
     
-    init(grave:Grave, selectedGraves:Binding<[Grave]>, offset:Binding<CGFloat>, selectedGrave:Binding<Grave?>){
+    init(grave:Grave, selectedGraves:Binding<[Grave]>, offset:Binding<CGFloat>, selectedGrave:Binding<Grave?>, locationMissing:Bool){
         self.grave = grave
         self._selectedGraves = selectedGraves
         self._offset = offset
         self._selectedGrave = selectedGrave
+        self.locationMissing = locationMissing
     }
     
     func showNotificationOptions(){
@@ -97,5 +99,10 @@ class GravesViewModel:ObservableObject {
     }
     func checkIfHighlight()->Bool{
         return self.selectedGrave?.id == self.grave.id
+    }
+    func removeAllPendingNotifications(){
+        NotificationService.removeNotification(for: "grave.\(grave.id!).födelsesdag")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).dödsdag")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).begravningsdag")
     }
 }

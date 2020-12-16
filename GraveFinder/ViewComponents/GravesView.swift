@@ -16,19 +16,16 @@ struct GravesView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
     var favorites: FetchedResults<FavGraves>
-    
-    private var isDisabled:Bool
-    
-    init(for grave:Grave, selectedGrave:Binding<Grave?>, disabledIf disabled:Bool, offset:Binding<CGFloat>, selectedGraves:Binding<[Grave]>){
-        self.isDisabled = disabled
-        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, offset: offset, selectedGrave: selectedGrave)
+        
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, offset:Binding<CGFloat>, selectedGraves:Binding<[Grave]>){
+        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, offset: offset, selectedGrave: selectedGrave, locationMissing: !grave.isLocatable())
     }
     
     var body: some View {
         // Left icon Map pin / "Cannot" sign
         HStack {
             HStack{
-                self.isDisabled ? Image(systemName: "nosign")
+                viewModel.locationMissing ? Image(systemName: "nosign")
                     .foregroundColor(.gray)
                     .padding(.all, 10)
                     :
@@ -57,7 +54,7 @@ struct GravesView: View {
             }.onTapGesture {
                 hideKeyboard()
                 //Grave info card tap to show on map
-                if !isDisabled {
+                if !viewModel.locationMissing {
                     viewModel.setSelectedGrave()
                     withAnimation {
                         viewModel.setOffset(to: 0)
@@ -66,7 +63,7 @@ struct GravesView: View {
                 }
             }
             // Disable favorite button if grave not locatable
-            if !isDisabled {
+            if !viewModel.locationMissing {
                 VStack{
                     //Add option for notifications only if favorite
                     if checkIsFavorite() && viewModel.checkIsNotifiable() {
@@ -96,6 +93,7 @@ struct GravesView: View {
     func toggleFavorite(){
         if favorites.firstIndex(where: {$0.id == viewModel.grave.id}) != nil {
             viewModel.deleteFromCoreData()
+            viewModel.removeAllPendingNotifications()
         } else {
             viewModel.saveToCoreData()
         }
