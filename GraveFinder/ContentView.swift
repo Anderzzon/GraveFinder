@@ -15,6 +15,7 @@ struct ContentView: View {
     @EnvironmentObject var netStatus: NetStatus
 
     @ObservedObject var viewModel = BottomSheetViewModel()
+    @ObservedObject var sheetPosition = SheetPositionViewModel()
     
     
     var body: some View {
@@ -35,7 +36,10 @@ struct ContentView: View {
                 ), content: {
                     
                     MapView(viewModel: viewModel)
-                    BottomSheetView().environmentObject(viewModel).onTapGesture {
+                    BottomSheetView()
+                        .environmentObject(viewModel)
+                        .environmentObject(sheetPosition)
+                        .onTapGesture {
                         hideKeyboard()
                     }
                         .alert(
