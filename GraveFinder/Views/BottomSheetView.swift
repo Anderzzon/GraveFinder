@@ -20,7 +20,7 @@ struct BottomSheetView : View {
     @State internal var showContent = ShowContent.nothing
     @State internal var onlyFavorites = 0
     @State internal var selectedIndex = 0
-    @State internal var graveOptions = ["All", "Favorites"]
+    @State internal var graveOptions = [NSLocalizedString("all", comment: "All"), NSLocalizedString("favorites", comment: "Favorites")]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 2)
     @State var sheetPos = SheetPosition.bottom
 

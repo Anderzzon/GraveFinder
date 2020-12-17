@@ -41,9 +41,9 @@ struct GravesView: View {
                     
                     Text(deceased)
                         .font(.caption).bold()
-                    Text("Begravd: \(dateBuried)")
+                    Text("\(NSLocalizedString("buried", comment: "Date of burial")): \(dateBuried)")
                         .font(.caption2)
-                    Text("Kyrkogård: \(cemetery)")
+                    Text("\(NSLocalizedString("cemetry", comment: "Name of cemetry")): \(cemetery)")
                         .font(.caption2)
                         .foregroundColor(.white)
                         .padding(5)

@@ -17,7 +17,7 @@ struct MapView: View {
     @State internal var showGraveDeatil = false
 
     @State internal var selectedIndex = 0
-    @State internal var mapOptions = ["Standard","Satelite","Hybrid"]
+    @State internal var mapOptions = [NSLocalizedString("standard", comment: "Standard"),NSLocalizedString("satellite", comment: "Satellite"),NSLocalizedString("hybrid", comment: "Hybrid")]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
 
     init(viewModel: BottomSheetViewModel) {
@@ -36,7 +36,7 @@ struct MapView: View {
         }
         .alert(isPresented: $showGraveDeatil, content: {
             let name = viewModel.selectedGraves[0].title ?? "Grave"
-            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
+            return Alert(title: Text(name), message: Text("\(NSLocalizedString("navigation_to_map_confirmation", comment: "Navigation confirmation")) \(name)?"), primaryButton: .default(Text(NSLocalizedString("ok", comment: "OK"))) {
                 navigate()
             }, secondaryButton: .cancel())
         })

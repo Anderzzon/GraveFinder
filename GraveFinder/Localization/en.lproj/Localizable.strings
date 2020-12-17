@@ -1,0 +1,72 @@
+/* 
+  Localizable.strings
+  GraveFinder
+
+  Created by Shafigh Khalili on 2020-12-17.
+  
+*/
+/* No comment provided by engineer. */
+"alert" = "Alert";
+
+/* No comment provided by engineer. */
+"buried" = "Buried";
+
+/* No comment provided by engineer. */
+"error" = "Error";
+
+/* No comment provided by engineer. */
+"settings" = "Settings";
+
+/* No comment provided by engineer. */
+"cemetry" = "Cemetry";
+
+/* No comment provided by engineer. */
+"no_internet" = "No internet connection detected";
+
+/* No comment provided by engineer. */
+"notification_service" = "Notification Service";
+
+/* No comment provided by engineer. */
+"notify_funeralday" = "Notify me on funeral day";
+
+/* No comment provided by engineer. */
+"notify_deathday" = "Notify me on the day of death";
+
+/* No comment provided by engineer. */
+"notify_birthday" = "Notify me on birthday";
+
+/* No comment provided by engineer. */
+"required_enabled_notification" = "Notifications must be enabled in settings.";
+
+/* No comment provided by engineer. */
+"notices" = "Notices";
+
+/* No comment provided by engineer. */
+"ok" = "OK";
+
+/* Search */
+"search" = "Search...";
+
+/* No comment provided by engineer. */
+"end_of_results" = "End of results...";
+
+/* No comment provided by engineer. */
+"navigation_to_map_confirmation" = "Do you want to open and navigate to Map?";
+
+/* No comment provided by engineer. */
+"show_more" = "Show more...";
+
+/* No comment provided by engineer. */
+"all" = "All";
+
+/* No comment provided by engineer. */
+"favorites" = "Favorites";
+
+/* No comment provided by engineer. */
+"standard" = "Map";
+
+/* No comment provided by engineer. */
+"satellite" = "Satellite";
+
+/* No comment provided by engineer. */
+"hybrid" = "Hybrid";

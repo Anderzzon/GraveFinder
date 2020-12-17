@@ -36,6 +36,7 @@
 		E26F76002588088900F5D0EF /* ToggleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */; };
 		E26F760525880FD200F5D0EF /* SearchGravesModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */; };
 		E26F76092588109900F5D0EF /* FavGravesModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F76082588109900F5D0EF /* FavGravesModifier.swift */; };
+		E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29393B7258B6B30008D6FCB /* Localizable.strings */; };
 		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 		E2ECBF64258901D70006A17C /* MapPickersViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */; };
 		E2ECBF68258968CF0006A17C /* BottomSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF67258968CF0006A17C /* BottomSheetModifier.swift */; };
@@ -72,6 +73,8 @@
 		E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGravesModifier.swift; sourceTree = "<group>"; };
 		E26F76082588109900F5D0EF /* FavGravesModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavGravesModifier.swift; sourceTree = "<group>"; };
 		E26F760E2588165D00F5D0EF /* NotificationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModifier.swift; sourceTree = "<group>"; };
+		E29393B6258B6B30008D6FCB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E29393B9258B6B90008D6FCB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickersViewModifier.swift; sourceTree = "<group>"; };
 		E2ECBF67258968CF0006A17C /* BottomSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetModifier.swift; sourceTree = "<group>"; };
@@ -115,6 +118,7 @@
 		031BF237256BC94E0047A5F4 /* GraveFinder */ = {
 			isa = PBXGroup;
 			children = (
+				E29393B1258B65AC008D6FCB /* Localization */,
 				783900082583852F0030B008 /* Services */,
 				78EF03932576537A00635427 /* Extensions */,
 				78688CA82571163100413618 /* ViewComponents */,
@@ -223,6 +227,14 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		E29393B1258B65AC008D6FCB /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				E29393B7258B6B30008D6FCB /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -266,6 +278,7 @@
 			knownRegions = (
 				en,
 				Base,
+				sv,
 			);
 			mainGroup = 031BF22C256BC94E0047A5F4;
 			packageReferences = (
@@ -285,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */,
+				E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */,
 				031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +344,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E29393B7258B6B30008D6FCB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E29393B6258B6B30008D6FCB /* en */,
+				E29393B9258B6B90008D6FCB /* sv */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		031BF242256BC9500047A5F4 /* Debug */ = {

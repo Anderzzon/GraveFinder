@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  GraveFinder
+
+  Created by Shafigh Khalili on 2020-12-17.
+  
+*/
+/* No comment provided by engineer. */
+"alert" = "Alert";
+
+/* No comment provided by engineer. */
+"buried" = "Begravd";
+
+/* No comment provided by engineer. */
+"error" = "Fel";
+
+/* No comment provided by engineer. */
+"settings" = "Inställningar";
+
+/* No comment provided by engineer. */
+"cemetry" = "Kyrkogård";
+
+/* No comment provided by engineer. */
+"no_internet" = "Ingen internetanslutning upptäcktes";
+
+/* No comment provided by engineer. */
+"notification_service" = "Notifikation Tjänst";
+
+/* No comment provided by engineer. */
+"notify_funeralday" = "Notifiera mig på begravningsdag";
+
+/* No comment provided by engineer. */
+"funeralday" = "Begravningsdag";
+
+/* No comment provided by engineer. */
+"notify_deathday" = "Notifiera mig på dödsdag";
+
+/* No comment provided by engineer. */
+"deathday" = "Dödsdag";
+
+/* No comment provided by engineer. */
+"notify_birthday" = "Notifiera mig på födelsdag";
+
+/* No comment provided by engineer. */
+"birthday" = "Födelsdag";
+
+/* No comment provided by engineer. */
+"required_enabled_notification" = "Notifikationer måste aktiveras i inställningar.";
+
+/* No comment provided by engineer. */
+"notices" = "Notiser";
+
+/* No comment provided by engineer. */
+"ok" = "OK";
+
+/* Search */
+"search" = "Sök...";
+
+/* No comment provided by engineer. */
+"end_of_results" = "Slut på resultat...";
+
+/* No comment provided by engineer. */
+"navigation_to_map_confirmation" = "Vill du öppna Maps och navigera till ?";
+
+/* No comment provided by engineer. */
+"show_more" = "Visa fler...";
+
+/* No comment provided by engineer. */
+"all" = "Allt";
+
+/* No comment provided by engineer. */
+"favorites" = "Favoriter";
+
+/* No comment provided by engineer. */
+"standard" = "Karta";
+
+/* No comment provided by engineer. */
+"satellite" = "Satellit";
+
+/* No comment provided by engineer. */
+"hybrid" = "Hybrid";

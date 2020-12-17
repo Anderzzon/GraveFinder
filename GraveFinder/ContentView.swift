@@ -38,7 +38,7 @@ struct ContentView: View {
                         .alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {
-                                viewModel.alert ?? Alert(title: Text("Error"))
+                                viewModel.alert ?? Alert(title: Text(NSLocalizedString("error", comment: "Error")))
                             }
                         )
                     if netStatus.noInternet { NotificationModifier() }

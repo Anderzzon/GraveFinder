@@ -15,7 +15,7 @@ extension ContentView {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("\(Image(systemName: "exclamationmark.triangle")) Alert")
                         .bold()
-                    Text("No internet connection detected")
+                    Text(NSLocalizedString("no_internet", comment: "Internet connection error"))
                         .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
                 }
                 .padding()

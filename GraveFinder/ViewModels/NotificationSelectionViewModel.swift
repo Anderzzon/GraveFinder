@@ -69,9 +69,9 @@ class NotificationSelectionViewModel:ObservableObject {
     func getDayTypeForNotification(type:NotificationDate)->String {
         var typeString:String {
             switch type {
-            case .birthday: return "födelsesdag"
-            case .deathday: return "dödsdag"
-            case .burialday: return "begravningsdag"
+            case .birthday: return NSLocalizedString("birthday", comment: "Birthday")
+            case .deathday: return NSLocalizedString("deathday", comment: "Death day")
+            case .burialday: return NSLocalizedString("funeralday", comment: "Funeral day")
             }
         }
         return typeString
@@ -92,8 +92,8 @@ class NotificationSelectionViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async {
                     self.setAlert(alert: Alert(
-                                title: Text("Notification Service").font(.system(.title)),
-                                message:Text("Notifikationer måste aktiveras i inställningar."),
+                                title: Text(NSLocalizedString("notification_service", comment: "Notification service")).font(.system(.title)),
+                                message:Text(NSLocalizedString("required_enabled_notification", comment: "Enalbe notifications")),
                                 primaryButton: .default(
                                     Text("Inställningar"), action: {
                                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)

@@ -13,7 +13,7 @@ internal extension BottomSheetView {
         HStack(spacing: 15){
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
-            TextField("Search...", text: $query,onEditingChanged: {EditMode in
+            TextField(NSLocalizedString("search", comment: "Search"), text: $query,onEditingChanged: {EditMode in
 
                 if(!self.pulledUp){
                     sheetPos = SheetPosition.top

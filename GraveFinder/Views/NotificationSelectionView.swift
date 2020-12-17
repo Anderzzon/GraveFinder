@@ -16,7 +16,7 @@ struct NotificationSelectionView: View {
     
     var body: some View {
         Form{
-            Section(header: Text("Notiser")) {
+            Section(header: Text(NSLocalizedString("notices", comment: "Notices"))) {
                 if viewModel.graveHasBirthday() {
                     HStack{
                         Text("Notifiera mig på födelsdag").font(.caption)
@@ -31,7 +31,7 @@ struct NotificationSelectionView: View {
             if viewModel.graveHasDeathday() {
                 HStack{
                     VStack{
-                        Text("Notifiera mig på dödsdag").font(.caption)
+                        Text(NSLocalizedString("notify_deathday", comment: "Deathday notification")).font(.caption)
                     }
                     Spacer()
                     Toggle(isOn: $viewModel.notifyDDay, label: {})
@@ -43,7 +43,7 @@ struct NotificationSelectionView: View {
             }
             if viewModel.graveHasBurialDay(){
                 HStack{
-                    Text("Notifiera mig på begravningsdag").font(.caption)
+                    Text(NSLocalizedString("notify_funeralday", comment: "Funeral day notification")).font(.caption)
                     Spacer()
                     Toggle(isOn: $viewModel.notifyBurialDay, label: {})
                         .labelsHidden()
