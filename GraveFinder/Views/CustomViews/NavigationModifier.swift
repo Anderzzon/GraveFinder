@@ -40,9 +40,11 @@ extension MapView {
 
                     
                     Button("Navigera till") {
+                        viewModel.navigate()
+
                         print("Gå till")
                     }
-                    .frame(minWidth: 100)
+                    .frame(minWidth: 100, minHeight: 20)
                     .foregroundColor(.white)
                     .padding(8)
                     .background(Color.gray)
