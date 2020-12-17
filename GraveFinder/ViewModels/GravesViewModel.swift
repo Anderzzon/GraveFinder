@@ -101,8 +101,8 @@ class GravesViewModel:ObservableObject {
         return self.selectedGrave?.id == self.grave.id
     }
     func removeAllPendingNotifications(){
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Birthday".localized())")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Funeral day".localized())")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Deathday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("birthday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("funeral day".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("deathday".localized())")
     }
 }

@@ -30,19 +30,19 @@
 "Notify funeral day" = "Notifiera mig på begravningsdag";
 
 /* No comment provided by engineer. */
-"Funeral day" = "Begravningsdag";
+"funeral day" = "begravningsdag";
 
 /* No comment provided by engineer. */
 "Notify deathday" = "Notifiera mig på dödsdag";
 
 /* No comment provided by engineer. */
-"Deathday" = "Dödsdag";
+"deathday" = "dödsdag";
 
 /* No comment provided by engineer. */
 "Notify Birthday" = "Notifiera mig på födelsdag";
 
 /* No comment provided by engineer. */
-"Birthday" = "Födelsdag";
+"birthday" = "Födelsdag";
 
 /* No comment provided by engineer. */
 "Required Enabled Notification" = "Notifikationer måste aktiveras i inställningar.";

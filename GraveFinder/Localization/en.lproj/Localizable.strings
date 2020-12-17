@@ -30,19 +30,19 @@
 "Notify funeral day" = "Notify me on funeral day";
 
 /* No comment provided by engineer. */
-"Funeral day" = "Funeral day";
+"funeral day" = "funeral day";
 
 /* No comment provided by engineer. */
 "Notify deathday" = "Notify me on the day of death";
 
 /* No comment provided by engineer. */
-"Deathday" = "Deathday";
+"deathday" = "deathday";
 
 /* No comment provided by engineer. */
 "Notify Birthday" = "Notify me on birthday";
 
 /* No comment provided by engineer. */
-"Birthday" = "Birthday";
+"birthday" = "birthday";
 
 /* No comment provided by engineer. */
 "Required Enabled Notification" = "Notifications must be enabled in settings.";

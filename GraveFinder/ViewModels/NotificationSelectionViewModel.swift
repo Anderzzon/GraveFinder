@@ -69,9 +69,9 @@ class NotificationSelectionViewModel:ObservableObject {
     func getDayTypeForNotification(type:NotificationDate)->String {
         var typeString:String {
             switch type {
-            case .birthday: return "Birthday".localized()
-            case .deathday: return "Deathday".localized()
-            case .burialday: return "Funeral day".localized()
+            case .birthday: return "birthday".localized()
+            case .deathday: return "deathday".localized()
+            case .burialday: return "funeral day".localized()
             }
         }
         return typeString
