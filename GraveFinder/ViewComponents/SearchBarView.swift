@@ -7,41 +7,40 @@
 
 import SwiftUI
 
-internal extension BottomSheetView {
-
-    func SearchViewModifier(readerHeight:CGFloat) -> some View {
+struct SearchBarView:View {
+    @EnvironmentObject private var viewModel:BottomSheetViewModel
+    
+    @State var readerHeight:CGFloat
+    
+    var body : some View {
         HStack(spacing: 15){
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             TextField("Search...", text: $viewModel.query, onEditingChanged: {EditMode in
 
-                if(!viewModel.pulledUp){
-                    viewModel.sheetPos = SheetPosition.top
-                    viewModel.pulledUp = true
+                if(!viewModel.sheetIsAtTop){
+                    viewModel.sheetPosition = SheetPosition.top
+                    viewModel.sheetIsAtTop = true
                 }
                 if(!EditMode){
-                    viewModel.pulledUp = false
+                    viewModel.sheetIsAtTop = false
                 }
             }, onCommit: {
-                viewModel.currentPage = 1
-                viewModel.totalGravesList.removeAll()
+                viewModel.currentPageForAPIRequest = 1
+                viewModel.totalGravesSearchResults.removeAll()
                 viewModel.fetchGraves()
 
             })
             .onChange(of: viewModel.query, perform: { _ in
-                self.setOptions(index: 0)
-                if viewModel.onlyFavorites == 1{
-                    viewModel.onlyFavorites = 0
-                    viewModel.showContent = .searchResults
-                }
-                viewModel.currentPage = 1
-                viewModel.selectedGraves.removeAll()
+                viewModel.contentToShow(set: .searchResults)
+                viewModel.currentPageForAPIRequest = 1
+                viewModel.gravesToDisplayOnMap.removeAll()
                 if(viewModel.query.count > 0){
-                    viewModel.totalGravesList.removeAll()
+                    viewModel.totalGravesSearchResults.removeAll()
                     viewModel.fetchGraves()
-                    viewModel.showContent = .searchResults
+                    viewModel.contentToDisplayInBottomSheet = .searchResults
                 } else {
-                    viewModel.showContent = .nothing
+                    viewModel.contentToDisplayInBottomSheet = .nothing
                 }
             })
             .disableAutocorrection(true)

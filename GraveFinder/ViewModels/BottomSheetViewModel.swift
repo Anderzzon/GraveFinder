@@ -9,36 +9,34 @@ import SwiftUI
 
 class BottomSheetViewModel: ObservableObject {
     
-    enum ShowContent { case searchResults, favorites, nothing }
+    enum ShowContent:String { case
+        searchResults = "Alla",
+        favorites = "Favoriter",
+        nothing = ""
+    }
     
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @Published var totalGravesList = [Grave]()
+    @Published var totalGravesSearchResults = [Grave]()
     @Published var selectedGrave:Grave?
-    @Published var selectedGraves = [Grave]() //Array to support posibility of multiple graves on map later
     @Published var favoriteGraves = [Grave]()
-    @Published var currentPage = 1
-    @Published var totalPages = 0
+    @Published var gravesToDisplayOnMap = [Grave]() //Array to support posibility of multiple graves on map later
+    @Published var currentPageForAPIRequest = 1
+    @Published var totalPagesInAPIRequest = 0
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
-    @Published var showContent:ShowContent = .nothing
+    @Published var contentToDisplayInBottomSheet:ShowContent = .nothing
     @Published var query = ""
-    @Published var sheetPos = SheetPosition.bottom
-    @Published var pulledUp = false
-    @Published var onlyFavorites = 0
-    @Published var selectedIndex = 0
-    @Published var graveOptions = ["All", "Favorites"]
+    @Published var sheetPosition = SheetPosition.bottom
+    @Published var sheetIsAtTop = false
+    @Published var selectedDisplayOption:ShowContent = .searchResults
+    @Published var bottomSheetDisplayOptions:[ShowContent] = [.searchResults, .favorites]
     @Published var frames = Array<CGRect>(repeating: .zero, count: 2)
 
-
-
-    
     private var netStatus = NetStatus.shared
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
-            totalGravesList.append(contentsOf: searchResults.graves)
-            totalPages = searchResults.pages
+            totalGravesSearchResults.append(contentsOf: searchResults.graves)
+            totalPagesInAPIRequest = searchResults.pages
         }
     }
     
@@ -70,7 +68,7 @@ class BottomSheetViewModel: ObservableObject {
     func fetchGraves() {
         guard netStatus.isConnected else { return }
         
-        guard currentPage > 0 else { return }
+        guard currentPageForAPIRequest > 0 else { return }
         
         let searchQuery = query.lowercased()
             .replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
@@ -83,7 +81,7 @@ class BottomSheetViewModel: ObservableObject {
         components.path = "/Hittagraven/ajax/search"
         components.queryItems = [
             URLQueryItem(name: "searchtext", value: searchQuery),
-            URLQueryItem(name: "page", value: String(currentPage))
+            URLQueryItem(name: "page", value: String(currentPageForAPIRequest))
         ]
         
         guard let url = components.url else {return}
@@ -104,8 +102,6 @@ class BottomSheetViewModel: ObservableObject {
         let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
         return location
     }
-
-    
     func setAlert(alert:Alert){
         self.alert = alert
         self.alertIsPresented = true
@@ -113,6 +109,17 @@ class BottomSheetViewModel: ObservableObject {
     func removeAlert(){
         self.alertIsPresented = false
         self.alert = nil
+    }
+    func contentToShow(set content:ShowContent){
+        selectedDisplayOption = content
+        if(content == .favorites){
+            contentToDisplayInBottomSheet = .favorites
+        } else {
+            contentToDisplayInBottomSheet = .searchResults
+        }
+    }
+    func setFrame(index: Int, frame: CGRect) {
+        frames[index] = frame
     }
 }
 

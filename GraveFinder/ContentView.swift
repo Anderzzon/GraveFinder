@@ -25,7 +25,7 @@ struct ContentView: View {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
                 MapView(viewModel: viewModel )
-                if netStatus.noInternet { NotificationModifier() }
+                if netStatus.noInternet { ConnectionAlertView() }
                 
             })
         } else {
@@ -35,7 +35,7 @@ struct ContentView: View {
                 ), content: {
                     
                     MapView(viewModel: viewModel)
-                    BottomSheetView(viewModel: viewModel).onTapGesture {
+                    BottomSheetView().environmentObject(viewModel).onTapGesture {
                         hideKeyboard()
                     }
                         .alert(
@@ -44,7 +44,7 @@ struct ContentView: View {
                                 viewModel.alert ?? Alert(title: Text("Error"))
                             }
                         )
-                    if netStatus.noInternet { NotificationModifier() }
+                    if netStatus.noInternet { ConnectionAlertView() }
                 }
                 )
             }
