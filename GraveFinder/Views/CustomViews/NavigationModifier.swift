@@ -11,21 +11,23 @@ extension MapView {
     func NavigationModifier() -> some View {
         VStack {
             VStack {
-                Text("\(viewModel.selectedGraves[0].deceased ?? "No name")")
+                Text("\(viewModel.selectedGraves.first?.deceased ?? "No name")")
                     .bold()
                     .foregroundColor(.black)
                     .padding(2)
-                Text("\(viewModel.selectedGraves[0].dateOfBirth ?? "") - \(viewModel.selectedGraves[0].dateOfDeath ?? "")")
+                Text("\(viewModel.selectedGraves.first?.dateOfBirth ?? "") - \(viewModel.selectedGraves.first?.dateOfDeath ?? "")")
                     .padding(2)
                     .font(.footnote)
                 Text("Gravsatt: \(viewModel.selectedGraves.first?.dateBuried ?? "")")
                     .padding(2)
                     .font(.footnote)
-                Text("Plot number")
-                    .padding(2)
-                    .font(.footnote)
-                
-                
+                if (viewModel.selectedGraves.first?.plotNumber != nil) {
+                    Text("\(viewModel.selectedGraves.first?.cemetery ?? "") gravplats \(viewModel.selectedGraves.first?.plotNumber ?? "")")
+                        .padding(2)
+                        .font(.footnote)
+                }
+                Print(viewModel.selectedGraves.first?.plotNumber)
+
                 HStack {
                     // Buttons
                     Button("Avbryt") {
