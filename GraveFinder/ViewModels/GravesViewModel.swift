@@ -43,13 +43,13 @@ class GravesViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async{
                     self.setAlert(alert: Alert(
-                                        title: Text(NSLocalizedString("notification_service", comment: "Notification service")).font(.system(.title)),
-                                        message: Text(NSLocalizedString("required_enabled_notification", comment: "Enalbe notifications")),
-                                        primaryButton: .default( Text(NSLocalizedString("settings", comment: "Settings")),
-                                                                 action: {
-                                                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                                                                 }),
-                                        secondaryButton: .cancel()))
+                                    title: Text("notification_service".localized()).font(.system(.title)),
+                                    message: Text("required_enabled_notification".localized()),
+                                    primaryButton: .default( Text("settings".localized()),
+                                                             action: {
+                                                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                                             }),
+                                    secondaryButton: .cancel()))
                 }
             case .notDetermined:
                 DispatchQueue.main.async {
@@ -101,8 +101,8 @@ class GravesViewModel:ObservableObject {
         return self.selectedGrave?.id == self.grave.id
     }
     func removeAllPendingNotifications(){
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\(NSLocalizedString("birthday", comment: "Birthday"))")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\(NSLocalizedString("funeralday", comment: "Funeral day"))")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\(NSLocalizedString("deathday", comment: "Deathday"))")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("birthday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("funeralday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("deathday".localized())")
     }
 }

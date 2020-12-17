@@ -69,9 +69,9 @@ class NotificationSelectionViewModel:ObservableObject {
     func getDayTypeForNotification(type:NotificationDate)->String {
         var typeString:String {
             switch type {
-            case .birthday: return NSLocalizedString("birthday", comment: "Birthday")
-            case .deathday: return NSLocalizedString("deathday", comment: "Death day")
-            case .burialday: return NSLocalizedString("funeralday", comment: "Funeral day")
+            case .birthday: return "birthday".localized()
+            case .deathday: return "deathday".localized()
+            case .burialday: return "funeralday".localized()
             }
         }
         return typeString
@@ -92,8 +92,8 @@ class NotificationSelectionViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async {
                     self.setAlert(alert: Alert(
-                                title: Text(NSLocalizedString("notification_service", comment: "Notification service")).font(.system(.title)),
-                                message:Text(NSLocalizedString("required_enabled_notification", comment: "Enalbe notifications")),
+                                    title: Text("notification_service".localized()).font(.system(.title)),
+                                    message:Text("required_enabled_notification".localized()),
                                 primaryButton: .default(
                                     Text("Inställningar"), action: {
                                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -147,7 +147,7 @@ class NotificationSelectionViewModel:ObservableObject {
     func getContent(for grave:Grave, with type:NotificationDate) -> UNMutableNotificationContent {
         let notificationDay = getDayTypeForNotification(type: type)
         let content = UNMutableNotificationContent()
-        content.title = "\(NSLocalizedString("gravefinder_reminder", comment: "Reminder")):"
+        content.title = "\("gravefinder_reminder".localized()):"
         content.subtitle = "Idag är \(notificationDay) för \(grave.deceased ?? "en av dina favoriter.")"
         content.sound = UNNotificationSound.default
         return content

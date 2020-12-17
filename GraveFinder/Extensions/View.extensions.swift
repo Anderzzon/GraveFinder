@@ -22,6 +22,13 @@ extension View {
     }
 }
 
+//MARK: Extension for localization
+extension String {
+    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
+        return NSLocalizedString(self, tableName: tableName, value: "\(self)", comment: "")
+    }
+}
+
 //MARK: Hide keyboard
 #if canImport(UIKit)
 extension View {

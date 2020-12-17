@@ -35,26 +35,26 @@ struct GravesView: View {
                 
                 // Grave information
                 VStack(alignment: .leading, spacing: 10){
-                    let deceased = viewModel.grave.deceased ?? NSLocalizedString("unknown", comment: "Unknown")
+                    let deceased = viewModel.grave.deceased ?? "unknown".localized()
                     let born = viewModel.grave.dateOfBirth
                     let died = viewModel.grave.dateOfDeath
-                    let cemetery = viewModel.grave.cemetery ?? NSLocalizedString("unspecified", comment: "Unspecified")
+                    let cemetery = viewModel.grave.cemetery ?? "unspecified".localized()
                     let gravNummer = viewModel.grave.plotNumber
                     
                     Text(deceased)
                         .font(.caption).bold()
                     
                     if born != nil && !born!.isEmpty {
-                        Text("\(NSLocalizedString("born", comment: "Born")): \(born!)").font(.caption2).padding(.leading, 15)
+                        Text("\("born".localized()): \(born!)").font(.caption2).padding(.leading, 15)
                     }
                     if died != nil && !died!.isEmpty {
-                        Text("\(NSLocalizedString("died", comment: "Died")): \(died!)").font(.caption2).padding(.leading, 15)
+                        Text("\("died".localized()): \(died!)").font(.caption2).padding(.leading, 15)
                     }
                     if gravNummer != nil && !gravNummer!.isEmpty {
-                        Text("\(NSLocalizedString("grave_nr", comment: "Grave Nr.")): \(gravNummer!)").font(.caption2).padding(.leading, 15)
+                        Text("\("grave_nr".localized()): \(gravNummer!)").font(.caption2).padding(.leading, 15)
                     }
                         
-                    Text("\(NSLocalizedString("cemetry", comment: "Cemetry")): \(cemetery)")
+                    Text("\("cemetry".localized()): \(cemetery)")
                         .font(.caption2)
                         .foregroundColor(.white)
                         .padding(5)

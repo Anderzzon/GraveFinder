@@ -87,3 +87,5 @@
 "unknown" = "Unknown";
 
 "gravefinder_reminder" = "GraveFinder Reminder";
+
+"notification_text %@" = "Idag är %@";
