@@ -15,8 +15,6 @@ struct MapViewUI: UIViewRepresentable {
     //var graves: [Grave]
     //let mapViewType: MKMapType
     
-    
-    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         //mapView.setRegion(region, animated: true)
@@ -73,11 +71,16 @@ struct MapViewUI: UIViewRepresentable {
             annotationView.titleVisibility = .visible
             return annotationView
         }
-        
-        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-            print("Annotiations pressed")
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             parent.showGraveDetail = true
-            print("MapViewUI showGraveDetail", parent.viewModel.showGraveDeatil)
+            //parent.viewModel.showGraveDeatil = true
         }
+        
+//        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//            print("Annotiations pressed")
+//            parent.showGraveDetail = true
+//            //parent.viewModel.showGraveDeatil = true
+//            print("MapViewUI showGraveDetail", parent.viewModel.showGraveDeatil)
+//        }
     }
 }

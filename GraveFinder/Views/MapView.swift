@@ -26,22 +26,26 @@ struct MapView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
-
-            Print("showGraveDetail", viewModel.showGraveDeatil)
+            ZStack {
+                MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
+                if showGraveDeatil {
+                    NavigationModifier()
+                }
+                
+            }
             MapPickrsView()
                 .foregroundColor(Color.black)
                 .padding()
 
             Spacer()
         }
-        .alert(isPresented: $showGraveDeatil, content: {
-            print("Alert navigation")
-            let name = viewModel.selectedGraves[0].title ?? "Grave"
-            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
-                navigate()
-            }, secondaryButton: .cancel())
-        })
+//        .alert(isPresented: $showGraveDeatil, content: {
+//            print("Alert navigation")
+//            let name = viewModel.selectedGraves[0].title ?? "Grave"
+//            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
+//                navigate()
+//            }, secondaryButton: .cancel())
+//        })
     }
     func navigate() {
         
