@@ -25,14 +25,14 @@
 		78688CA52570FB2100413618 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA42570FB2100413618 /* Strings.swift */; };
 		78688CAA2571165800413618 /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA92571165800413618 /* GravesView.swift */; };
 		78781D45258A492900873A7F /* ScrollViewWithOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78781D44258A492900873A7F /* ScrollViewWithOffset.swift */; };
+		78781D4E258B673B00873A7F /* FavGraves+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78781D4C258B673B00873A7F /* FavGraves+CoreDataClass.swift */; };
+		78781D4F258B673B00873A7F /* FavGraves+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78781D4D258B673B00873A7F /* FavGraves+CoreDataProperties.swift */; };
 		7878D0672588D91A0099E6E6 /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878D0662588D91A0099E6E6 /* NetStatus.swift */; };
 		7878D06A2588D9770099E6E6 /* NotificationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760E2588165D00F5D0EF /* NotificationModifier.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
 		78EF0395257653A200635427 /* View.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0394257653A200635427 /* View.extensions.swift */; };
 		78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78EF04EC25798B0000635427 /* GraveFinder.xcdatamodeld */; };
 		78EF051225798C3B00635427 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF051125798C3B00635427 /* Persistence.swift */; };
-		78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */; };
-		78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */; };
 		E26F75F72587F9E800F5D0EF /* SearchViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75F62587F9E800F5D0EF /* SearchViewModifier.swift */; };
 		E26F76002588088900F5D0EF /* ToggleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */; };
 		E26F760525880FD200F5D0EF /* SearchGravesModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */; };
@@ -62,13 +62,13 @@
 		78688CA42570FB2100413618 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		78688CA92571165800413618 /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
 		78781D44258A492900873A7F /* ScrollViewWithOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithOffset.swift; sourceTree = "<group>"; };
+		78781D4C258B673B00873A7F /* FavGraves+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataClass.swift"; sourceTree = "<group>"; };
+		78781D4D258B673B00873A7F /* FavGraves+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7878D0662588D91A0099E6E6 /* NetStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		78EF0394257653A200635427 /* View.extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.extensions.swift; sourceTree = "<group>"; };
 		78EF04ED25798B0000635427 /* FavGraves.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavGraves.xcdatamodel; sourceTree = "<group>"; };
 		78EF051125798C3B00635427 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataClass.swift"; sourceTree = "<group>"; };
-		78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E26F75F62587F9E800F5D0EF /* SearchViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModifier.swift; sourceTree = "<group>"; };
 		E26F75FF2588088900F5D0EF /* ToggleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleViewModifier.swift; sourceTree = "<group>"; };
 		E26F760425880FD200F5D0EF /* SearchGravesModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGravesModifier.swift; sourceTree = "<group>"; };
@@ -179,8 +179,8 @@
 		7845964B256CFF6000A97B7F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				78EF0523257A765500635427 /* FavGraves+CoreDataClass.swift */,
-				78EF0524257A765500635427 /* FavGraves+CoreDataProperties.swift */,
+				78781D4C258B673B00873A7F /* FavGraves+CoreDataClass.swift */,
+				78781D4D258B673B00873A7F /* FavGraves+CoreDataProperties.swift */,
 				7845964C256D004200A97B7F /* Grave.swift */,
 				78EEED82256D37480005C6CC /* SearchResults.swift */,
 			);
@@ -300,9 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				783900192587849E0030B008 /* NotificationSelectionViewModel.swift in Sources */,
-				78EF0526257A765600635427 /* FavGraves+CoreDataProperties.swift in Sources */,
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
-				78EF0525257A765600635427 /* FavGraves+CoreDataClass.swift in Sources */,
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
 				7839000A258385460030B008 /* NotificationService.swift in Sources */,
 				7878D06A2588D9770099E6E6 /* NotificationModifier.swift in Sources */,
@@ -314,6 +312,7 @@
 				03541A4B2583933100B98CEB /* (null) in Sources */,
 				E26F76002588088900F5D0EF /* ToggleViewModifier.swift in Sources */,
 				031BF239256BC94E0047A5F4 /* GraveFinderApp.swift in Sources */,
+				78781D4E258B673B00873A7F /* FavGraves+CoreDataClass.swift in Sources */,
 				783900162586970D0030B008 /* NotificationSelectionView.swift in Sources */,
 				78EEED83256D37480005C6CC /* SearchResults.swift in Sources */,
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
@@ -330,6 +329,7 @@
 				E26F76092588109900F5D0EF /* FavGravesModifier.swift in Sources */,
 				78781D45258A492900873A7F /* ScrollViewWithOffset.swift in Sources */,
 				7845964D256D004200A97B7F /* Grave.swift in Sources */,
+				78781D4F258B673B00873A7F /* FavGraves+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

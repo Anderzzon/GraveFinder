@@ -10,8 +10,9 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="plotNumber" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavGraves" positionX="-36" positionY="9" width="128" height="164"/>
+        <element name="FavGraves" positionX="-36" positionY="9" width="128" height="179"/>
     </elements>
 </model>

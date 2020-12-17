@@ -17,6 +17,7 @@ class Grave:NSObject, Decodable, Identifiable {
     let graveType:String?
     let latitude:Double?
     let longitude:Double?
+    let plotNumber:String?
     private let life:String?
     private let location: CLLocation
     private let regionRadius: CLLocationDistance = 1000
@@ -32,6 +33,7 @@ class Grave:NSObject, Decodable, Identifiable {
         case graveType = "blockType"
         case location = "coordinates"
         case id
+        case plotnumber
         
         enum LocationKeys: String, CodingKey {
             case latitude = "lat"
@@ -51,6 +53,7 @@ class Grave:NSObject, Decodable, Identifiable {
         self.latitude = nil
         self.longitude = nil
         self.id = "123"
+        self.plotNumber = "0"
     }
     init(favorite:FavGraves){
         deceased = favorite.deceased
@@ -61,6 +64,7 @@ class Grave:NSObject, Decodable, Identifiable {
         graveType = favorite.graveType
         latitude = favorite.latitude
         longitude = favorite.longitude
+        plotNumber = favorite.plotNumber
         let birthday = dateOfBirth ?? ""
         let deathday = dateOfDeath ?? ""
         life = birthday + " - " + deathday
@@ -82,6 +86,7 @@ class Grave:NSObject, Decodable, Identifiable {
         dateOfDeath = try? container.decode(String.self, forKey: .dateOfDeath)
         cemetery = try? container.decode(String.self, forKey: .cemetery)
         graveType = try? container.decode(String.self, forKey: .graveType)
+        plotNumber = try? container.decode(String.self, forKey: .plotnumber)
         
         let locationContainer = try container.nestedContainer(keyedBy: CodingKeys.LocationKeys.self, forKey: .location)
         
