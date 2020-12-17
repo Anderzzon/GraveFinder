@@ -22,9 +22,12 @@ extension MapView {
                     .padding(2)
                     .font(.footnote)
                 if (viewModel.selectedGraves.first?.plotNumber != nil) {
-                    Text("\(viewModel.selectedGraves.first?.cemetery ?? "") gravplats \(viewModel.selectedGraves.first?.plotNumber ?? "")")
-                        .padding(2)
-                        .font(.footnote)
+                    Group {
+                        Text("\(viewModel.selectedGraves.first?.cemetery ?? "")")
+                            .font(.footnote)
+                        Text("plats \(viewModel.selectedGraves.first!.plotNumber!)")
+                            .font(.footnote)
+                    }
                 }
                 Print(viewModel.selectedGraves.first?.plotNumber)
 
