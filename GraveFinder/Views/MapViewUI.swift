@@ -15,6 +15,8 @@ struct MapViewUI: UIViewRepresentable {
     //var graves: [Grave]
     //let mapViewType: MKMapType
     
+    
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         //mapView.setRegion(region, animated: true)
@@ -78,8 +80,4 @@ struct MapViewUI: UIViewRepresentable {
             print("MapViewUI showGraveDetail", parent.viewModel.showGraveDeatil)
         }
     }
-    
-
-    
-    
 }
