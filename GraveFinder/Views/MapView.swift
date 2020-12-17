@@ -26,9 +26,13 @@ struct MapView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
-
-            Print("showGraveDetail", viewModel.showGraveDeatil)
+            ZStack {
+                MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
+                if showGraveDeatil {
+                    NavigationModifier()
+                }
+                
+            }
             MapPickrsView()
                 .foregroundColor(Color.black)
                 .padding()
