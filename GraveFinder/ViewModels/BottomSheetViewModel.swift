@@ -8,17 +8,30 @@ import Combine
 import SwiftUI
 
 class BottomSheetViewModel: ObservableObject {
+    
+    enum ShowContent { case searchResults, favorites, nothing }
+    
     @Environment(\.managedObjectContext) private var viewContext
     
     @Published var totalGravesList = [Grave]()
+    @Published var selectedGrave:Grave?
     @Published var selectedGraves = [Grave]() //Array to support posibility of multiple graves on map later
     @Published var favoriteGraves = [Grave]()
     @Published var currentPage = 1
     @Published var totalPages = 0
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
-    
-    @State var latestQuery = ""
+    @Published var showContent:ShowContent = .nothing
+    @Published var query = ""
+    @Published var sheetPos = SheetPosition.bottom
+    @Published var pulledUp = false
+    @Published var onlyFavorites = 0
+    @Published var selectedIndex = 0
+    @Published var graveOptions = ["All", "Favorites"]
+    @Published var frames = Array<CGRect>(repeating: .zero, count: 2)
+
+
+
     
     private var netStatus = NetStatus.shared
     
@@ -54,11 +67,10 @@ class BottomSheetViewModel: ObservableObject {
     
     var task : AnyCancellable?
     
-    func fetchGraves(for query:String, at page: Int) {
+    func fetchGraves() {
         guard netStatus.isConnected else { return }
         
-        latestQuery = query
-        guard page > 0 else { return }
+        guard currentPage > 0 else { return }
         
         let searchQuery = query.lowercased()
             .replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
@@ -71,7 +83,7 @@ class BottomSheetViewModel: ObservableObject {
         components.path = "/Hittagraven/ajax/search"
         components.queryItems = [
             URLQueryItem(name: "searchtext", value: searchQuery),
-            URLQueryItem(name: "page", value: String(page))
+            URLQueryItem(name: "page", value: String(currentPage))
         ]
         
         guard let url = components.url else {return}

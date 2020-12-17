@@ -13,7 +13,7 @@ internal extension BottomSheetView {
             ForEach(favorites){
                 favorite in
                 let grave = Grave(favorite: favorite)
-                GravesView(for: grave, selectedGrave: $selectedGrave, sheetPos: $sheetPos, selectedGraves: $viewModel.selectedGraves)
+                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, sheetPos: $viewModel.sheetPos, selectedGraves: $viewModel.selectedGraves)
             }
             
         })

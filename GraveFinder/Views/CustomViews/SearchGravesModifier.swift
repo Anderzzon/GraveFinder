@@ -13,14 +13,14 @@ internal extension BottomSheetView {
             ForEach(viewModel.totalGravesList){
                 grave in
 
-                GravesView(for: grave, selectedGrave: $selectedGrave, sheetPos: $sheetPos, selectedGraves: $viewModel.selectedGraves)
+                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, sheetPos: $viewModel.sheetPos, selectedGraves: $viewModel.selectedGraves)
             }
             if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
                 HStack(alignment: .center) {
                     Spacer()
                     Button(action: {
                         viewModel.currentPage += 1
-                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                        viewModel.fetchGraves()
                     }, label: {
                         Text("Visa fler...")
                     }).padding(.bottom, 40)

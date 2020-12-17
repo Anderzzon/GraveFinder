@@ -13,41 +13,40 @@ internal extension BottomSheetView {
         HStack(spacing: 15){
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
-            TextField("Search...", text: $query,onEditingChanged: {EditMode in
+            TextField("Search...", text: $viewModel.query, onEditingChanged: {EditMode in
 
-                if(!self.pulledUp){
-                    sheetPos = SheetPosition.top
-                    offset = (-readerHeight + searchBarHeight)
-                    self.pulledUp = true
+                if(!viewModel.pulledUp){
+                    viewModel.sheetPos = SheetPosition.top
+                    viewModel.pulledUp = true
                 }
                 if(!EditMode){
-                    self.pulledUp = false
+                    viewModel.pulledUp = false
                 }
             }, onCommit: {
                 viewModel.currentPage = 1
                 viewModel.totalGravesList.removeAll()
-                viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                viewModel.fetchGraves()
 
             })
-            .onChange(of: query, perform: { _ in
+            .onChange(of: viewModel.query, perform: { _ in
                 self.setOptions(index: 0)
-                if onlyFavorites == 1{
-                    onlyFavorites = 0
-                    showContent = .searchResults
+                if viewModel.onlyFavorites == 1{
+                    viewModel.onlyFavorites = 0
+                    viewModel.showContent = .searchResults
                 }
                 viewModel.currentPage = 1
                 viewModel.selectedGraves.removeAll()
-                if(query.count > 0){
+                if(viewModel.query.count > 0){
                     viewModel.totalGravesList.removeAll()
-                    viewModel.fetchGraves(for: query, at: viewModel.currentPage)
-                    showContent = .searchResults
+                    viewModel.fetchGraves()
+                    viewModel.showContent = .searchResults
                 } else {
-                    showContent = .nothing
+                    viewModel.showContent = .nothing
                 }
             })
             .disableAutocorrection(true)
-            if !query.isEmpty {
-                Button(action: {self.query = ""}, label: {Image(systemName: "multiply.circle").foregroundColor(.gray)})
+            if !viewModel.query.isEmpty {
+                Button(action: {viewModel.query = ""}, label: {Image(systemName: "multiply.circle").foregroundColor(.gray)})
             }
         }
         .padding()
