@@ -14,12 +14,12 @@ struct CoreDataHelper {
         let context = PersistenceController.shared.context
         let newFav = FavGraves(context: context)
         newFav.id = grave.id ?? ""
-        newFav.deceased = grave.deceased ?? "unnamed".localized()
-        newFav.cemetery = grave.cemetery ??  "unspecified".localized()
-        newFav.dateBuried = grave.dateBuried ??  "unspecified".localized()
-        newFav.dateOfBirth = grave.dateOfBirth ??  "unspecified".localized()
-        newFav.dateOfDeath = grave.dateOfDeath ??  "unspecified".localized()
-        newFav.graveType = grave.graveType ??  "unspecified".localized()
+        newFav.deceased = grave.deceased ?? "Unnamed".localized()
+        newFav.cemetery = grave.cemetery ??  "Unspecified".localized()
+        newFav.dateBuried = grave.dateBuried ??  "Unspecified".localized()
+        newFav.dateOfBirth = grave.dateOfBirth ??  "Unspecified".localized()
+        newFav.dateOfDeath = grave.dateOfDeath ??  "Unspecified".localized()
+        newFav.graveType = grave.graveType ??  "Unspecified".localized()
         newFav.latitude = grave.latitude!
         newFav.longitude = grave.longitude!
         PersistenceController.shared.saveContext()

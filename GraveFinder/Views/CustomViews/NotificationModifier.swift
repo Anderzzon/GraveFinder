@@ -15,7 +15,7 @@ extension ContentView {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("\(Image(systemName: "exclamationmark.triangle")) Alert")
                         .bold()
-                    Text("no_internet".localized())
+                    Text("No internet")
                         .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
                 }
                 .padding()

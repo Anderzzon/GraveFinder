@@ -17,7 +17,7 @@ struct MapView: View {
     @State internal var showGraveDeatil = false
 
     @State internal var selectedIndex = 0
-    @State internal var mapOptions = ["standard".localized(),"satellite".localized(),"hybrid".localized()]
+    @State internal var mapOptions = ["Standard".localized(),"Satellite".localized(),"Hybrid".localized()]
     @State internal var frames = Array<CGRect>(repeating: .zero, count: 3)
 
     init(viewModel: BottomSheetViewModel) {
@@ -36,7 +36,7 @@ struct MapView: View {
         }
         .alert(isPresented: $showGraveDeatil, content: {
             let name = viewModel.selectedGraves[0].title ?? "Grave"
-            return Alert(title: Text(name), message: Text("\("navigation_to_map_confirmation".localized()) \(name)?"), primaryButton: .default(Text("ok".localized())) {
+            return Alert(title: Text(name), message: Text("\("Confirm navigating to map".localized()) \(name)?"), primaryButton: .default(Text("Ok".localized())) {
                 navigate()
             }, secondaryButton: .cancel())
         })

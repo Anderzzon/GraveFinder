@@ -6,95 +6,95 @@
   
 */
 /* No comment provided by engineer. */
-"alert" = "Alert";
+"Alert" = "Alert";
 
 /* No comment provided by engineer. */
-"buried" = "Begravd";
+"Buried" = "Begravd";
 
 /* No comment provided by engineer. */
-"error" = "Fel";
+"Error" = "Fel";
 
 /* No comment provided by engineer. */
-"settings" = "Inställningar";
+"Settings" = "Inställningar";
 
 /* No comment provided by engineer. */
-"cemetry" = "Kyrkogård";
+"Cemetry" = "Kyrkogård";
 
 /* No comment provided by engineer. */
-"no_internet" = "Ingen internetanslutning upptäcktes";
+"No internet" = "Ingen internetanslutning upptäcktes";
 
 /* No comment provided by engineer. */
-"notification_service" = "Notifikation Tjänst";
+"Notification service" = "Notifikation Tjänst";
 
 /* No comment provided by engineer. */
-"notify_funeralday" = "Notifiera mig på begravningsdag";
+"Notify funeral day" = "Notifiera mig på begravningsdag";
 
 /* No comment provided by engineer. */
-"funeralday" = "Begravningsdag";
+"Funeral day" = "Begravningsdag";
 
 /* No comment provided by engineer. */
-"notify_deathday" = "Notifiera mig på dödsdag";
+"Notify deathday" = "Notifiera mig på dödsdag";
 
 /* No comment provided by engineer. */
-"deathday" = "Dödsdag";
+"Deathday" = "Dödsdag";
 
 /* No comment provided by engineer. */
-"notify_birthday" = "Notifiera mig på födelsdag";
+"Notify Birthday" = "Notifiera mig på födelsdag";
 
 /* No comment provided by engineer. */
-"birthday" = "Födelsdag";
+"Birthday" = "Födelsdag";
 
 /* No comment provided by engineer. */
-"required_enabled_notification" = "Notifikationer måste aktiveras i inställningar.";
+"Required Enabled Notification" = "Notifikationer måste aktiveras i inställningar.";
 
 /* No comment provided by engineer. */
-"notices" = "Notiser";
+"Notices" = "Notiser";
 
 /* No comment provided by engineer. */
-"ok" = "OK";
+"Ok" = "OK";
 
 /* Search */
-"search" = "Sök...";
+"Search" = "Sök...";
 
 /* No comment provided by engineer. */
-"end_of_results" = "Slut på resultat...";
+"End of results" = "Slut på resultat...";
 
 /* No comment provided by engineer. */
-"navigation_to_map_confirmation" = "Vill du öppna Maps och navigera till ?";
+"Confirm navigating to map" = "Vill du öppna Maps och navigera till ?";
 
 /* No comment provided by engineer. */
-"show_more" = "Visa fler...";
+"Show more" = "Visa fler...";
 
 /* No comment provided by engineer. */
-"all" = "Allt";
+"All" = "Allt";
 
 /* No comment provided by engineer. */
-"favorites" = "Favoriter";
+"Favorites" = "Favoriter";
 
 /* No comment provided by engineer. */
-"standard" = "Karta";
+"Standard" = "Karta";
 
 /* No comment provided by engineer. */
-"satellite" = "Satellit";
+"Satellite" = "Satellit";
 
 /* No comment provided by engineer. */
-"hybrid" = "Hybrid";
+"Hybrid" = "Hybrid";
 
 /* No comment provided by engineer. */
-"born" = "Född";
+"Born" = "Född";
 
-"grave_nr" = "Grav nummer";
+"Grave number" = "Grav nummer";
 
-"died" = "Dog";
+"Died" = "Dog";
 
-"close" = "Stänga";
+"Close" = "Stänga";
 
-"unnamed" = "Ej namngiven";
+"Unnamed" = "Ej namngiven";
 
-"unspecified" = "Ej specificerad";
+"Unspecified" = "Ej specificerad";
 
-"unknown" = "Okänd";
+"Unknown" = "Okänd";
 
-"gravefinder_reminder" = "GraveFinder Påminnelse";
+"Gravefinder reminder" = "GraveFinder Påminnelse";
 
-"notification_text %@" = "Idag är %@";
+"Notification text %@" = "Idag är %@";

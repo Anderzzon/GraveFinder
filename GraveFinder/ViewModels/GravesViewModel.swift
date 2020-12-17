@@ -43,9 +43,9 @@ class GravesViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async{
                     self.setAlert(alert: Alert(
-                                    title: Text("notification_service".localized()).font(.system(.title)),
-                                    message: Text("required_enabled_notification".localized()),
-                                    primaryButton: .default( Text("settings".localized()),
+                                    title: Text("Notification service".localized()).font(.system(.title)),
+                                    message: Text("Required Enabled Notification".localized()),
+                                    primaryButton: .default( Text("Settings".localized()),
                                                              action: {
                                                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
                                                              }),
@@ -101,8 +101,8 @@ class GravesViewModel:ObservableObject {
         return self.selectedGrave?.id == self.grave.id
     }
     func removeAllPendingNotifications(){
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("birthday".localized())")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("funeralday".localized())")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).\("deathday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Birthday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Funeral day".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("Deathday".localized())")
     }
 }

@@ -22,14 +22,14 @@ internal extension BottomSheetView {
                         viewModel.currentPage += 1
                         viewModel.fetchGraves(for: query, at: viewModel.currentPage)
                     }, label: {
-                        Text("show_more".localized())
+                        Text("Show more".localized())
                     }).padding(.bottom, 40)
                     Spacer()
                 }
             } else {
                 HStack{
                     Spacer()
-                    Text("end_of_results".localized())
+                    Text("End of results".localized())
                         .font(.caption2)
                         .padding(.bottom, 40)
                     Spacer()

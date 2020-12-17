@@ -6,86 +6,95 @@
   
 */
 /* No comment provided by engineer. */
-"alert" = "Alert";
+"Alert" = "Alert";
 
 /* No comment provided by engineer. */
-"buried" = "Buried";
+"Buried" = "Buried";
 
 /* No comment provided by engineer. */
-"error" = "Error";
+"Error" = "Error";
 
 /* No comment provided by engineer. */
-"settings" = "Settings";
+"Settings" = "Settings";
 
 /* No comment provided by engineer. */
-"cemetry" = "Cemetry";
+"Cemetry" = "Cemetry";
 
 /* No comment provided by engineer. */
-"no_internet" = "No internet connection detected";
+"No internet" = "No internet connection detected";
 
 /* No comment provided by engineer. */
-"notification_service" = "Notification Service";
+"Notification service" = "Notification Service";
 
 /* No comment provided by engineer. */
-"notify_funeralday" = "Notify me on funeral day";
+"Notify funeral day" = "Notify me on funeral day";
 
 /* No comment provided by engineer. */
-"notify_deathday" = "Notify me on the day of death";
+"Funeral day" = "Funeral day";
 
 /* No comment provided by engineer. */
-"notify_birthday" = "Notify me on birthday";
+"Notify deathday" = "Notify me on the day of death";
 
 /* No comment provided by engineer. */
-"required_enabled_notification" = "Notifications must be enabled in settings.";
+"Deathday" = "Deathday";
 
 /* No comment provided by engineer. */
-"notices" = "Notices";
+"Notify Birthday" = "Notify me on birthday";
 
 /* No comment provided by engineer. */
-"ok" = "OK";
+"Birthday" = "Birthday";
+
+/* No comment provided by engineer. */
+"Required Enabled Notification" = "Notifications must be enabled in settings.";
+
+/* No comment provided by engineer. */
+"Notices" = "Notices";
+
+/* No comment provided by engineer. */
+"Ok" = "OK";
 
 /* Search */
-"search" = "Search...";
+"Search" = "Search...";
 
 /* No comment provided by engineer. */
-"end_of_results" = "End of results...";
+"End of results" = "End of results...";
 
 /* No comment provided by engineer. */
-"navigation_to_map_confirmation" = "Do you want to open and navigate to Map?";
+"Confirm navigating to map" = "Do you want to open and navigate to Map?";
 
 /* No comment provided by engineer. */
-"show_more" = "Show more...";
+"Show more" = "Show more...";
 
 /* No comment provided by engineer. */
-"all" = "All";
+"All" = "All";
 
 /* No comment provided by engineer. */
-"favorites" = "Favorites";
+"Favorites" = "Favorites";
 
 /* No comment provided by engineer. */
-"standard" = "Map";
+"Standard" = "Map";
 
 /* No comment provided by engineer. */
-"satellite" = "Satellite";
+"Satellite" = "Satellite";
 
 /* No comment provided by engineer. */
-"hybrid" = "Hybrid";
+"Hybrid" = "Hybrid";
 
 /* No comment provided by engineer. */
-"born" = "Born";
+"Born" = "Born";
 
-"grave_nr" = "Grave number";
+"Grave number" = "Grave number";
 
-"died" = "Died";
+"Died" = "Died";
 
-"close" = "Close";
+"Close" = "Close";
 
-"unnamed" = "Unnamed";
+"Unnamed" = "Unnamed";
 
-"unspecified" = "Unspecified";
+"Unspecified" = "Unspecified";
 
-"unknown" = "Unknown";
+"Unknown" = "Unknown";
 
-"gravefinder_reminder" = "GraveFinder Reminder";
+"Gravefinder reminder" = "GraveFinder Reminder";
 
-"notification_text %@" = "Idag är %@";
+"Notification text %@" = "Idag är %@";

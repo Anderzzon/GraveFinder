@@ -69,9 +69,9 @@ class NotificationSelectionViewModel:ObservableObject {
     func getDayTypeForNotification(type:NotificationDate)->String {
         var typeString:String {
             switch type {
-            case .birthday: return "birthday".localized()
-            case .deathday: return "deathday".localized()
-            case .burialday: return "funeralday".localized()
+            case .birthday: return "Birthday".localized()
+            case .deathday: return "Deathday".localized()
+            case .burialday: return "Funeral day".localized()
             }
         }
         return typeString
@@ -92,8 +92,8 @@ class NotificationSelectionViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async {
                     self.setAlert(alert: Alert(
-                                    title: Text("notification_service".localized()).font(.system(.title)),
-                                    message:Text("required_enabled_notification".localized()),
+                                    title: Text("Notification service".localized()).font(.system(.title)),
+                                    message:Text("Required Enabled Notification".localized()),
                                 primaryButton: .default(
                                     Text("Inställningar"), action: {
                                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -147,7 +147,7 @@ class NotificationSelectionViewModel:ObservableObject {
     func getContent(for grave:Grave, with type:NotificationDate) -> UNMutableNotificationContent {
         let notificationDay = getDayTypeForNotification(type: type)
         let content = UNMutableNotificationContent()
-        content.title = "\("gravefinder_reminder".localized()):"
+        content.title = "\("Gravefinder reminder".localized()):"
         content.subtitle = "Idag är \(notificationDay) för \(grave.deceased ?? "en av dina favoriter.")"
         content.sound = UNNotificationSound.default
         return content
