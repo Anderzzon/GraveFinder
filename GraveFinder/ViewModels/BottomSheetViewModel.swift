@@ -20,6 +20,8 @@ class BottomSheetViewModel: ObservableObject {
     
     @State var latestQuery = ""
     
+    private var netStatus = NetStatus.shared
+    
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
             totalGravesList.append(contentsOf: searchResults.graves)
@@ -53,6 +55,8 @@ class BottomSheetViewModel: ObservableObject {
     var task : AnyCancellable?
     
     func fetchGraves(for query:String, at page: Int) {
+        guard netStatus.isConnected else { return }
+        
         latestQuery = query
         guard page > 0 else { return }
         

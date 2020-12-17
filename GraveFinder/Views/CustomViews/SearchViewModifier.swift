@@ -46,6 +46,9 @@ internal extension BottomSheetView {
                 }
             })
             .disableAutocorrection(true)
+            if !query.isEmpty {
+                Button(action: {self.query = ""}, label: {Image(systemName: "multiply.circle").foregroundColor(.gray)})
+            }
         }
         .padding()
         .padding(.horizontal,10)

@@ -25,6 +25,7 @@
 		78459651256D01E700A97B7F /* BottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78459650256D01E700A97B7F /* BottomSheetViewModel.swift */; };
 		78688CA52570FB2100413618 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA42570FB2100413618 /* Strings.swift */; };
 		78688CAA2571165800413618 /* GravesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78688CA92571165800413618 /* GravesView.swift */; };
+		78781D45258A492900873A7F /* ScrollViewWithOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78781D44258A492900873A7F /* ScrollViewWithOffset.swift */; };
 		7878D0672588D91A0099E6E6 /* NetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878D0662588D91A0099E6E6 /* NetStatus.swift */; };
 		7878D06A2588D9770099E6E6 /* NotificationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760E2588165D00F5D0EF /* NotificationModifier.swift */; };
 		78EEED83256D37480005C6CC /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EEED82256D37480005C6CC /* SearchResults.swift */; };
@@ -62,6 +63,7 @@
 		78459650256D01E700A97B7F /* BottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewModel.swift; sourceTree = "<group>"; };
 		78688CA42570FB2100413618 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		78688CA92571165800413618 /* GravesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesView.swift; sourceTree = "<group>"; };
+		78781D44258A492900873A7F /* ScrollViewWithOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWithOffset.swift; sourceTree = "<group>"; };
 		7878D0662588D91A0099E6E6 /* NetStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetStatus.swift; sourceTree = "<group>"; };
 		78EEED82256D37480005C6CC /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		78EF0394257653A200635427 /* View.extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.extensions.swift; sourceTree = "<group>"; };
@@ -157,11 +159,11 @@
 		78459649256CFF4A00A97B7F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				783900152586970D0030B008 /* NotificationSelectionView.swift */,
 				E26F75F92587FC7500F5D0EF /* CustomViews */,
 				E2C787CF256E575D008ACA90 /* BottomSheetView.swift */,
 				03102EE4256E539C004FBE3F /* MapView.swift */,
 				03102EF7256ED6F5004FBE3F /* MapViewUI.swift */,
-				783900152586970D0030B008 /* NotificationSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				78688CA92571165800413618 /* GravesView.swift */,
+				78781D44258A492900873A7F /* ScrollViewWithOffset.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				E26F760525880FD200F5D0EF /* SearchGravesModifier.swift in Sources */,
 				03102EF8256ED6F5004FBE3F /* MapViewUI.swift in Sources */,
 				E26F76092588109900F5D0EF /* FavGravesModifier.swift in Sources */,
+				78781D45258A492900873A7F /* ScrollViewWithOffset.swift in Sources */,
 				7845964D256D004200A97B7F /* Grave.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

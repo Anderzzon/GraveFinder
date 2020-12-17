@@ -89,7 +89,7 @@ struct GravesView: View {
             }
         }
         .padding([.top,.bottom])
-        .background(viewModel.checkIfHighlight() ? Color.gray.opacity(0.4) : Color.white.opacity(0))
+        .background(viewModel.checkIfHighlight() ? Color.gray.opacity(0.2) : Color.white.opacity(0))
         .cornerRadius(10)
         .shadow(radius: 10)
     }
