@@ -12,9 +12,10 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @EnvironmentObject var netStatus: NetStatus
+
     @ObservedObject var viewModel = BottomSheetViewModel()
     
-    @ObservedObject var netStatus: NetStatus
     
     var body: some View {
         
@@ -34,7 +35,9 @@ struct ContentView: View {
                 ), content: {
                     
                     MapView(viewModel: viewModel)
-                    BottomSheetView(viewModel: viewModel)
+                    BottomSheetView(viewModel: viewModel).onTapGesture {
+                        hideKeyboard()
+                    }
                         .alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {

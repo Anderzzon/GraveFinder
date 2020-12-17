@@ -13,9 +13,11 @@ internal extension BottomSheetView {
         VStack{
             HStack(spacing: 10) {
                 ForEach(self.graveOptions.indices, id: \.self) { index in
-                    
-                    Button(action: {setOptions(index: index)}) {
-                        Text(self.graveOptions[index])
+                    Button(action: {
+                            setOptions(index: index)
+                            hideKeyboard()
+                    }) {
+                        Text(self.graveOptions[index]).frame(width: 60, height: 10, alignment: .center)
                     }
                     .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
                     .background(

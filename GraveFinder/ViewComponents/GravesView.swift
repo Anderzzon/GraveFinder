@@ -36,14 +36,25 @@ struct GravesView: View {
                 // Grave information
                 VStack(alignment: .leading, spacing: 10){
                     let deceased = viewModel.grave.deceased ?? "Okänd"
-                    let dateBuried = viewModel.grave.dateBuried ?? "Ej specificerad"
+                    let born = viewModel.grave.dateOfBirth
+                    let died = viewModel.grave.dateOfDeath
                     let cemetery = viewModel.grave.cemetery ?? "Ej specificerad"
+                    let gravNummer = viewModel.grave.plotNumber
                     
                     Text(deceased)
                         .font(.caption).bold()
-                    Text("\(NSLocalizedString("buried", comment: "Date of burial")): \(dateBuried)")
-                        .font(.caption2)
-                    Text("\(NSLocalizedString("cemetry", comment: "Name of cemetry")): \(cemetery)")
+                    
+                    if born != nil && !born!.isEmpty {
+                        Text("Född: \(born!)").font(.caption2).padding(.leading, 15)
+                    }
+                    if died != nil && !died!.isEmpty {
+                        Text("Dog: \(died!)").font(.caption2).padding(.leading, 15)
+                    }
+                    if gravNummer != nil && !gravNummer!.isEmpty {
+                        Text("Grav nummer: \(gravNummer!)").font(.caption2).padding(.leading, 15)
+                    }
+                        
+                    Text("Kyrkogård: \(cemetery)")
                         .font(.caption2)
                         .foregroundColor(.white)
                         .padding(5)
@@ -89,7 +100,7 @@ struct GravesView: View {
             }
         }
         .padding([.top,.bottom])
-        .background(viewModel.checkIfHighlight() ? Color.gray.opacity(0.4) : Color.white.opacity(0))
+        .background(viewModel.checkIfHighlight() ? Color.gray.opacity(0.2) : Color.white.opacity(0))
         .cornerRadius(10)
         .shadow(radius: 10)
     }

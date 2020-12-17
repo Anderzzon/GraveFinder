@@ -67,6 +67,7 @@ struct BottomSheetModifier<Content: View> : View {
 
         if verticalDirection > 0 {
             self.sheetPos = positionBelow
+            hideKeyboard()
         } else if verticalDirection < 0 {
             self.sheetPos = positionAbove
         } else {
@@ -78,7 +79,7 @@ struct BottomSheetModifier<Content: View> : View {
 enum SheetPosition: CGFloat {
     case top = 10
     case middle = 400
-    case bottom = 700
+    case bottom = 680
 }
 
 enum DragState {
