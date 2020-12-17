@@ -28,8 +28,8 @@ class BottomSheetViewModel: ObservableObject {
     @Published var sheetPosition = SheetPosition.bottom
     @Published var sheetIsAtTop = false
     @Published var selectedDisplayOption:ShowContent = .searchResults
+    @Published var selectedDisplayOptionIndex = 0
     @Published var bottomSheetDisplayOptions:[ShowContent] = [.searchResults, .favorites]
-    @Published var frames = Array<CGRect>(repeating: .zero, count: 2)
 
     private var netStatus = NetStatus.shared
     
@@ -113,13 +113,13 @@ class BottomSheetViewModel: ObservableObject {
     func contentToShow(set content:ShowContent){
         selectedDisplayOption = content
         if(content == .favorites){
+            selectedDisplayOptionIndex = 1
             contentToDisplayInBottomSheet = .favorites
         } else {
+            selectedDisplayOptionIndex = 0
             contentToDisplayInBottomSheet = .searchResults
         }
     }
-    func setFrame(index: Int, frame: CGRect) {
-        frames[index] = frame
-    }
+    
 }
 
