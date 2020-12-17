@@ -35,23 +35,23 @@ struct MapView: View {
 
             Spacer()
         }
-        .alert(isPresented: $showGraveDeatil, content: {
-            print("Alert navigation")
-            let name = viewModel.selectedGraves[0].title ?? "Grave"
-            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
-                navigate()
-            }, secondaryButton: .cancel())
-        })
+//        .alert(isPresented: $showGraveDeatil, content: {
+//            print("Alert navigation")
+//            let name = viewModel.selectedGraves[0].title ?? "Grave"
+//            return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
+//                navigate()
+//            }, secondaryButton: .cancel())
+//        })
     }
-    func navigate() {
-        
-        let graveAnnotation = viewModel.selectedGraves[0] 
-        let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
-        let mapItem = MKMapItem(placemark: placemark)
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
-        mapItem.name = placemark.title
-        mapItem.openInMaps(launchOptions: launchOptions)
-    }
+//    func navigate() {
+//
+//        let graveAnnotation = viewModel.selectedGraves[0]
+//        let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
+//        let mapItem = MKMapItem(placemark: placemark)
+//        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+//        mapItem.name = placemark.title
+//        mapItem.openInMaps(launchOptions: launchOptions)
+//    }
     func setFrame(index: Int, frame: CGRect) {
         self.frames[index] = frame
     }

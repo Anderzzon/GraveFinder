@@ -39,4 +39,15 @@ class MapViewModel: ObservableObject {
         }
     }
     
+    func navigate() {
+        
+        //let graveAnnotation = selectedGraves[0]
+        guard let graveAnnotation = selectedGraves.first else { return }
+        let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
+        mapItem.name = placemark.title
+        mapItem.openInMaps(launchOptions: launchOptions)
+    }
+    
 }
