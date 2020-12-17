@@ -70,3 +70,20 @@
 
 /* No comment provided by engineer. */
 "hybrid" = "Hybrid";
+
+/* No comment provided by engineer. */
+"born" = "Born";
+
+"grave_nr" = "Grave number";
+
+"died" = "Died";
+
+"close" = "Close";
+
+"unnamed" = "Unnamed";
+
+"unspecified" = "Unspecified";
+
+"unknown" = "Unknown";
+
+"gravefinder_reminder" = "GraveFinder Reminder";

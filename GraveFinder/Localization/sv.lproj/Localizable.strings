@@ -79,3 +79,20 @@
 
 /* No comment provided by engineer. */
 "hybrid" = "Hybrid";
+
+/* No comment provided by engineer. */
+"born" = "Född";
+
+"grave_nr" = "Grav nummer";
+
+"died" = "Dog";
+
+"close" = "Stänga";
+
+"unnamed" = "Ej namngiven";
+
+"unspecified" = "Ej specificerad";
+
+"unknown" = "Okänd";
+
+"gravefinder_reminder" = "GraveFinder Påminnelse";

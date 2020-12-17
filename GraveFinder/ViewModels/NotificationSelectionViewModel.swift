@@ -147,7 +147,7 @@ class NotificationSelectionViewModel:ObservableObject {
     func getContent(for grave:Grave, with type:NotificationDate) -> UNMutableNotificationContent {
         let notificationDay = getDayTypeForNotification(type: type)
         let content = UNMutableNotificationContent()
-        content.title = "GraveFinder Reminder:"
+        content.title = "\(NSLocalizedString("gravefinder_reminder", comment: "Reminder")):"
         content.subtitle = "Idag är \(notificationDay) för \(grave.deceased ?? "en av dina favoriter.")"
         content.sound = UNNotificationSound.default
         return content
