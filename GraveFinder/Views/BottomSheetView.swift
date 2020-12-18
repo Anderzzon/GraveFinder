@@ -28,11 +28,9 @@ struct BottomSheetView : View {
                         }
                     }).padding(.bottom, 40)
                 }
-
             }.ignoresSafeArea(.all, edges: .bottom)
         }
     }
-    
 }
 
 struct BlurView : UIViewRepresentable {

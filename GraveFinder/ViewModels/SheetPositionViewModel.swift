@@ -17,8 +17,4 @@ class SheetPositionViewModel:ObservableObject {
         self.bottom = bottom
         self.sheetPosition = initialPosition
     }
-    
-    func initSheetToBottom(){
-        sheetPosition = bottom
-    }
 }

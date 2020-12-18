@@ -55,13 +55,6 @@ struct ContentView: View {
                             }
                         )
                     if netStatus.noInternet { ConnectionAlertView() }
-                }
-                ).onAppear(perform: {
-//                    let screenHeight = geometry.frame(in: .global).height
-//                    let middleOfScreen = screenHeight / 2
-//                    sheetPosition.setBottom(to: screenHeight)
-//                    sheetPosition.setMiddle(to: middleOfScreen)
-                    
                 })
             }
         }
