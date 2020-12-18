@@ -45,7 +45,7 @@ struct ToggleView:View {
         }
         .background(
             Capsule().fill(
-                Color.white.opacity(0.4))
+                Color.gray.opacity(0.1))
             , alignment: .leading
         )
     }

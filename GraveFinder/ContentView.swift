@@ -41,8 +41,7 @@ struct ContentView: View {
                         .environmentObject(sheetPosition)
                         .onTapGesture {
                         hideKeyboard()
-                    }
-                        .alert(
+                    }.alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {
                                 viewModel.alert ?? Alert(title: Text("Error"))
@@ -50,7 +49,13 @@ struct ContentView: View {
                         )
                     if netStatus.noInternet { ConnectionAlertView() }
                 }
-                )
+                ).onAppear(perform: {
+                    let screenHeight = geometry.frame(in: .global).height
+                    let middleOfScreen = screenHeight / 2
+                    sheetPosition.setBottom(to: screenHeight)
+                    sheetPosition.setMiddle(to: middleOfScreen)
+                    
+                })
             }
         }
     }
