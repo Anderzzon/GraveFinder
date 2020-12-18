@@ -25,7 +25,7 @@ struct ContentView: View {
             //iPhone landscape
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
-                MapView(graves: viewModel.selectedGraves)
+                MapView(graves: viewModel.gravesToDisplayOnMap)
                 if netStatus.noInternet { ConnectionAlertView() }
                 
             })
@@ -35,8 +35,8 @@ struct ContentView: View {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
                     
-                    MapView(graves: viewModel.selectedGraves)
-                    BottomSheetView(viewModel: viewModel)
+                    MapView(graves: viewModel.gravesToDisplayOnMap)
+                    BottomSheetView()
                         .environmentObject(viewModel)
                         .environmentObject(sheetPosition)
                         .onTapGesture {

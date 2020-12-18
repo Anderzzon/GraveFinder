@@ -39,7 +39,6 @@ struct GravesView: View {
                     let born = viewModel.grave.dateOfBirth
                     let died = viewModel.grave.dateOfDeath
                     let cemetery = viewModel.grave.cemetery ?? "Unspecified".localized()
-                    let gravNummer = viewModel.grave.plotNumber
                     
                     Text(deceased)
                         .font(.caption).bold()

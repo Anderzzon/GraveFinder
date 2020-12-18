@@ -14,6 +14,7 @@ struct GraveInfoPopup: View {
     var body: some View {
         VStack {
             VStack {
+                
                 let deceased = viewModel.selectedGraves.first?.deceased ?? "Okänd"
                 let born = viewModel.selectedGraves.first?.dateOfBirth
                 let died = viewModel.selectedGraves.first?.dateOfDeath
@@ -21,31 +22,38 @@ struct GraveInfoPopup: View {
                 let cemetery = viewModel.selectedGraves.first?.cemetery ?? "Ej specificerad"
                 let plotNumber = viewModel.selectedGraves.first?.plotNumber
                 //let block = viewModel.selectedGraves.first?.block
-                
+                Print(deceased, born, died, buried, cemetery)
                 Text(deceased)
                     .bold()
                     .foregroundColor(.black)
                     .padding(2)
                 
                 if born != nil && !born!.isEmpty && died != nil && !died!.isEmpty {
+                    Print("Born+dead")
                     Text("\(born!) - \(died!)")
+                        .foregroundColor(Color.black)
                         .padding(2)
                         .font(.footnote)
                 } else {
                     if (born != nil && !born!.isEmpty) && (died == nil) {
+                        Print("born")
                         Text("Född: \(born!)")
+                            .foregroundColor(Color.black)
                             .padding(2)
                             .font(.footnote)
                     }
                     if (died != nil && !died!.isEmpty) && (born == nil) {
-                        Text("Dog: \(died!)")
+                        Print("dead")
+                            .foregroundColor(Color.black)
                             .padding(2)
                             .font(.footnote)
                     }
                 }
                 
                 if buried != nil && !buried!.isEmpty {
+                    Print("buried")
                     Text("Gravsatt: \(buried!)")
+                        .foregroundColor(Color.black)
                         .padding(2)
                         .font(.footnote)
                 }
@@ -53,18 +61,22 @@ struct GraveInfoPopup: View {
                 if !cemetery.isEmpty && plotNumber != nil && !plotNumber!.isEmpty {
                     Group {
                         Text("\(cemetery)")
+                            .foregroundColor(Color.black)
                             .font(.footnote)
-                        Text("plats \(plotNumber!)")
+                        Text("Kvarter, plats \(plotNumber!)")
+                            .foregroundColor(Color.black)
                             .font(.footnote)
                     }
                 } else {
                     if !cemetery.isEmpty {
                         Text("\(cemetery)")
+                            .foregroundColor(Color.black)
                             .font(.footnote)
                     }
                     
                     if plotNumber != nil && !plotNumber!.isEmpty {
                         Text("plats \(plotNumber!)")
+                            .foregroundColor(Color.black)
                             .font(.footnote)
                     }
                 }
