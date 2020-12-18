@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct BottomSheetView : View {
-    
+
     @EnvironmentObject var viewModel : BottomSheetViewModel
-    
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \FavGraves.deceased, ascending: true)],
         animation: .default)
     var favorites: FetchedResults<FavGraves>
-    
+
     var body: some View{
         BottomSheetPositionModifier() {
             GeometryReader{ reader in
@@ -31,16 +31,17 @@ struct BottomSheetView : View {
             }.ignoresSafeArea(.all, edges: .bottom)
         }
     }
+
 }
 
 struct BlurView : UIViewRepresentable {
     var style : UIBlurEffect.Style
-    
+
     func makeUIView(context: Context) -> UIVisualEffectView{
         let view = UIVisualEffectView(effect: UIBlurEffect(style: style))
         return view
     }
-    
+
     func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
     }
 }

@@ -53,7 +53,7 @@ struct ContentView: View {
                     }.alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {
-                                viewModel.alert ?? Alert(title: Text("Error"))
+                                viewModel.alert ?? Alert(title: Text("Error".localized()))
                             }
                         )
                     if netStatus.noInternet { ConnectionAlertView() }

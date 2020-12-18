@@ -41,13 +41,13 @@ class GravesViewModel:ObservableObject {
             case .denied:
                 DispatchQueue.main.async{
                     self.setAlert(alert: Alert(
-                                        title: Text("Notification Service").font(.system(.title)),
-                                        message: Text("Notifikationer måste aktiveras i inställningarna"),
-                                        primaryButton: .default( Text("Inställningar"),
-                                                                 action: {
-                                                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                                                                 }),
-                                        secondaryButton: .cancel()))
+                                    title: Text("Notification service".localized()).font(.system(.title)),
+                                    message: Text("Required Enabled Notification".localized()),
+                                    primaryButton: .default( Text("Settings".localized()),
+                                                             action: {
+                                                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                                                             }),
+                                    secondaryButton: .cancel()))
                 }
             case .notDetermined:
                 DispatchQueue.main.async {
@@ -97,8 +97,8 @@ class GravesViewModel:ObservableObject {
         return self.selectedGrave?.id == self.grave.id
     }
     func removeAllPendingNotifications(){
-        NotificationService.removeNotification(for: "grave.\(grave.id!).födelsesdag")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).dödsdag")
-        NotificationService.removeNotification(for: "grave.\(grave.id!).begravningsdag")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("birthday".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("funeral day".localized())")
+        NotificationService.removeNotification(for: "grave.\(grave.id!).\("deathday".localized())")
     }
 }

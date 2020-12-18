@@ -25,14 +25,14 @@ struct SearchResultsView : View {
                         viewModel.currentPageForAPIRequest += 1
                         viewModel.fetchGraves()
                     }, label: {
-                        Text("Visa fler...")
+                        Text("Show more".localized())
                     }).padding(.bottom, 40)
                     Spacer()
                 }
             } else {
                 HStack{
                     Spacer()
-                    Text("Slut på resultat...")
+                    Text("End of results".localized())
                         .font(.caption2)
                         .padding(.bottom, 40)
                     Spacer()
