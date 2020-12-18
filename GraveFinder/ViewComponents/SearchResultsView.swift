@@ -7,20 +7,23 @@
 
 import SwiftUI
 
-internal extension BottomSheetView {
-    func SearchGravesModifier() -> some View {
+struct SearchResultsView : View {
+    
+    @EnvironmentObject private var viewModel:BottomSheetViewModel
+    
+    var body : some View {
         LazyVStack(alignment: .leading, spacing: 5, content:{
-            ForEach(viewModel.totalGravesList){
+            ForEach(viewModel.totalGravesSearchResults){
                 grave in
 
-                GravesView(for: grave, selectedGrave: $selectedGrave, sheetPos: $sheetPos, selectedGraves: $viewModel.selectedGraves)
+                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, sheetPos: $viewModel.sheetPosition, selectedGraves: $viewModel.gravesToDisplayOnMap)
             }
-            if viewModel.totalPages > 1 && viewModel.currentPage < viewModel.totalPages {
+            if viewModel.totalPagesInAPIRequest > 1 && viewModel.currentPageForAPIRequest < viewModel.totalPagesInAPIRequest {
                 HStack(alignment: .center) {
                     Spacer()
                     Button(action: {
-                        viewModel.currentPage += 1
-                        viewModel.fetchGraves(for: query, at: viewModel.currentPage)
+                        viewModel.currentPageForAPIRequest += 1
+                        viewModel.fetchGraves()
                     }, label: {
                         Text("Visa fler...")
                     }).padding(.bottom, 40)

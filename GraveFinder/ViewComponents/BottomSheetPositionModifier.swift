@@ -17,7 +17,7 @@ struct Handle : View {
     }
 }
 
-struct BottomSheetModifier<Content: View> : View {
+struct BottomSheetPositionModifier<Content: View> : View {
     @GestureState private var dragState = DragState.inactive
     @Binding var sheetPos: SheetPosition
 

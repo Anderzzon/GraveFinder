@@ -12,7 +12,7 @@ class NetStatus: ObservableObject {
     
     static let shared = NetStatus()
     
-    @Published var noInternet = true
+    @Published var noInternet = false
     var monitor: NWPathMonitor?
     
     var isMonitoring = false

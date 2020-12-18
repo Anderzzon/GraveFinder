@@ -26,7 +26,7 @@ struct MapView: View {
     
     var body: some View {
         ZStack(alignment: .top){
-            MapViewUI(showGraveDetail: $showGraveDeatil, graves: viewModel.selectedGraves, mapViewType: mapType).edgesIgnoringSafeArea(.all)
+            MapViewUI(showGraveDetail: $showGraveDeatil, graves: viewModel.gravesToDisplayOnMap, mapViewType: mapType).edgesIgnoringSafeArea(.all)
 
             MapPickrsView()
                 .foregroundColor(Color.black)
@@ -35,7 +35,7 @@ struct MapView: View {
             Spacer()
         }
         .alert(isPresented: $showGraveDeatil, content: {
-            let name = viewModel.selectedGraves[0].title ?? "Grave"
+            let name = viewModel.gravesToDisplayOnMap[0].title ?? "Grave"
             return Alert(title: Text(name), message: Text("Vill du öppna Maps och navigera till \(name)?"), primaryButton: .default(Text("OK")) {
                 navigate()
             }, secondaryButton: .cancel())
@@ -43,7 +43,7 @@ struct MapView: View {
     }
     func navigate() {
         
-        let graveAnnotation = viewModel.selectedGraves[0] 
+        let graveAnnotation = viewModel.gravesToDisplayOnMap[0] 
         let placemark = MKPlacemark(coordinate: graveAnnotation.coordinate, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeTransit]
