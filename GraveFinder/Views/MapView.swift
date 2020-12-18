@@ -29,7 +29,7 @@ struct MapView: View {
             ZStack {
                 MapViewUI(showGraveDetail: $showGraveDeatil, viewModel: viewModel).edgesIgnoringSafeArea(.all)
                 if showGraveDeatil {
-                    NavigationModifier()
+                    GraveInfoPopup(viewModel: viewModel, showGraveDetail: $showGraveDeatil)
                 }
                 
             }
