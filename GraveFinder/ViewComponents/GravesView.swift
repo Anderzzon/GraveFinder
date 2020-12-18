@@ -39,19 +39,19 @@ struct GravesView: View {
                     let born = viewModel.grave.dateOfBirth
                     let died = viewModel.grave.dateOfDeath
                     let cemetery = viewModel.grave.cemetery ?? "Unspecified".localized()
-                    let gravNummer = viewModel.grave.plotNumber
                     
                     Text(deceased)
                         .font(.caption).bold()
                     
-                    if born != nil && !born!.isEmpty {
-                        Text("\("Born".localized()): \(born!)").font(.caption2).padding(.leading, 15)
-                    }
-                    if died != nil && !died!.isEmpty {
-                        Text("\("Died".localized()): \(died!)").font(.caption2).padding(.leading, 15)
-                    }
-                    if gravNummer != nil && !gravNummer!.isEmpty {
-                        Text("\("Grave number".localized()): \(gravNummer!)").font(.caption2).padding(.leading, 15)
+                    if born != nil && !born!.isEmpty && died != nil && !died!.isEmpty {
+                        Text("\(born!) - \(died!)").font(.caption2)
+                    } else {
+                        if (born != nil && !born!.isEmpty) && (died == nil) {
+                            Text("Född: \(born!)").font(.caption2)
+                        }
+                        if (died != nil && !died!.isEmpty) && (born == nil) {
+                            Text("Dog: \(died!)").font(.caption2)
+                        }
                     }
                         
                     Text("\("Cemetry".localized()): \(cemetery)")
