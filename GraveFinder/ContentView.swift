@@ -15,6 +15,7 @@ struct ContentView: View {
     @EnvironmentObject var netStatus: NetStatus
 
     @ObservedObject var viewModel = BottomSheetViewModel()
+    @ObservedObject var sheetPosition = SheetPositionViewModel()
     
     
     var body: some View {
@@ -25,7 +26,7 @@ struct ContentView: View {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
                 MapView(graves: viewModel.selectedGraves)
-                if netStatus.noInternet { NotificationModifier() }
+                if netStatus.noInternet { ConnectionAlertView() }
                 
             })
         } else {
@@ -35,18 +36,26 @@ struct ContentView: View {
                 ), content: {
                     
                     MapView(graves: viewModel.selectedGraves)
-                    BottomSheetView(viewModel: viewModel).onTapGesture {
+                    BottomSheetView(viewModel: viewModel)
+                        .environmentObject(viewModel)
+                        .environmentObject(sheetPosition)
+                        .onTapGesture {
                         hideKeyboard()
-                    }
-                        .alert(
+                    }.alert(
                             isPresented: $viewModel.alertIsPresented,
                             content: {
-                                viewModel.alert ?? Alert(title: Text("Error"))
+                                viewModel.alert ?? Alert(title: Text("Error".localized()))
                             }
                         )
-                    if netStatus.noInternet { NotificationModifier() }
+                    if netStatus.noInternet { ConnectionAlertView() }
                 }
-                )
+                ).onAppear(perform: {
+                    let screenHeight = geometry.frame(in: .global).height
+                    let middleOfScreen = screenHeight / 2
+                    sheetPosition.setBottom(to: screenHeight)
+                    sheetPosition.setMiddle(to: middleOfScreen)
+                    
+                })
             }
         }
     }

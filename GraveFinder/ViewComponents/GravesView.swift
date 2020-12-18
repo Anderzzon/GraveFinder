@@ -35,10 +35,11 @@ struct GravesView: View {
                 
                 // Grave information
                 VStack(alignment: .leading, spacing: 10){
-                    let deceased = viewModel.grave.deceased ?? "Okänd"
+                    let deceased = viewModel.grave.deceased ?? "Unknown".localized()
                     let born = viewModel.grave.dateOfBirth
                     let died = viewModel.grave.dateOfDeath
-                    let cemetery = viewModel.grave.cemetery ?? "Ej specificerad"
+                    let cemetery = viewModel.grave.cemetery ?? "Unspecified".localized()
+                    let gravNummer = viewModel.grave.plotNumber
                     
                     Text(deceased)
                         .font(.caption).bold()
@@ -54,7 +55,7 @@ struct GravesView: View {
                         }
                     }
                         
-                    Text("Kyrkogård: \(cemetery)")
+                    Text("\("Cemetry".localized()): \(cemetery)")
                         .font(.caption2)
                         .foregroundColor(.white)
                         .padding(5)

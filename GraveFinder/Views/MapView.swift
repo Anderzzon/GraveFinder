@@ -23,7 +23,7 @@ struct MapView: View {
     init(graves: [Grave]) {
         self.viewModel = MapViewModel(selectedGraves: graves)
     }
-    
+
     var body: some View {
         ZStack(alignment: .top){
             ZStack {

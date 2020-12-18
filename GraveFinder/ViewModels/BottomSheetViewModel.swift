@@ -8,24 +8,41 @@ import Combine
 import SwiftUI
 
 class BottomSheetViewModel: ObservableObject {
-    @Environment(\.managedObjectContext) private var viewContext
     
-    @Published var totalGravesList = [Grave]()
-    @Published var selectedGraves = [Grave]() //Array to support posibility of multiple graves on map later
+    enum ShowContent:String { case
+        searchResults = "All",
+        favorites = "Favorites",
+        nothing = ""
+    }
+    enum Test: CaseIterable {
+
+        static var startBrowsing: LocalizedStringKey {
+            return "Start browsing"
+        }
+    }
+    
+    @Published var totalGravesSearchResults = [Grave]()
+    @Published var selectedGrave:Grave?
     @Published var favoriteGraves = [Grave]()
-    @Published var currentPage = 1
-    @Published var totalPages = 0
+    @Published var gravesToDisplayOnMap = [Grave]() //Array to support posibility of multiple graves on map later
+    @Published var currentPageForAPIRequest = 1
+    @Published var totalPagesInAPIRequest = 0
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
-    
-    @State var latestQuery = ""
-    
+    @Published var contentToDisplayInBottomSheet:ShowContent = .nothing
+    @Published var query = ""
+    @Published var sheetPosition = SheetPosition.bottom
+    @Published var sheetIsAtTop = false
+    @Published var selectedDisplayOption:ShowContent = .searchResults
+    @Published var selectedDisplayOptionIndex = 0
+    @Published var bottomSheetDisplayOptions:[ShowContent] = [.searchResults, .favorites]
+
     private var netStatus = NetStatus.shared
     
     var searchResults = SearchResults(graves: [Grave](), pages: 0) {
         didSet {
-            totalGravesList.append(contentsOf: searchResults.graves)
-            totalPages = searchResults.pages
+            totalGravesSearchResults.append(contentsOf: searchResults.graves)
+            totalPagesInAPIRequest = searchResults.pages
         }
     }
     
@@ -54,11 +71,10 @@ class BottomSheetViewModel: ObservableObject {
     
     var task : AnyCancellable?
     
-    func fetchGraves(for query:String, at page: Int) {
+    func fetchGraves() {
         guard netStatus.isConnected else { return }
         
-        latestQuery = query
-        guard page > 0 else { return }
+        guard currentPageForAPIRequest > 0 else { return }
         
         let searchQuery = query.lowercased()
             .replacingOccurrences(of: "[\\s\n]+", with: " ", options: .regularExpression, range: nil)
@@ -71,7 +87,7 @@ class BottomSheetViewModel: ObservableObject {
         components.path = "/Hittagraven/ajax/search"
         components.queryItems = [
             URLQueryItem(name: "searchtext", value: searchQuery),
-            URLQueryItem(name: "page", value: String(page))
+            URLQueryItem(name: "page", value: String(currentPageForAPIRequest))
         ]
         
         guard let url = components.url else {return}
@@ -92,8 +108,6 @@ class BottomSheetViewModel: ObservableObject {
         let location = staticCemeteries[cemetery.lowercased()] ?? (latitude:0, longitude:0)
         return location
     }
-
-    
     func setAlert(alert:Alert){
         self.alert = alert
         self.alertIsPresented = true
@@ -102,5 +116,16 @@ class BottomSheetViewModel: ObservableObject {
         self.alertIsPresented = false
         self.alert = nil
     }
+    func contentToShow(set content:ShowContent){
+        selectedDisplayOption = content
+        if(content == .favorites){
+            selectedDisplayOptionIndex = 1
+            contentToDisplayInBottomSheet = .favorites
+        } else {
+            selectedDisplayOptionIndex = 0
+            contentToDisplayInBottomSheet = .searchResults
+        }
+    }
+    
 }
 
