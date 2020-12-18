@@ -17,8 +17,10 @@ struct ContentView: View {
     @ObservedObject var sheetPositionModel:SheetPositionViewModel
     
     init(){
-        let searchBarHeight:CGFloat = 165
         let screenSize = UIScreen.main.bounds.size.height
+        
+        let searchBarHeight:CGFloat = 154
+        
         let screenMiddle = screenSize / 2
         let bottomPosition = screenSize - searchBarHeight
         let middlePosition = screenMiddle - (searchBarHeight / 2)
