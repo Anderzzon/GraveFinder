@@ -20,7 +20,7 @@ struct ToggleView:View {
                         viewModel.contentToShow(set: viewModel.bottomSheetDisplayOptions[index])
                         hideKeyboard()
                     }) {
-                        Text(viewModel.bottomSheetDisplayOptions[index].rawValue).frame(width: 60, height: 10, alignment: .center)
+                        Text(viewModel.bottomSheetDisplayOptions[index].rawValue.localized()).frame(width: 60, height: 10, alignment: .center)
                     }
                     .padding(EdgeInsets(top: 16, leading: 20, bottom: 16, trailing: 20))
                     .background(
