@@ -13,7 +13,9 @@ struct BottomSheetView : View {
         BottomSheetPositionModifier() {
             GeometryReader{ reader in
                 VStack{
-                    SearchBarView(readerHeight: reader.frame(in: .global).height)
+                    SearchBarView(readerHeight: reader.frame(in: .global).height) {
+                        HStack{}
+                    }
                     ToggleView()
                         .foregroundColor(Color.black)
                         .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
