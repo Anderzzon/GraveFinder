@@ -16,7 +16,7 @@ struct SearchBarView:View {
         HStack(spacing: 15){
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
-            TextField("Search...", text: $viewModel.query, onEditingChanged: {EditMode in
+            TextField("Search".localized(), text: $viewModel.query, onEditingChanged: {EditMode in
 
                 if(!viewModel.sheetIsAtTop){
                     viewModel.sheetPosition = SheetPosition.top
