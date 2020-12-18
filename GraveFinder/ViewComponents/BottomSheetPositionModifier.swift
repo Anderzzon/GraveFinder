@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct Handle : View {
     private let handleThickness = CGFloat(5.0)
@@ -19,9 +20,9 @@ struct Handle : View {
 
 struct BottomSheetPositionModifier<Content: View> : View {
     @GestureState private var dragState = DragState.inactive
-    @Binding var sheetPos: SheetPosition
+    @EnvironmentObject private var sheetPositionModel:SheetPositionViewModel
 
-    var content: (Binding<SheetPosition>) -> Content
+    var content: () -> Content
     var body: some View {
         let drag = DragGesture()
             .updating($dragState) { drag, state, transaction in
@@ -31,7 +32,7 @@ struct BottomSheetPositionModifier<Content: View> : View {
         VStack{
             Group {
                 Handle()
-                self.content($sheetPos)
+                self.content()
             }
         }
         .padding()
@@ -39,47 +40,44 @@ struct BottomSheetPositionModifier<Content: View> : View {
         .cornerRadius(15.0)
         .frame(height: UIScreen.main.bounds.height)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(y: self.sheetPos.rawValue + self.dragState.translation.height)
+        .offset(y: sheetPositionModel.sheetPosition + self.dragState.translation.height)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
 
     private func onDragEnded(drag: DragGesture.Value) {
         let verticalDirection = drag.predictedEndLocation.y - drag.location.y
-        let cardTopEdgeLocation = self.sheetPos.rawValue + drag.translation.height
-        let positionAbove: SheetPosition
-        let positionBelow: SheetPosition
-        let closestPosition: SheetPosition
+        let cardTopEdgeLocation = sheetPositionModel.sheetPosition + drag.translation.height
+        let positionAbove: CGFloat
+        let positionBelow: CGFloat
+        let closestPosition: CGFloat
 
-        if cardTopEdgeLocation <= SheetPosition.middle.rawValue {
-            positionAbove = .top
-            positionBelow = .middle
+        if cardTopEdgeLocation <= sheetPositionModel.middle {
+            positionAbove = sheetPositionModel.top
+            positionBelow = sheetPositionModel.middle
         } else {
-            positionAbove = .middle
-            positionBelow = .bottom
+            positionAbove = sheetPositionModel.middle
+            positionBelow = sheetPositionModel.bottom
         }
 
-        if (cardTopEdgeLocation - positionAbove.rawValue) < (positionBelow.rawValue - cardTopEdgeLocation) {
+        if (cardTopEdgeLocation - positionAbove) < (positionBelow - cardTopEdgeLocation) {
             closestPosition = positionAbove
         } else {
             closestPosition = positionBelow
         }
 
         if verticalDirection > 0 {
-            self.sheetPos = positionBelow
+            sheetPositionModel.sheetPosition = positionBelow
+            print("positionBelow", positionBelow)
             hideKeyboard()
         } else if verticalDirection < 0 {
-            self.sheetPos = positionAbove
+            sheetPositionModel.sheetPosition = positionAbove
+            print("positionAbove", positionAbove)
         } else {
-            self.sheetPos = closestPosition
+            sheetPositionModel.sheetPosition = closestPosition
+            print("closestPosition", closestPosition)
         }
     }
-}
-
-enum SheetPosition: CGFloat {
-    case top = 10
-    case middle = 400
-    case bottom = 680
 }
 
 enum DragState {

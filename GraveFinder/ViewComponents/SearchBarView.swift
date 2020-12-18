@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchBarView:View {
     @EnvironmentObject private var viewModel:BottomSheetViewModel
-    
+    @EnvironmentObject private var sheetPositionModel:SheetPositionViewModel
     @State var readerHeight:CGFloat
     
     var body : some View {
@@ -19,7 +19,7 @@ struct SearchBarView:View {
             TextField("Search...", text: $viewModel.query, onEditingChanged: {EditMode in
 
                 if(!viewModel.sheetIsAtTop){
-                    viewModel.sheetPosition = SheetPosition.top
+                    sheetPositionModel.sheetPosition = sheetPositionModel.top
                     viewModel.sheetIsAtTop = true
                 }
                 if(!EditMode){

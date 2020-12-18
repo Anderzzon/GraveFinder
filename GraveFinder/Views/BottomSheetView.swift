@@ -10,7 +10,7 @@ struct BottomSheetView : View {
     var favorites: FetchedResults<FavGraves>
     
     var body: some View{
-        BottomSheetPositionModifier(sheetPos: $viewModel.sheetPosition) {_ in
+        BottomSheetPositionModifier() {
             GeometryReader{ reader in
                 VStack{
                     SearchBarView(readerHeight: reader.frame(in: .global).height)
