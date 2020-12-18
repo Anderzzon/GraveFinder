@@ -19,10 +19,10 @@ struct NotificationSelectionView: View {
         NavigationView {
             VStack {
                 Form{
-                    Section(header: Text("Notiser")) {
+                    Section(header: Text("Notices")) {
                         if viewModel.graveHasBirthday() {
                             HStack{
-                                Text("Notifiera mig på födelsdag (\(viewModel.grave.dateOfBirth!))").font(.caption)
+                                Text("\("Notify Birthday".localized())  (\(viewModel.grave.dateOfBirth!))").font(.caption)
                                 Spacer()
                                 Toggle(isOn: $viewModel.notifyBDay, label: {})
                                     .labelsHidden()
@@ -34,7 +34,7 @@ struct NotificationSelectionView: View {
                         if viewModel.graveHasDeathday() {
                             HStack{
                                 VStack{
-                                    Text("Notifiera mig på dödsdag (\(viewModel.grave.dateOfDeath!))").font(.caption)
+                                    Text("\("Notify deathday".localized())  (\(viewModel.grave.dateOfDeath!))").font(.caption)
                                 }
                                 Spacer()
                                 Toggle(isOn: $viewModel.notifyDDay, label: {})
@@ -46,7 +46,7 @@ struct NotificationSelectionView: View {
                         }
                         if viewModel.graveHasBurialDay(){
                             HStack{
-                                Text("Notifiera mig på begravningsdag  (\(viewModel.grave.dateBuried!))").font(.caption)
+                                Text("\("Notify funeral day".localized())  (\(viewModel.grave.dateBuried!))").font(.caption)
                                 Spacer()
                                 Toggle(isOn: $viewModel.notifyBurialDay, label: {})
                                     .labelsHidden()
@@ -57,7 +57,7 @@ struct NotificationSelectionView: View {
                         }
                     }
                     .navigationBarTitle("\(self.viewModel.grave.deceased ?? "")")
-                    .navigationBarItems(trailing: Button("Close") {
+                    .navigationBarItems(trailing: Button("Close".localized()) {
                         self.presentationMode.wrappedValue.dismiss()
                     })
                     .navigationBarTitleDisplayMode(/*@START_MENU_TOKEN@*/.inline/*@END_MENU_TOKEN@*/)
