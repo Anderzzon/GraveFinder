@@ -22,6 +22,7 @@ struct CoreDataHelper {
         newFav.graveType = grave.graveType ??  "Unspecified".localized()
         newFav.latitude = grave.latitude!
         newFav.longitude = grave.longitude!
+        newFav.block = grave.block ?? "Unspecified".localized()
         PersistenceController.shared.saveContext()
         
     }
