@@ -10,9 +10,15 @@ import SwiftUI
 class BottomSheetViewModel: ObservableObject {
     
     enum ShowContent:String { case
-        searchResults = "Alla",
-        favorites = "Favoriter",
+        searchResults = "All",
+        favorites = "Favorites",
         nothing = ""
+    }
+    enum Test: CaseIterable {
+
+        static var startBrowsing: LocalizedStringKey {
+            return "Start browsing"
+        }
     }
     
     @Published var totalGravesSearchResults = [Grave]()

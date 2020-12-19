@@ -11,7 +11,7 @@ import SwiftUI
 
 class GravesViewModel:ObservableObject {
     
-    @State var showNotificationAlert = false
+    @State var showNotificationAlert = false //Used?
     
     @Published var notificationOptionsPresenting:Bool = false
     @Published var alert:Alert? = nil

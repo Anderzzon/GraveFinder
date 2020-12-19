@@ -34,7 +34,7 @@ struct ContentView: View {
             //iPhone landscape
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top
             ), content: {
-                MapView(viewModel: viewModel )
+                MapView(graves: viewModel.gravesToDisplayOnMap)
                 if netStatus.noInternet { ConnectionAlertView() }
                 
             })
@@ -44,7 +44,7 @@ struct ContentView: View {
                 ZStack(alignment: Alignment(horizontal: .center, vertical: .top
                 ), content: {
                     
-                    MapView(viewModel: viewModel)
+                    MapView(graves: viewModel.gravesToDisplayOnMap)
                     BottomSheetView()
                         .environmentObject(viewModel)
                         .environmentObject(sheetPositionModel)
@@ -63,8 +63,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView(viewModel: BottomSheetViewModel())
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapView(viewModel: MapView(graves: viewModel.selectedGraves))
+//    }
+//}
