@@ -7,16 +7,15 @@
 
 import SwiftUI
 
-struct ConnectionAlertView:View {
-    
-    var body : some View {
+extension ContentView {
+    func NotificationModifier() -> some View {
         VStack {
             HStack {
                 // Banner Content Here
                 VStack(alignment: .leading, spacing: 2) {
                     Text("\(Image(systemName: "exclamationmark.triangle")) Alert")
                         .bold()
-                    Text("No internet")
+                    Text("No internet connection detected")
                         .font(Font.system(size: 15, weight: Font.Weight.light, design: Font.Design.default))
                 }
                 .padding()

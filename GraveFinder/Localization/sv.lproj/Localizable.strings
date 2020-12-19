@@ -1,0 +1,100 @@
+/* 
+  Localizable.strings
+  GraveFinder
+
+  Created by Shafigh Khalili on 2020-12-17.
+  
+*/
+/* No comment provided by engineer. */
+"Alert" = "Alert";
+
+/* No comment provided by engineer. */
+"Buried" = "Begravd";
+
+/* No comment provided by engineer. */
+"Error" = "Fel";
+
+/* No comment provided by engineer. */
+"Settings" = "Inställningar";
+
+/* No comment provided by engineer. */
+"Cemetry" = "Kyrkogård";
+
+/* No comment provided by engineer. */
+"No internet" = "Ingen internetanslutning upptäcktes";
+
+/* No comment provided by engineer. */
+"Notification service" = "Notifikation Tjänst";
+
+/* No comment provided by engineer. */
+"Notify funeral day" = "Notifiera mig på begravningsdag";
+
+/* No comment provided by engineer. */
+"funeral day" = "begravningsdag";
+
+/* No comment provided by engineer. */
+"Notify deathday" = "Notifiera mig på dödsdag";
+
+/* No comment provided by engineer. */
+"deathday" = "dödsdag";
+
+/* No comment provided by engineer. */
+"Notify Birthday" = "Notifiera mig på födelsdag";
+
+/* No comment provided by engineer. */
+"birthday" = "Födelsdag";
+
+/* No comment provided by engineer. */
+"Required Enabled Notification" = "Notifikationer måste aktiveras i inställningar.";
+
+/* No comment provided by engineer. */
+"Notices" = "Notiser";
+
+/* No comment provided by engineer. */
+"Ok" = "OK";
+
+/* Search */
+"Search" = "Sök...";
+
+/* No comment provided by engineer. */
+"End of results" = "Slut på resultat...";
+
+/* No comment provided by engineer. */
+"Confirm navigating to map" = "Vill du öppna Maps och navigera till ?";
+
+/* No comment provided by engineer. */
+"Show more" = "Visa fler...";
+
+/* No comment provided by engineer. */
+"All" = "Allt";
+
+/* No comment provided by engineer. */
+"Favorites" = "Favoriter";
+
+/* No comment provided by engineer. */
+"Standard" = "Karta";
+
+/* No comment provided by engineer. */
+"Satellite" = "Satellit";
+
+/* No comment provided by engineer. */
+"Hybrid" = "Hybrid";
+
+/* No comment provided by engineer. */
+"Born" = "Född";
+
+"Grave number" = "Grav nummer";
+
+"Died" = "Dog";
+
+"Close" = "Stänga";
+
+"Unnamed" = "Ej namngiven";
+
+"Unspecified" = "Ej specificerad";
+
+"Unknown" = "Okänd";
+
+"Gravefinder reminder" = "GraveFinder Påminnelse";
+
+"Notification text %@" = "Idag är %@";

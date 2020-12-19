@@ -14,8 +14,10 @@
 		031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23C256BC9500047A5F4 /* Assets.xcassets */; };
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
 		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
+		03491EBA258B6740008178F2 /* GraveInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03491EB9258B6740008178F2 /* GraveInfoPopup.swift */; };
 		035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035419EA2582554200B98CEB /* CoreDataHelper.swift */; };
 		03541A4B2583933100B98CEB /* (null) in Sources */ = {isa = PBXBuildFile; };
+		03C8D888258A416E0029934C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8D887258A416E0029934C /* MapViewModel.swift */; };
 		78177AE82589EE7200AB14C9 /* GravesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78177AE72589EE7200AB14C9 /* GravesViewModel.swift */; };
 		7839000A258385460030B008 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78390009258385460030B008 /* NotificationService.swift */; };
 		783900162586970D0030B008 /* NotificationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783900152586970D0030B008 /* NotificationSelectionView.swift */; };
@@ -38,6 +40,7 @@
 		E26F76002588088900F5D0EF /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75FF2588088900F5D0EF /* ToggleView.swift */; };
 		E26F760525880FD200F5D0EF /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchResultsView.swift */; };
 		E26F76092588109900F5D0EF /* FavoritesResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F76082588109900F5D0EF /* FavoritesResultsView.swift */; };
+		E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29393B7258B6B30008D6FCB /* Localizable.strings */; };
 		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 		E2ECBF64258901D70006A17C /* MapPickersViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */; };
 		E2ECBF68258968CF0006A17C /* BottomSheetPositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */; };
@@ -53,7 +56,9 @@
 		031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		031BF241256BC9500047A5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		03491EB9258B6740008178F2 /* GraveInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveInfoPopup.swift; sourceTree = "<group>"; };
 		035419EA2582554200B98CEB /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		03C8D887258A416E0029934C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		78177AE72589EE7200AB14C9 /* GravesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesViewModel.swift; sourceTree = "<group>"; };
 		78390009258385460030B008 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		783900152586970D0030B008 /* NotificationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSelectionView.swift; sourceTree = "<group>"; };
@@ -76,6 +81,8 @@
 		E26F760425880FD200F5D0EF /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
 		E26F76082588109900F5D0EF /* FavoritesResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesResultsView.swift; sourceTree = "<group>"; };
 		E26F760E2588165D00F5D0EF /* ConnectionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionAlertView.swift; sourceTree = "<group>"; };
+		E29393B6258B6B30008D6FCB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E29393B9258B6B90008D6FCB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickersViewModifier.swift; sourceTree = "<group>"; };
 		E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPositionModifier.swift; sourceTree = "<group>"; };
@@ -119,6 +126,7 @@
 		031BF237256BC94E0047A5F4 /* GraveFinder */ = {
 			isa = PBXGroup;
 			children = (
+				E29393B1258B65AC008D6FCB /* Localization */,
 				783900082583852F0030B008 /* Services */,
 				78EF03932576537A00635427 /* Extensions */,
 				78688CA82571163100413618 /* ViewComponents */,
@@ -174,6 +182,7 @@
 				78459650256D01E700A97B7F /* BottomSheetViewModel.swift */,
 				783900182587849D0030B008 /* NotificationSelectionViewModel.swift */,
 				78177AE72589EE7200AB14C9 /* GravesViewModel.swift */,
+				03C8D887258A416E0029934C /* MapViewModel.swift */,
 				78781D6E258C07DC00873A7F /* SheetPositionViewModel.swift */,
 			);
 			path = ViewModels;
@@ -205,10 +214,10 @@
 				E26F75FF2588088900F5D0EF /* ToggleView.swift */,
 				E26F760425880FD200F5D0EF /* SearchResultsView.swift */,
 				E26F75F62587F9E800F5D0EF /* SearchBarView.swift */,
-				E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */,
 				E26F760E2588165D00F5D0EF /* ConnectionAlertView.swift */,
 				E26F76082588109900F5D0EF /* FavoritesResultsView.swift */,
 				78781D44258A492900873A7F /* ScrollViewWithOffset.swift */,
+				E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -225,8 +234,17 @@
 			isa = PBXGroup;
 			children = (
 				E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */,
+				03491EB9258B6740008178F2 /* GraveInfoPopup.swift */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		E29393B1258B65AC008D6FCB /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				E29393B7258B6B30008D6FCB /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +276,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					031BF234256BC94E0047A5F4 = {
 						CreatedOnToolsVersion = 12.2;
@@ -272,6 +290,7 @@
 			knownRegions = (
 				en,
 				Base,
+				sv,
 			);
 			mainGroup = 031BF22C256BC94E0047A5F4;
 			packageReferences = (
@@ -291,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */,
+				E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */,
 				031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C8D888258A416E0029934C /* MapViewModel.swift in Sources */,
 				783900192587849E0030B008 /* NotificationSelectionViewModel.swift in Sources */,
 				031BF23B256BC94E0047A5F4 /* ContentView.swift in Sources */,
 				78EF0395257653A200635427 /* View.extensions.swift in Sources */,
@@ -321,6 +342,7 @@
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
 				78781D6F258C07DC00873A7F /* SheetPositionViewModel.swift in Sources */,
 				E2ECBF68258968CF0006A17C /* BottomSheetPositionModifier.swift in Sources */,
+				03491EBA258B6740008178F2 /* GraveInfoPopup.swift in Sources */,
 				E2ECBF64258901D70006A17C /* MapPickersViewModifier.swift in Sources */,
 				78688CA52570FB2100413618 /* Strings.swift in Sources */,
 				E26F75F72587F9E800F5D0EF /* SearchBarView.swift in Sources */,
@@ -339,11 +361,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		E29393B7258B6B30008D6FCB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E29393B6258B6B30008D6FCB /* en */,
+				E29393B9258B6B90008D6FCB /* sv */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		031BF242256BC9500047A5F4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -405,6 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
