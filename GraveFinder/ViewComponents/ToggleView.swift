@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct ToggleView:View {
+struct ToggleView<Content:View>:View {
 
     @EnvironmentObject private var viewModel:BottomSheetViewModel
     @State var frames = Array<CGRect>(repeating: .zero, count: 2)
-
+    var content : () -> Content
     var body : some View {
         VStack{
+            self.content()
             HStack(spacing: 10) {
                 ForEach(viewModel.bottomSheetDisplayOptions.indices, id: \.self) { index in
                     Button(action: {

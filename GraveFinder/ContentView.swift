@@ -13,11 +13,20 @@ struct ContentView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
     @EnvironmentObject var netStatus: NetStatus
-
     @ObservedObject var viewModel = BottomSheetViewModel()
-    @ObservedObject var sheetPosition = SheetPositionViewModel()
+    @ObservedObject var sheetPositionModel:SheetPositionViewModel
     
-    
+    init(){
+        let screenSize = UIScreen.main.bounds.size.height
+        
+        let searchBarHeight:CGFloat = 154
+        
+        let screenMiddle = screenSize / 2
+        let bottomPosition = screenSize - searchBarHeight
+        let middlePosition = screenMiddle - (searchBarHeight / 2)
+        self.sheetPositionModel = SheetPositionViewModel(middle: middlePosition, bottom: bottomPosition, initialPosition: bottomPosition)
+    }
+
     var body: some View {
         
         if (horizontalSizeClass == .regular && verticalSizeClass == .compact) || (horizontalSizeClass == .compact && verticalSizeClass == .compact) {
@@ -38,7 +47,7 @@ struct ContentView: View {
                     MapView(graves: viewModel.gravesToDisplayOnMap)
                     BottomSheetView()
                         .environmentObject(viewModel)
-                        .environmentObject(sheetPosition)
+                        .environmentObject(sheetPositionModel)
                         .onTapGesture {
                         hideKeyboard()
                     }.alert(
@@ -48,13 +57,6 @@ struct ContentView: View {
                             }
                         )
                     if netStatus.noInternet { ConnectionAlertView() }
-                }
-                ).onAppear(perform: {
-                    let screenHeight = geometry.frame(in: .global).height
-                    let middleOfScreen = screenHeight / 2
-                    sheetPosition.setBottom(to: screenHeight)
-                    sheetPosition.setMiddle(to: middleOfScreen)
-                    
                 })
             }
         }

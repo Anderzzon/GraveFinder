@@ -31,7 +31,6 @@ class BottomSheetViewModel: ObservableObject {
     @Published var alertIsPresented:Bool = false
     @Published var contentToDisplayInBottomSheet:ShowContent = .nothing
     @Published var query = ""
-    @Published var sheetPosition = SheetPosition.bottom
     @Published var sheetIsAtTop = false
     @Published var selectedDisplayOption:ShowContent = .searchResults
     @Published var selectedDisplayOptionIndex = 0

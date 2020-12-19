@@ -16,7 +16,7 @@ struct SearchResultsView : View {
             ForEach(viewModel.totalGravesSearchResults){
                 grave in
 
-                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, sheetPos: $viewModel.sheetPosition, selectedGraves: $viewModel.gravesToDisplayOnMap)
+                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, selectedGraves: $viewModel.gravesToDisplayOnMap)
             }
             if viewModel.totalPagesInAPIRequest > 1 && viewModel.currentPageForAPIRequest < viewModel.totalPagesInAPIRequest {
                 HStack(alignment: .center) {

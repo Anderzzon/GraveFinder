@@ -7,19 +7,20 @@
 
 import SwiftUI
 
-struct SearchBarView:View {
+struct SearchBarView<Content:View>:View {
     @EnvironmentObject private var viewModel:BottomSheetViewModel
-    
+    @EnvironmentObject private var sheetPositionModel:SheetPositionViewModel
     @State var readerHeight:CGFloat
-    
+    var content : ()->Content
     var body : some View {
         HStack(spacing: 15){
+            self.content()
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             TextField("Search".localized(), text: $viewModel.query, onEditingChanged: {EditMode in
 
                 if(!viewModel.sheetIsAtTop){
-                    viewModel.sheetPosition = SheetPosition.top
+                    sheetPositionModel.sheetPosition = sheetPositionModel.top
                     viewModel.sheetIsAtTop = true
                 }
                 if(!EditMode){

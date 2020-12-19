@@ -20,15 +20,13 @@ class GravesViewModel:ObservableObject {
     
     @Binding var selectedGraves:[Grave] //Array to support posibility of multiple graves on map later
     @Binding var selectedGrave:Grave?
-    @Binding var sheetPos:SheetPosition
     
     private var coreDataHelper = CoreDataHelper()
     var grave:Grave
     
-    init(grave:Grave, selectedGraves:Binding<[Grave]>, sheetPos:Binding<SheetPosition>, selectedGrave:Binding<Grave?>, locationMissing:Bool){
+    init(grave:Grave, selectedGraves:Binding<[Grave]>, selectedGrave:Binding<Grave?>, locationMissing:Bool){
         self.grave = grave
         self._selectedGraves = selectedGraves
-        self._sheetPos = sheetPos
         self._selectedGrave = selectedGrave
         self.locationMissing = locationMissing
     }
@@ -91,9 +89,7 @@ class GravesViewModel:ObservableObject {
         self.alertIsPresented = false
         self.alert = nil
     }
-    func setSheetPos(to pos:SheetPosition){
-        self.sheetPos = pos
-    }
+
     func setSelectedGrave(){
         self.selectedGrave = self.grave
     }

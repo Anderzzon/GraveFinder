@@ -10,11 +10,15 @@ struct BottomSheetView : View {
     var favorites: FetchedResults<FavGraves>
 
     var body: some View{
-        BottomSheetPositionModifier(sheetPos: $viewModel.sheetPosition) {_ in
+        BottomSheetPositionModifier() {
             GeometryReader{ reader in
                 VStack{
-                    SearchBarView(readerHeight: reader.frame(in: .global).height)
-                    ToggleView()
+                    SearchBarView(readerHeight: reader.frame(in: .global).height){
+                        EmptyView()
+                    }
+                    ToggleView(){
+                        EmptyView()
+                    }
                         .foregroundColor(Color.black)
                         .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
                     ScrollViewWithOffset(onOffsetChange:{_ in hideKeyboard()}, content: {
@@ -28,7 +32,6 @@ struct BottomSheetView : View {
                         }
                     }).padding(.bottom, 40)
                 }
-
             }.ignoresSafeArea(.all, edges: .bottom)
         }
     }

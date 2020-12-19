@@ -10,6 +10,7 @@ import CoreData
 
 struct GravesView: View {
     @Environment(\.managedObjectContext) private var moc
+    @EnvironmentObject private var sheetPositionModel:SheetPositionViewModel
     @ObservedObject var viewModel : GravesViewModel
     
     @FetchRequest(
@@ -17,8 +18,8 @@ struct GravesView: View {
         animation: .default)
     var favorites: FetchedResults<FavGraves>
         
-    init(for grave:Grave, selectedGrave:Binding<Grave?>, sheetPos:Binding<SheetPosition>, selectedGraves:Binding<[Grave]>){
-        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, sheetPos: sheetPos, selectedGrave: selectedGrave, locationMissing: !grave.isLocatable())
+    init(for grave:Grave, selectedGrave:Binding<Grave?>, selectedGraves:Binding<[Grave]>){
+        self.viewModel = GravesViewModel(grave: grave, selectedGraves: selectedGraves, selectedGrave: selectedGrave, locationMissing: !grave.isLocatable())
     }
     
     var body: some View {
@@ -70,8 +71,7 @@ struct GravesView: View {
                 if !viewModel.locationMissing {
                     viewModel.setSelectedGrave()
                     withAnimation {
-                        viewModel.setSheetPos(to: SheetPosition.bottom)
-
+                        sheetPositionModel.sheetPosition = sheetPositionModel.bottom
                     }
                     viewModel.selectGrave()
                 }

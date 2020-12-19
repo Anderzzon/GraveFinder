@@ -20,7 +20,7 @@ struct FavoritesResultsView:View {
             ForEach(favorites){
                 favorite in
                 let grave = Grave(favorite: favorite)
-                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, sheetPos: $viewModel.sheetPosition, selectedGraves: $viewModel.gravesToDisplayOnMap)
+                GravesView(for: grave, selectedGrave: $viewModel.selectedGrave, selectedGraves: $viewModel.gravesToDisplayOnMap)
             }
         })
     }
