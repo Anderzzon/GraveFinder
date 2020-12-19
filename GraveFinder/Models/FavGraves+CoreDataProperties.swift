@@ -2,7 +2,7 @@
 //  FavGraves+CoreDataProperties.swift
 //  GraveFinder
 //
-//  Created by Alessio on 2020-12-17.
+//  Created by Alessio on 2020-12-19.
 //
 //
 
@@ -26,6 +26,7 @@ extension FavGraves {
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
     @NSManaged public var plotNumber: String?
+    @NSManaged public var block: String?
 
 }
 

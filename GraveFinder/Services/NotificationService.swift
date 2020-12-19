@@ -34,6 +34,8 @@ class NotificationService {
             completion(exists)
         }
     }
-    
+    static func setDelegate(delegate:NotificationDelegate){
+        center.delegate = delegate
+    }
 }
 
