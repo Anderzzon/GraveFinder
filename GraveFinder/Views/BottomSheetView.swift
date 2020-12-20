@@ -13,10 +13,12 @@ struct BottomSheetView : View {
         BottomSheetPositionModifier() {
             GeometryReader{ reader in
                 VStack{
-                    SearchBarView(readerHeight: reader.frame(in: .global).height) {
-                        HStack{}
+                    SearchBarView(readerHeight: reader.frame(in: .global).height){
+                        EmptyView()
                     }
-                    ToggleView()
+                    ToggleView(){
+                        EmptyView()
+                    }
                         .foregroundColor(Color.black)
                         .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
                     ScrollViewWithOffset(onOffsetChange:{_ in hideKeyboard()}, content: {
