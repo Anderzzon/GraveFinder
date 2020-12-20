@@ -3,7 +3,7 @@ import SwiftUI
 
 struct ScrollViewWithOffset<Content: View>: View {
   let onOffsetChange: (CGFloat) -> Void
-  let content: () -> Content
+    let content: () -> Content
 
   init(
     onOffsetChange: @escaping (CGFloat) -> Void,

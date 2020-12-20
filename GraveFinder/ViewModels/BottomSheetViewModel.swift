@@ -22,6 +22,7 @@ class BottomSheetViewModel: ObservableObject {
     }
     
     @Published var totalGravesSearchResults = [Grave]()
+    @Published var sortedGraves = [Grave]()
     @Published var selectedGrave:Grave?
     @Published var favoriteGraves = [Grave]()
     @Published var gravesToDisplayOnMap = [Grave]() //Array to support posibility of multiple graves on map later
@@ -120,7 +121,7 @@ class BottomSheetViewModel: ObservableObject {
         if(content == .favorites){
             selectedDisplayOptionIndex = 1
             contentToDisplayInBottomSheet = .favorites
-        } else {
+        }else {
             selectedDisplayOptionIndex = 0
             contentToDisplayInBottomSheet = .searchResults
         }

@@ -42,6 +42,7 @@
 		E26F760525880FD200F5D0EF /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchResultsView.swift */; };
 		E26F76092588109900F5D0EF /* FavoritesResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F76082588109900F5D0EF /* FavoritesResultsView.swift */; };
 		E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29393B7258B6B30008D6FCB /* Localizable.strings */; };
+		E2AB2F42258E43EE00D698DE /* GraveFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AB2F41258E43EE00D698DE /* GraveFilterView.swift */; };
 		E2C787D0256E575D008ACA90 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C787CF256E575D008ACA90 /* BottomSheetView.swift */; };
 		E2ECBF64258901D70006A17C /* MapPickersViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */; };
 		E2ECBF68258968CF0006A17C /* BottomSheetPositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */; };
@@ -85,6 +86,7 @@
 		E26F760E2588165D00F5D0EF /* ConnectionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionAlertView.swift; sourceTree = "<group>"; };
 		E29393B6258B6B30008D6FCB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E29393B9258B6B90008D6FCB /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E2AB2F41258E43EE00D698DE /* GraveFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveFilterView.swift; sourceTree = "<group>"; };
 		E2C787CF256E575D008ACA90 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		E2ECBF63258901D70006A17C /* MapPickersViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickersViewModifier.swift; sourceTree = "<group>"; };
 		E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetPositionModifier.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				E26F76082588109900F5D0EF /* FavoritesResultsView.swift */,
 				78781D44258A492900873A7F /* ScrollViewWithOffset.swift */,
 				E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */,
+				E2AB2F41258E43EE00D698DE /* GraveFilterView.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				7878D0672588D91A0099E6E6 /* NetStatus.swift in Sources */,
 				032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */,
 				03102EE5256E539C004FBE3F /* MapView.swift in Sources */,
+				E2AB2F42258E43EE00D698DE /* GraveFilterView.swift in Sources */,
 				035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */,
 				78177AE82589EE7200AB14C9 /* GravesViewModel.swift in Sources */,
 				03541A4B2583933100B98CEB /* (null) in Sources */,
@@ -503,7 +507,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GraveFinder/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				DEVELOPMENT_TEAM = 929AVN2CVW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GraveFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -525,7 +529,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GraveFinder/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				DEVELOPMENT_TEAM = 929AVN2CVW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GraveFinder/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -9,7 +9,13 @@ import Foundation
 struct SearchResults: Decodable, Hashable {
     var graves:[Grave]
     var pages:Int
-    
+
+    enum SortOptions:String { case
+        dateOfBrith = "Date of birth",
+        dateOfDeath = "Date of death",
+        reset = ""
+    }
+
     enum CodingKeys: String, CodingKey {
         case graves = "items"
         case pages
