@@ -15,6 +15,7 @@
 		031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */; };
 		032EDEC8256D390900A28FAD /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EDEC7256D390900A28FAD /* LocationDelegate.swift */; };
 		03491EBA258B6740008178F2 /* GraveInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03491EB9258B6740008178F2 /* GraveInfoPopup.swift */; };
+		03491EEC258FE695008178F2 /* GraveFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03491EEB258FE695008178F2 /* GraveFinderTests.swift */; };
 		035419EB2582554200B98CEB /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035419EA2582554200B98CEB /* CoreDataHelper.swift */; };
 		03541A4B2583933100B98CEB /* (null) in Sources */ = {isa = PBXBuildFile; };
 		03C8D888258A416E0029934C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8D887258A416E0029934C /* MapViewModel.swift */; };
@@ -49,6 +50,16 @@
 		E2ECBF68258968CF0006A17C /* BottomSheetPositionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ECBF67258968CF0006A17C /* BottomSheetPositionModifier.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		03491EEE258FE695008178F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 031BF22D256BC94E0047A5F4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031BF234256BC94E0047A5F4;
+			remoteInfo = GraveFinder;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		03102EE4256E539C004FBE3F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		03102EF7256ED6F5004FBE3F /* MapViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewUI.swift; sourceTree = "<group>"; };
@@ -60,6 +71,9 @@
 		031BF241256BC9500047A5F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		032EDEC7256D390900A28FAD /* LocationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		03491EB9258B6740008178F2 /* GraveInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveInfoPopup.swift; sourceTree = "<group>"; };
+		03491EE9258FE695008178F2 /* GraveFinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraveFinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03491EEB258FE695008178F2 /* GraveFinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraveFinderTests.swift; sourceTree = "<group>"; };
+		03491EED258FE695008178F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035419EA2582554200B98CEB /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		03C8D887258A416E0029934C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		78177AE72589EE7200AB14C9 /* GravesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravesViewModel.swift; sourceTree = "<group>"; };
@@ -102,6 +116,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		03491EE6258FE695008178F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -116,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				031BF237256BC94E0047A5F4 /* GraveFinder */,
+				03491EEA258FE695008178F2 /* GraveFinderTests */,
 				031BF236256BC94E0047A5F4 /* Products */,
 				03102EE2256E5310004FBE3F /* Recovered References */,
 			);
@@ -125,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				031BF235256BC94E0047A5F4 /* GraveFinder.app */,
+				03491EE9258FE695008178F2 /* GraveFinderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +181,15 @@
 				031BF23F256BC9500047A5F4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03491EEA258FE695008178F2 /* GraveFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				03491EEB258FE695008178F2 /* GraveFinderTests.swift */,
+				03491EED258FE695008178F2 /* Info.plist */,
+			);
+			path = GraveFinderTests;
 			sourceTree = "<group>";
 		};
 		783900082583852F0030B008 /* Services */ = {
@@ -278,17 +310,39 @@
 			productReference = 031BF235256BC94E0047A5F4 /* GraveFinder.app */;
 			productType = "com.apple.product-type.application";
 		};
+		03491EE8258FE695008178F2 /* GraveFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03491EF0258FE695008178F2 /* Build configuration list for PBXNativeTarget "GraveFinderTests" */;
+			buildPhases = (
+				03491EE5258FE695008178F2 /* Sources */,
+				03491EE6258FE695008178F2 /* Frameworks */,
+				03491EE7258FE695008178F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03491EEF258FE695008178F2 /* PBXTargetDependency */,
+			);
+			name = GraveFinderTests;
+			productName = GraveFinderTests;
+			productReference = 03491EE9258FE695008178F2 /* GraveFinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		031BF22D256BC94E0047A5F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					031BF234256BC94E0047A5F4 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					03491EE8258FE695008178F2 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 031BF234256BC94E0047A5F4;
 					};
 				};
 			};
@@ -309,6 +363,7 @@
 			projectRoot = "";
 			targets = (
 				031BF234256BC94E0047A5F4 /* GraveFinder */,
+				03491EE8258FE695008178F2 /* GraveFinderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,6 +376,13 @@
 				031BF240256BC9500047A5F4 /* Preview Assets.xcassets in Resources */,
 				E29393B5258B6B30008D6FCB /* Localizable.strings in Resources */,
 				031BF23D256BC9500047A5F4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03491EE7258FE695008178F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +433,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		03491EE5258FE695008178F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03491EEC258FE695008178F2 /* GraveFinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03491EEF258FE695008178F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031BF234256BC94E0047A5F4 /* GraveFinder */;
+			targetProxy = 03491EEE258FE695008178F2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E29393B7258B6B30008D6FCB /* Localizable.strings */ = {
@@ -548,6 +626,48 @@
 			};
 			name = Release;
 		};
+		03491EF1258FE695008178F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				INFOPLIST_FILE = GraveFinderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.erik.GraveFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GraveFinder.app/GraveFinder";
+			};
+			name = Debug;
+		};
+		03491EF2258FE695008178F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2T4JVD9P46;
+				INFOPLIST_FILE = GraveFinderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.erik.GraveFinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GraveFinder.app/GraveFinder";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -565,6 +685,15 @@
 			buildConfigurations = (
 				031BF245256BC9500047A5F4 /* Debug */,
 				031BF246256BC9500047A5F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03491EF0258FE695008178F2 /* Build configuration list for PBXNativeTarget "GraveFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03491EF1258FE695008178F2 /* Debug */,
+				03491EF2258FE695008178F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -56,7 +56,9 @@ class GravesViewModel:ObservableObject {
                         if !didAllow {
                             return
                         } else {
-                            self.notificationOptionsPresenting = true
+                            DispatchQueue.main.async {
+                                self.notificationOptionsPresenting = true
+                            }
                         }
                     }
                 }
