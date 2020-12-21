@@ -9,7 +9,7 @@ import Foundation
 struct SearchResults: Decodable, Hashable {
     var graves:[Grave]
     var pages:Int
-    
+
     enum CodingKeys: String, CodingKey {
         case graves = "items"
         case pages
@@ -23,7 +23,7 @@ struct SearchResults: Decodable, Hashable {
     init(from decoder:Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         pages = try container.decode(Int.self, forKey: .pages)
         graves = try container.decode([Grave].self, forKey: .graves)
     }

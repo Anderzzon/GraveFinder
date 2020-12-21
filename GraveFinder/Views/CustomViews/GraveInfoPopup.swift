@@ -22,7 +22,6 @@ struct GraveInfoPopup: View {
                 let cemetery = viewModel.selectedGraves.first?.cemetery ?? "Ej specificerad"
                 let plotNumber = viewModel.selectedGraves.first?.plotNumber
                 //let block = viewModel.selectedGraves.first?.block
-                Print(deceased, born, died, buried, cemetery)
                 Text(deceased)
                     .bold()
                     .foregroundColor(.black)
