@@ -15,6 +15,7 @@ struct GraveFinderApp: App {
     @StateObject var notificationDelegate = NotificationDelegate()
     
     let viewContext = PersistenceController.shared.container.viewContext
+    private let compliance = ComplianceViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -24,6 +25,11 @@ struct GraveFinderApp: App {
                 .environmentObject(netStatus)
                 .onAppear{
                     NotificationService.setDelegate(delegate: notificationDelegate)
+                    
+                    let encrypted = compliance.encrypt(string: "Super duper secret message about top secret secret stuff!!")
+                    print("encrypted: ", encrypted! as Data)
+                    let decrypted = compliance.decrypt(data: encrypted!)
+                    print("decrypted: ", decrypted!)
                 }
         }
     }

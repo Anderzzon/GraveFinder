@@ -37,6 +37,7 @@
 		78F47008258EA8FA00D1F4AF /* FavGraves+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F47006258EA8FA00D1F4AF /* FavGraves+CoreDataClass.swift */; };
 		78F47009258EA8FA00D1F4AF /* FavGraves+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F47007258EA8FA00D1F4AF /* FavGraves+CoreDataProperties.swift */; };
 		78F4700D258EAE5400D1F4AF /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F4700C258EAE5400D1F4AF /* NotificationDelegate.swift */; };
+		78F470122590A30400D1F4AF /* ComplianceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F470112590A30400D1F4AF /* ComplianceViewModel.swift */; };
 		E26F75F72587F9E800F5D0EF /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75F62587F9E800F5D0EF /* SearchBarView.swift */; };
 		E26F76002588088900F5D0EF /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F75FF2588088900F5D0EF /* ToggleView.swift */; };
 		E26F760525880FD200F5D0EF /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26F760425880FD200F5D0EF /* SearchResultsView.swift */; };
@@ -78,6 +79,7 @@
 		78F47006258EA8FA00D1F4AF /* FavGraves+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataClass.swift"; sourceTree = "<group>"; };
 		78F47007258EA8FA00D1F4AF /* FavGraves+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavGraves+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		78F4700C258EAE5400D1F4AF /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
+		78F470112590A30400D1F4AF /* ComplianceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplianceViewModel.swift; sourceTree = "<group>"; };
 		E26F75F62587F9E800F5D0EF /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E26F75FF2588088900F5D0EF /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		E26F760425880FD200F5D0EF /* SearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				78177AE72589EE7200AB14C9 /* GravesViewModel.swift */,
 				03C8D887258A416E0029934C /* MapViewModel.swift */,
 				78781D6E258C07DC00873A7F /* SheetPositionViewModel.swift */,
+				78F470112590A30400D1F4AF /* ComplianceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				78EF04EE25798B0000635427 /* GraveFinder.xcdatamodeld in Sources */,
 				78F47009258EA8FA00D1F4AF /* FavGraves+CoreDataProperties.swift in Sources */,
 				78781D6F258C07DC00873A7F /* SheetPositionViewModel.swift in Sources */,
+				78F470122590A30400D1F4AF /* ComplianceViewModel.swift in Sources */,
 				E2ECBF68258968CF0006A17C /* BottomSheetPositionModifier.swift in Sources */,
 				03491EBA258B6740008178F2 /* GraveInfoPopup.swift in Sources */,
 				E2ECBF64258901D70006A17C /* MapPickersViewModifier.swift in Sources */,
