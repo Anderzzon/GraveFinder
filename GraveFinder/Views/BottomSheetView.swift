@@ -34,11 +34,14 @@ struct BottomSheetView : View {
                         }
 
                         Button(action: {
+
+                            let option = self.showFilterSheet ? BottomSheetViewModel.SortOptions.reset : BottomSheetViewModel.SortOptions.name
                             self.showFilterSheet.toggle()
-                            viewModel.selectedSortOption = BottomSheetViewModel.SortOptions.name
+                            viewModel.selectedSortOption = option
                             viewModel.insertionSortGraves()
                         }){
-                            Image(systemName: "line.horizontal.3.decrease.circle")
+                            let icon = self.showFilterSheet ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle"
+                            Image(systemName: icon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50, height: 50)

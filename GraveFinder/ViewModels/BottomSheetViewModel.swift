@@ -51,7 +51,7 @@ class BottomSheetViewModel: ObservableObject {
         didSet {
             totalGravesSearchResults.append(contentsOf: searchResults.graves)
             totalPagesInAPIRequest = searchResults.pages
-
+            insertionSortGraves()
         }
     }
     
@@ -110,25 +110,53 @@ class BottomSheetViewModel: ObservableObject {
             .assign(to: \BottomSheetViewModel.searchResults, on: self)
     }
 
+    func insertionSort<T: Comparable>(_ input: [T], by comparison: (T, T) -> Bool) -> [T]
+    {
+        var items = input
+
+        for index in 1..<items.count
+        {
+            let value = items[index]
+            var position = index
+
+            while position > 0 && comparison(items[position - 1], value) {
+                items[position] = items[position - 1]
+                position -= 1
+            }
+
+            items[position] = value
+        }
+
+        return items
+    }
+
     func insertionSortGraves() {
 //        do {
 //            try  bubbleUpNilGraves()
 //        } catch  {
 //            print("ERROR:",error)
 //        }
-
         var data_set = totalGravesSearchResults
-        for index in 1..<data_set.count
-        {
-            let value = data_set[index]
-            var position = index
+        if data_set.count <= 0 {
+            return
+        }
+        switch selectedSortOption {
+        case .name:
+            print("Opt:",selectedSortOption)
+            for index in 1..<data_set.count
+            {
+                let value = data_set[index]
+                var position = index
 
-            while position > 0 && data_set[position - 1].deceased! > value.deceased! {
-                data_set[position] = data_set[position - 1]
-                position -= 1
+                while position > 0 && data_set[position - 1].deceased! > value.deceased! {
+                    data_set[position] = data_set[position - 1]
+                    position -= 1
+                }
+
+                data_set[position] = value
             }
-
-            data_set[position] = value
+        default:
+            totalGravesSearchResults = data_set
         }
         totalGravesSearchResults = data_set
     }
