@@ -26,10 +26,14 @@ struct GraveFinderApp: App {
                 .onAppear{
                     NotificationService.setDelegate(delegate: notificationDelegate)
                     
-                    let encrypted = compliance.encrypt(string: "Super duper secret message about top secret secret stuff!!")
-                    print("encrypted: ", encrypted! as Data)
-                    let decrypted = compliance.decrypt(data: encrypted!)
-                    print("decrypted: ", decrypted!)
+                    DispatchQueue.global(qos: .utility).async {
+                        let encrypted = compliance.encrypt(string: "Super duper secret message about top secret secret stuff!!")
+                        let decrypted = compliance.decrypt(data: encrypted!)
+                        DispatchQueue.main.async {
+                            print(decrypted!)
+                        }
+                    }
+                    
                 }
         }
     }
