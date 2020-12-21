@@ -78,14 +78,17 @@ class GraveFinderTests: XCTestCase {
     
     func testEncryption(){
         let vm = ComplianceViewModel()
-        let encryptedValue = vm.encrypt(string: "test")
+        let encryptedValue = vm.encrypt(string: "test", password: "password")
         XCTAssertNotNil(encryptedValue)
     }
     func testDecryption() {
         let vm = ComplianceViewModel()
-        let encryptedValue = vm.encrypt(string: "test")
+        guard let encryptedValue = vm.encrypt(string: "test", password: "password") else {
+            XCTAssertTrue(false)
+            return
+        }
         
-        guard let decryptedValue = vm.decrypt(data: encryptedValue!) else {
+        guard let decryptedValue = vm.decrypt(data: encryptedValue, password: "password") else {
             XCTAssertTrue(false)
             return
         }
