@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "03491ED7258FD44F008178F2"
+               BuildableName = "GraveFinderUITests.xctest"
+               BlueprintName = "GraveFinderUITests"
+               ReferencedContainer = "container:GraveFinder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "03491EE8258FE695008178F2"
+               BuildableName = "GraveFinderTests.xctest"
+               BlueprintName = "GraveFinderTests"
+               ReferencedContainer = "container:GraveFinder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
