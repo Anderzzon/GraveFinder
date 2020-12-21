@@ -75,5 +75,23 @@ class GraveFinderTests: XCTestCase {
         
         wait(for: [expectation], timeout: 5.0)
     }
+    
+    func testEncryption(){
+        let vm = ComplianceViewModel()
+        let encryptedValue = vm.encrypt(string: "test")
+        XCTAssertNotNil(encryptedValue)
+    }
+    func testDecryption() {
+        let vm = ComplianceViewModel()
+        let encryptedValue = vm.encrypt(string: "test")
+        
+        guard let decryptedValue = vm.decrypt(data: encryptedValue!) else {
+            XCTAssertTrue(false)
+            return
+        }
+        XCTAssertEqual("test", decryptedValue)
+        
+    }
+    
 
 }
