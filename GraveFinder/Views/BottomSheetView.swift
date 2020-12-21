@@ -14,10 +14,14 @@ struct BottomSheetView : View {
     var actionSheet: ActionSheet {
         ActionSheet(title: Text("Sort by"), message: Text("Choose Option"), buttons: [
             .default(Text("Date of birth"),action: {
-                Print("DOB")
+                viewModel.selectedSortOption = .birthday
             }),
-            .default(Text("Date of death")),
-            .destructive(Text("Cancel"))
+            .default(Text("Date of death"),action: {
+                viewModel.selectedSortOption = .deathday
+            }),
+            .destructive(Text("Reset"),action: {
+                viewModel.selectedSortOption = .reset
+            })
         ])
     }
     var body: some View{
@@ -30,8 +34,9 @@ struct BottomSheetView : View {
                         }
 
                         Button(action: {
-                            Print("Filter Cicked")
                             self.showFilterSheet.toggle()
+                            viewModel.selectedSortOption = BottomSheetViewModel.SortOptions.name
+                            viewModel.insertionSortGraves()
                         }){
                             Image(systemName: "line.horizontal.3.decrease.circle")
                                 .resizable()
@@ -39,9 +44,9 @@ struct BottomSheetView : View {
                                 .frame(width: 50, height: 50)
                                 .foregroundColor(.gray)
                         }
-                        .actionSheet(isPresented: $showFilterSheet, content: {
-                            self.actionSheet
-                        })
+//                        .actionSheet(isPresented: $showFilterSheet, content: {
+//                            self.actionSheet
+//                        })
                     }
                     ToggleView(){
                         EmptyView()

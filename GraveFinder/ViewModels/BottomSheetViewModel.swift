@@ -14,6 +14,13 @@ class BottomSheetViewModel: ObservableObject {
         favorites = "Favorites",
         nothing = ""
     }
+    enum SortOptions:String,CaseIterable { case
+        name = "Name",
+        birthday = "Birthday",
+        deathday = "Deathday",
+        reset = "Reset",
+        clear = ""
+    }
     enum Test: CaseIterable {
 
         static var startBrowsing: LocalizedStringKey {
@@ -22,8 +29,8 @@ class BottomSheetViewModel: ObservableObject {
     }
     
     @Published var totalGravesSearchResults = [Grave]()
-    @Published var sortedGraves = [Grave]()
     @Published var selectedGrave:Grave?
+    @Published var selectedSortOption:SortOptions = SortOptions.clear
     @Published var favoriteGraves = [Grave]()
     @Published var gravesToDisplayOnMap = [Grave]() //Array to support posibility of multiple graves on map later
     @Published var currentPageForAPIRequest = 1
@@ -31,6 +38,7 @@ class BottomSheetViewModel: ObservableObject {
     @Published var alert:Alert? = nil
     @Published var alertIsPresented:Bool = false
     @Published var contentToDisplayInBottomSheet:ShowContent = .nothing
+    @Published var sortOptions:SortOptions = .clear
     @Published var query = ""
     @Published var sheetIsAtTop = false
     @Published var selectedDisplayOption:ShowContent = .searchResults
@@ -43,6 +51,7 @@ class BottomSheetViewModel: ObservableObject {
         didSet {
             totalGravesSearchResults.append(contentsOf: searchResults.graves)
             totalPagesInAPIRequest = searchResults.pages
+
         }
     }
     
@@ -91,7 +100,7 @@ class BottomSheetViewModel: ObservableObject {
         ]
         
         guard let url = components.url else {return}
-        
+
         task = URLSession.shared.dataTaskPublisher(for: url)
             .map {$0.data}
             .decode(type: SearchResults.self, decoder: JSONDecoder())
@@ -100,6 +109,100 @@ class BottomSheetViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \BottomSheetViewModel.searchResults, on: self)
     }
+
+    func insertionSortGraves() {
+//        do {
+//            try  bubbleUpNilGraves()
+//        } catch  {
+//            print("ERROR:",error)
+//        }
+
+        var data_set = totalGravesSearchResults
+        for index in 1..<data_set.count
+        {
+            let value = data_set[index]
+            var position = index
+
+            while position > 0 && data_set[position - 1].deceased! > value.deceased! {
+                data_set[position] = data_set[position - 1]
+                position -= 1
+            }
+
+            data_set[position] = value
+        }
+        totalGravesSearchResults = data_set
+    }
+    func bubbleUpNilGraves() {
+
+        var data_set = totalGravesSearchResults
+        let last_position = totalGravesSearchResults.count - 1
+        var swap = true
+        var current:Grave
+        var next:Grave
+
+        while swap == true {
+             swap = false
+            for i in 0..<last_position {
+                current = data_set[i]
+                next = data_set [i + 1]
+
+                switch selectedSortOption {
+                case .name:
+                    if current.deceased! > next.deceased! {
+                        data_set [i + 1] = current
+                        data_set[i] = next
+
+                        swap = true
+                    }
+                case .birthday:
+                    if current.dateOfBirth == nil{
+                        data_set [i + 1] = current
+                        data_set[i] = next
+
+                        swap = true
+                    }
+                default:
+                    continue
+                }
+            }
+        }
+        totalGravesSearchResults = data_set
+    }
+
+    func sendNilToEnd(checkParam:SortOptions) -> [Grave] {
+        var sortedGraves = totalGravesSearchResults
+        for i in 0...sortedGraves.count-1 {
+            print("Sorted:",sortedGraves[i].dateOfBirth ?? "NIIIIL")
+        }
+        switch checkParam {
+        case .birthday:
+            for i in 0...totalGravesSearchResults.count-1 {
+                let grave = totalGravesSearchResults[i]
+
+                if totalGravesSearchResults[i].dateOfBirth == nil {
+                    sortedGraves.remove(at: i)
+                    sortedGraves.insert(grave, at: sortedGraves.endIndex)
+                }
+            }
+
+        case .deathday:
+            for i in 0...totalGravesSearchResults.count-1 {
+                let grave = totalGravesSearchResults[i]
+
+                if totalGravesSearchResults[i].dateOfDeath == nil {
+                    sortedGraves.remove(at: i)
+                    sortedGraves.insert(grave, at: sortedGraves.endIndex)
+                }
+            }
+        default:
+            sortedGraves = totalGravesSearchResults
+        }
+        for i in 0...sortedGraves.count-1 {
+            print("Sortedddd:",sortedGraves[i].dateOfBirth ?? "NUUUUL")
+        }
+        return sortedGraves
+    }
+    
     static func getMemorialLocation(for cemetery:String) -> (latitude:Double, longitude:Double){
         let location = staticMemorials[cemetery.lowercased()] ?? (latitude:0, longitude:0)
         return location
