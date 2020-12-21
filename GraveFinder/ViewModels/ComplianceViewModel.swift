@@ -10,26 +10,22 @@ import CryptoKit
 
 class ComplianceViewModel {
 
-    private let key:SymmetricKey
-    
-    init(){
-        key = ComplianceViewModel.createKeyFromPassword("SuperDuperAwesomeSecretPassword")
-    }
-    
-    func encrypt(string:String) -> Data? {
+    func encrypt(string:String, password:String) -> Data? {
+        let key = createKeyFromPassword(password)
         let dataToEncrypt = string.data(using: .utf8)!
         let sealedBox = try? ChaChaPoly.seal(dataToEncrypt, using: key)
         return sealedBox?.combined
     }
     
-    func decrypt(data:Data) -> String? {
+    func decrypt(data:Data, password:String) -> String? {
+        let key = createKeyFromPassword(password)
         if let sealedBox = try? ChaChaPoly.SealedBox(combined: data),
            let decrypted = try? ChaChaPoly.open(sealedBox, using: key) {
             return String(decoding: decrypted, as: UTF8.self)
         }
         return nil
     }
-    static func createKeyFromPassword(_ password: String) -> SymmetricKey {
+    func createKeyFromPassword(_ password: String) -> SymmetricKey {
       let hash = SHA256.hash(data: password.data(using: .utf8)!)
       let hashString = hash.map { String(format: "%02hhx", $0) }.joined()
       let subString = String(hashString.prefix(32))

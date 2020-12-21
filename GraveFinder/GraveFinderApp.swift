@@ -27,10 +27,14 @@ struct GraveFinderApp: App {
                     NotificationService.setDelegate(delegate: notificationDelegate)
                     
                     DispatchQueue.global(qos: .utility).async {
-                        let encrypted = compliance.encrypt(string: "Super duper secret message about top secret secret stuff!!")
-                        let decrypted = compliance.decrypt(data: encrypted!)
+                        let secretMessage = "Super duper secret message about top secret secret stuff!"
+                        let password = "SuperDuperTopSecretPassword"
+                        
+                        guard let encrypted = compliance.encrypt(string: secretMessage, password: password) else { return }
+                        guard let decrypted = compliance.decrypt(data: encrypted, password: password) else { return }
+                        
                         DispatchQueue.main.async {
-                            print(decrypted!)
+                            print("Decrypted Secret Message: ", decrypted)
                         }
                     }
                     
